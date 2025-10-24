@@ -27,10 +27,10 @@ public class CategoriaEntity {
 	
 	
 	//Relacionamentos
-	@OneToMany(mappedBy = "id_categoria")
+	@OneToMany(mappedBy = "categoria")
 	private Set<SubCategoriaEntity> subCategorias;
 	
-	@ManyToMany(mappedBy = "id_categoria")
+	@ManyToMany(mappedBy = "categorias")
 	private Set<ProdutoEntity> produtos;
 
 	public CategoriaEntity(String nome, String descricao, Set<SubCategoriaEntity> subCategorias, Set<ProdutoEntity> produtos) {

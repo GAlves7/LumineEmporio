@@ -53,8 +53,8 @@ public class UsuarioEntity implements UserDetails{
 	
 	
 	//Relacionamentos
-	@OneToMany(mappedBy = "id_usuario")
-	private AvaliacaoEntity avaliacaoEntity;
+	@OneToMany(mappedBy = "usuario")
+	private Set<AvaliacaoEntity> avaliacoesEntity;
 
 	@ManyToMany
 	@JoinTable(
@@ -65,22 +65,9 @@ public class UsuarioEntity implements UserDetails{
 	)
 	private Set<ProdutoEntity> favoritos;
 	
-	@OneToMany(mappedBy = "id_usuario")
+	@OneToMany(mappedBy = "usuario")
 	private Set<ItemCarrinhoEntity> itensCarrinho;
 	
-	
-	public UsuarioEntity(String nome, String senha, String email, String telefone, Role role,
-			AvaliacaoEntity avaliacaoEntity, Set<ProdutoEntity> favoritos, Set<ItemCarrinhoEntity> itensCarrinho) {
-		this.nome = nome;
-		this.senha = senha;
-		this.email = email;
-		this.telefone = telefone;
-		this.role = role;
-		this.avaliacaoEntity = avaliacaoEntity;
-		this.favoritos = favoritos;
-		this.itensCarrinho = itensCarrinho;
-	}
-
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -98,6 +85,19 @@ public class UsuarioEntity implements UserDetails{
 	public String getUsername() {
 		// TODO Auto-generated method stub
 		return email;
+	}
+
+	public UsuarioEntity(String nome, String senha, String email, String telefone, Role role,
+			Set<AvaliacaoEntity> avaliacoesEntity, Set<ProdutoEntity> favoritos,
+			Set<ItemCarrinhoEntity> itensCarrinho) {
+		this.nome = nome;
+		this.senha = senha;
+		this.email = email;
+		this.telefone = telefone;
+		this.role = role;
+		this.avaliacoesEntity = avaliacoesEntity;
+		this.favoritos = favoritos;
+		this.itensCarrinho = itensCarrinho;
 	}
 	
 	
@@ -142,12 +142,12 @@ public class UsuarioEntity implements UserDetails{
 		this.role = role;
 	}
 
-	public AvaliacaoEntity getAvaliacaoEntity() {
-		return avaliacaoEntity;
+	public Set<AvaliacaoEntity> getAvaliacoesEntity() {
+		return avaliacoesEntity;
 	}
 
-	public void setAvaliacaoEntity(AvaliacaoEntity avaliacaoEntity) {
-		this.avaliacaoEntity = avaliacaoEntity;
+	public void setAvaliacoesEntity(Set<AvaliacaoEntity> avaliacoesEntity) {
+		this.avaliacoesEntity = avaliacoesEntity;
 	}
 
 	public Set<ProdutoEntity> getFavoritos() {

@@ -26,7 +26,7 @@ public class CorEntity {
 	
 	
 	//Relacionamentos
-	@ManyToMany(mappedBy = "id_cor")
+	@ManyToMany(mappedBy = "cores")
 	private Set<ProdutoVariacaoEntity> produtos;
 
 	public CorEntity(String nome, String codigoHex, Set<ProdutoVariacaoEntity> produtos) {

@@ -43,10 +43,10 @@ public class ProdutoEntity {
 	)
 	private Set<SubCategoriaEntity> subCategoria;
 	
-	@OneToMany(mappedBy = "id_produto")
+	@OneToMany(mappedBy = "produto")
 	private Set<ImagemProdutoEntity> imagemProduto;
 	
-	@OneToMany(mappedBy = "id_produto")
+	@OneToMany(mappedBy = "produto")
 	private Set<ProdutoVariacaoEntity> produtoVariacao;
 	
 	@ManyToMany
@@ -57,7 +57,7 @@ public class ProdutoEntity {
 	)
 	private Set<MarcaEntity> marcas;
 	
-	@OneToMany(mappedBy = "id_produto")
+	@OneToMany(mappedBy = "produto")
 	private Set<AvaliacaoEntity> avaliacoes;
 	
 	

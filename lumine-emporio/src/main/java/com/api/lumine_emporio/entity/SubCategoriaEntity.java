@@ -30,7 +30,7 @@ public class SubCategoriaEntity {
 	@ManyToOne
 	private CategoriaEntity categoria;
 	
-	@ManyToMany(mappedBy = "id_subcategoria")
+	@ManyToMany(mappedBy = "subCategoria")
 	private Set<ProdutoEntity> produtos;
 
 	

@@ -26,7 +26,7 @@ public class MarcaEntity {
 	
 	
 	//Relacionamentos
-	@ManyToMany(mappedBy = "id_marca")
+	@ManyToMany(mappedBy = "marcas")
 	private Set<ProdutoEntity> produtos;
 
 	public MarcaEntity(String nome, String descricao, Set<ProdutoEntity> produtos) {
