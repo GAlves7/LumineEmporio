@@ -7,10 +7,15 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -22,7 +27,7 @@ import com.api.lumine_emporio.entity.enums.Role;
 
 @Entity
 @Table(name = "tb_usuario")
-public class Usuario implements UserDetails{
+public class UsuarioEntity implements UserDetails{
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -45,7 +50,38 @@ public class Usuario implements UserDetails{
 	@Column(nullable=false)
 	@Enumerated(EnumType.STRING)
 	private Role role;
+	
+	
+	//Relacionamentos
+	@OneToMany(mappedBy = "id_usuario")
+	private AvaliacaoEntity avaliacaoEntity;
 
+	@ManyToMany
+	@JoinTable(
+		name = "tb_favoritos",
+		joinColumns = @JoinColumn(name = "id_usuario"),
+		inverseJoinColumns = @JoinColumn(name = "id_produto")
+	
+	)
+	private Set<ProdutoEntity> favoritos;
+	
+	@OneToMany(mappedBy = "id_usuario")
+	private Set<ItemCarrinhoEntity> itensCarrinho;
+	
+	
+	public UsuarioEntity(String nome, String senha, String email, String telefone, Role role,
+			AvaliacaoEntity avaliacaoEntity, Set<ProdutoEntity> favoritos, Set<ItemCarrinhoEntity> itensCarrinho) {
+		this.nome = nome;
+		this.senha = senha;
+		this.email = email;
+		this.telefone = telefone;
+		this.role = role;
+		this.avaliacaoEntity = avaliacaoEntity;
+		this.favoritos = favoritos;
+		this.itensCarrinho = itensCarrinho;
+	}
+
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		if(this.role == Role.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
@@ -60,23 +96,22 @@ public class Usuario implements UserDetails{
 
 	@Override
 	public String getUsername() {
+		// TODO Auto-generated method stub
 		return email;
 	}
-
-	public Usuario(String nome, String senha, String email, String telefone, Role role) {
-		this.nome = nome;
-		this.senha = senha;
-		this.email = email;
-		this.telefone = telefone;
-		this.role = role;
-	}
-
+	
+	
+	//Getters e Setters
 	public String getNome() {
 		return nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getSenha() {
+		return senha;
 	}
 
 	public void setSenha(String senha) {
@@ -99,11 +134,43 @@ public class Usuario implements UserDetails{
 		this.telefone = telefone;
 	}
 
-	public UUID getIdUsuario() {
-		return idUsuario;
-	}
-
 	public Role getRole() {
 		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public AvaliacaoEntity getAvaliacaoEntity() {
+		return avaliacaoEntity;
+	}
+
+	public void setAvaliacaoEntity(AvaliacaoEntity avaliacaoEntity) {
+		this.avaliacaoEntity = avaliacaoEntity;
+	}
+
+	public Set<ProdutoEntity> getFavoritos() {
+		return favoritos;
+	}
+
+	public void setFavoritos(Set<ProdutoEntity> favoritos) {
+		this.favoritos = favoritos;
+	}
+
+	public Set<ItemCarrinhoEntity> getItensCarrinho() {
+		return itensCarrinho;
+	}
+
+	public void setItensCarrinho(Set<ItemCarrinhoEntity> itensCarrinho) {
+		this.itensCarrinho = itensCarrinho;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public UUID getIdUsuario() {
+		return idUsuario;
 	}
 }
