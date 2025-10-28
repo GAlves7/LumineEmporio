@@ -3,6 +3,7 @@ package com.api.lumine_emporio.entity;
 import java.util.Set;
 
 import com.api.lumine_emporio.entity.enums.Tamanho;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,8 +36,13 @@ public class ProdutoVariacaoEntity {
 	@Column(nullable=false)
 	private String descricao;
 	
+	@Column(nullable = false)
+	private double preco;
+	
+	
 	//Relacionamentos
 	@ManyToOne
+	@JsonBackReference
 	private ProdutoEntity produto;
 	
 	@ManyToMany
@@ -47,16 +53,26 @@ public class ProdutoVariacaoEntity {
 	)
 	private Set<CorEntity> cores;
 	
+	@ManyToOne
+	@JoinColumn(name = "promocao")
+	@JsonBackReference
+	private PromocaoEntity promocao;
 	
-	public ProdutoVariacaoEntity(int estoque, Tamanho tamanho, String descricao, ProdutoEntity produto, Set<CorEntity> cores) {
+	
+	public ProdutoVariacaoEntity(int estoque, Tamanho tamanho, String descricao, double preco, ProdutoEntity produto,
+			Set<CorEntity> cores) {
 		this.estoque = estoque;
 		this.tamanho = tamanho;
 		this.descricao = descricao;
+		this.preco = preco;
 		this.produto = produto;
 		this.cores = cores;
 	}
-
 	
+
+	public ProdutoVariacaoEntity() {}
+	
+
 	//Getters e Setters
 	public int getEstoque() {
 		return estoque;
@@ -100,5 +116,21 @@ public class ProdutoVariacaoEntity {
 
 	public Long getIdProdutoVar() {
 		return idProdutoVar;
+	}
+
+	public PromocaoEntity getPromocao() {
+		return promocao;
+	}
+
+	public void setPromocao(PromocaoEntity promocao) {
+		this.promocao = promocao;
+	}
+
+	public double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(double preco) {
+		this.preco = preco;
 	}
 }

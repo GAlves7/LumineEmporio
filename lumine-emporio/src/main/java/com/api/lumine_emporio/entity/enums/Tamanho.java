@@ -20,4 +20,13 @@ public enum Tamanho {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	public static Tamanho getTamanho(String cod) {
+		if(cod.equalsIgnoreCase("pp")) return PP;
+		if(cod.equalsIgnoreCase("P")) return P;
+		if(cod.equalsIgnoreCase("M")) return M;
+		if(cod.equalsIgnoreCase("G")) return G;
+		if(cod.equalsIgnoreCase("GG")) return GG;
+		return null;
+	}
 }

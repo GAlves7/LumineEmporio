@@ -2,6 +2,8 @@ package com.api.lumine_emporio.entity;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +29,9 @@ public class ProdutoEntity {
 	@Column(nullable=false)
 	private String descricao;
 	
+	@Column(nullable = false, precision = 2)
+	private double preco;
+	
 	
 	//Relacionamentos
 	@ManyToMany
@@ -47,6 +52,7 @@ public class ProdutoEntity {
 	private Set<ImagemProdutoEntity> imagemProduto;
 	
 	@OneToMany(mappedBy = "produto")
+	@JsonManagedReference
 	private Set<ProdutoVariacaoEntity> produtoVariacao;
 	
 	@ManyToMany
@@ -61,20 +67,16 @@ public class ProdutoEntity {
 	private Set<AvaliacaoEntity> avaliacoes;
 	
 	
-	public ProdutoEntity(String nome, String descricao, Set<CategoriaEntity> categorias,
-			Set<SubCategoriaEntity> subCategoria, Set<ImagemProdutoEntity> imagemProduto,
-			Set<ProdutoVariacaoEntity> produtoVariacao, Set<MarcaEntity> marcas, Set<AvaliacaoEntity> avaliacoes) {
+	public ProdutoEntity(String nome, String descricao, double preco) {
 		this.nome = nome;
 		this.descricao = descricao;
-		this.categorias = categorias;
-		this.subCategoria = subCategoria;
-		this.imagemProduto = imagemProduto;
-		this.produtoVariacao = produtoVariacao;
-		this.marcas = marcas;
-		this.avaliacoes = avaliacoes;
+		this.preco = preco;
 	}
-
 	
+
+	public ProdutoEntity() {}
+
+
 	//Getters e Setters
 	public String getNome() {
 		return nome;
@@ -142,5 +144,13 @@ public class ProdutoEntity {
 
 	public Long getIdProduto() {
 		return idProduto;
+	}
+
+	public double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(double preco) {
+		this.preco = preco;
 	}
 }

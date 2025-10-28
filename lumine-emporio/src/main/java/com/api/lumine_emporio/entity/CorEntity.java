@@ -29,13 +29,15 @@ public class CorEntity {
 	@ManyToMany(mappedBy = "cores")
 	private Set<ProdutoVariacaoEntity> produtos;
 
-	public CorEntity(String nome, String codigoHex, Set<ProdutoVariacaoEntity> produtos) {
+	public CorEntity(String nome, String codigoHex) {
 		this.nome = nome;
 		this.codigoHex = codigoHex;
-		this.produtos = produtos;
 	}
 	
 	
+	public CorEntity() {}
+
+
 	//Getters e Setters
 	public String getNome() {
 		return nome;

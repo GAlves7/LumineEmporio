@@ -25,12 +25,14 @@ public class ImagemProdutoEntity {
 	private ProdutoEntity produto;
 	
 	
-	public ImagemProdutoEntity(String url, ProdutoEntity produto) {
-		this.url = url;
+	public ImagemProdutoEntity(ProdutoEntity produto, Long idImagemProd) {
 		this.produto = produto;
+		this.idImagemProd = idImagemProd;
 	}
 	
-	
+	public ImagemProdutoEntity() {}
+
+
 	//Getters e Setters
 	public String getUrl() {
 		return url;
@@ -50,5 +52,9 @@ public class ImagemProdutoEntity {
 	
 	public Long getIdImagemProd() {
 		return idImagemProd;
+	}
+
+	public void setIdImagemProd(Long idImagemProd) {
+		this.idImagemProd = idImagemProd;
 	}
 }
