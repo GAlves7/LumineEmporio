@@ -2,6 +2,8 @@ package com.api.lumine_emporio.entity;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +29,7 @@ public class CorEntity {
 	
 	//Relacionamentos
 	@ManyToMany(mappedBy = "cores")
+	@JsonBackReference
 	private Set<ProdutoVariacaoEntity> produtos;
 
 	public CorEntity(String nome, String codigoHex) {

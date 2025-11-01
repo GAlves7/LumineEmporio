@@ -7,12 +7,15 @@ import org.springframework.stereotype.Service;
 import com.api.lumine_emporio.entity.PromocaoEntity;
 import com.api.lumine_emporio.repository.PromocaoRepository;
 
+import jakarta.transaction.Transactional;
+
 
 @Service
 public class PromocaoService {
 	@Autowired
 	private PromocaoRepository promocaoRepository;
 	
+	@Transactional
 	public PromocaoEntity save(PromocaoEntity promocaoEntity) {
 		promocaoEntity.getProdutosVariacao().forEach(variacao -> {
 			variacao.setPromocao(promocaoEntity);

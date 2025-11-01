@@ -1,5 +1,7 @@
 package com.api.lumine_emporio.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,8 +14,8 @@ import jakarta.persistence.Table;
 @Table(name = "tb_imagemproduto")
 public class ImagemProdutoEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_imagemprod")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idImagemProd;
 	
 	@Column(nullable=false, unique = true)
@@ -22,14 +24,16 @@ public class ImagemProdutoEntity {
 	
 	//Relacionamentos
 	@ManyToOne
+	@JsonBackReference
 	private ProdutoEntity produto;
 	
 	
-	public ImagemProdutoEntity(ProdutoEntity produto, Long idImagemProd) {
+	public ImagemProdutoEntity(String url, ProdutoEntity produto) {
+		this.url = url;
 		this.produto = produto;
-		this.idImagemProd = idImagemProd;
 	}
-	
+
+
 	public ImagemProdutoEntity() {}
 
 

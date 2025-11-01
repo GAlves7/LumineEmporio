@@ -49,6 +49,7 @@ public class ProdutoEntity {
 	private Set<SubCategoriaEntity> subCategoria;
 	
 	@OneToMany(mappedBy = "produto")
+	@JsonManagedReference
 	private Set<ImagemProdutoEntity> imagemProduto;
 	
 	@OneToMany(mappedBy = "produto")

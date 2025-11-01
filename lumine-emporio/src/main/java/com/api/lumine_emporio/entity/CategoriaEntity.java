@@ -22,7 +22,7 @@ public class CategoriaEntity {
 	@Column(nullable=false, unique = true, length = 35)
 	private String nome;
 	
-	@Column(nullable=false)
+	@Column(nullable=false, length = 50)
 	private String descricao;
 	
 	
@@ -33,14 +33,14 @@ public class CategoriaEntity {
 	@ManyToMany(mappedBy = "categorias")
 	private Set<ProdutoEntity> produtos;
 
-	public CategoriaEntity(String nome, String descricao, Set<SubCategoriaEntity> subCategorias, Set<ProdutoEntity> produtos) {
+	public CategoriaEntity(String nome, String descricao) {
 		this.nome = nome;
 		this.descricao = descricao;
-		this.subCategorias = subCategorias;
-		this.produtos = produtos;
 	}
 	
-	
+	public CategoriaEntity() {}
+
+
 	//Getters e Setters
 	public String getNome() {
 		return nome;

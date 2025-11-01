@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.lumine_emporio.entity.ProdutoVariacaoEntity;
+import com.api.lumine_emporio.exception.NaoEncontradoException;
 import com.api.lumine_emporio.repository.ProdutoVariacaoRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class ProdutoVariacaoService {
@@ -20,14 +23,14 @@ public class ProdutoVariacaoService {
 
 
 	public List<ProdutoVariacaoEntity> findByPromocaoIsNotNull() {
-		// TODO Auto-generated method stub
 		return produtoVariacaoRepository.findByPromocaoIsNotNull();
 	}
 	
+	@Transactional
 	public ProdutoVariacaoEntity save(ProdutoVariacaoEntity produtoVariacaoEntity) {
 		return produtoVariacaoRepository.save(produtoVariacaoEntity);
 	}
 	public ProdutoVariacaoEntity findById(Long id) {
-		return produtoVariacaoRepository.findById(id).orElseThrow(() -> new RuntimeException("produtoVariacao nao encontrado"));
+		return produtoVariacaoRepository.findById(id).orElseThrow(() -> new NaoEncontradoException("ProdutoVar com ID: "+id+" não encontrado."));
 	}
 }

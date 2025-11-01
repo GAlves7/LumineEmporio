@@ -1,9 +1,11 @@
 package com.api.lumine_emporio.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.api.lumine_emporio.entity.enums.Tamanho;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -51,6 +53,7 @@ public class ProdutoVariacaoEntity {
 			joinColumns = @JoinColumn(name = "id_produtovariacao"),
 			inverseJoinColumns = @JoinColumn(name = "id_cor")
 	)
+	@JsonManagedReference
 	private Set<CorEntity> cores;
 	
 	@ManyToOne
@@ -112,6 +115,10 @@ public class ProdutoVariacaoEntity {
 
 	public void setCores(Set<CorEntity> cores) {
 		this.cores = cores;
+	}
+	public void addCor(CorEntity cor) {
+		if (cores == null) cores = new HashSet<>();
+		if(!cores.contains(cor)) cores.add(cor);
 	}
 
 	public Long getIdProdutoVar() {
