@@ -39,7 +39,7 @@ public class UsuarioEntity implements UserDetails{
 	private String nome;
 	
 	@Column(nullable=false)
-	private String senha;
+	private String password;
 	
 	@Column(nullable=false, unique = true, length = 35)
 	private String email;
@@ -78,7 +78,7 @@ public class UsuarioEntity implements UserDetails{
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return senha;
+		return password;
 	}
 
 	@Override
@@ -87,11 +87,11 @@ public class UsuarioEntity implements UserDetails{
 		return email;
 	}
 
-	public UsuarioEntity(String nome, String senha, String email, String telefone, Role role,
+	public UsuarioEntity(String nome, String password, String email, String telefone, Role role,
 			Set<AvaliacaoEntity> avaliacoesEntity, Set<ProdutoEntity> favoritos,
 			Set<ItemCarrinhoEntity> itensCarrinho) {
 		this.nome = nome;
-		this.senha = senha;
+		this.password = password;
 		this.email = email;
 		this.telefone = telefone;
 		this.role = role;
@@ -101,6 +101,9 @@ public class UsuarioEntity implements UserDetails{
 	}
 	
 	
+	
+	public UsuarioEntity() {}
+
 	//Getters e Setters
 	public String getNome() {
 		return nome;
@@ -110,12 +113,8 @@ public class UsuarioEntity implements UserDetails{
 		this.nome = nome;
 	}
 
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getEmail() {
