@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
+import com.api.lumine_emporio.dtos.CodigoAndEmail;
 import com.api.lumine_emporio.entity.UsuarioEntity;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -25,6 +26,32 @@ public class TokenConfig {
 				.withIssuedAt(Instant.now())
 				.sign(algorithm);
 	}
+	
+	public String generateRecuperarSenhaToken(UsuarioEntity usuario, int codVerificacao) {
+		Algorithm algorithm = Algorithm.HMAC256(secret);
+		
+		return JWT.create()
+				.withSubject(usuario.getEmail())
+				.withExpiresAt(Instant.now().plusSeconds(180))
+				.withIssuedAt(Instant.now())
+				.withClaim("codVerificacao", codVerificacao)
+				.sign(algorithm);
+	}
+	
+	public Optional<CodigoAndEmail> recuperarCod(String token){
+		try {
+			Algorithm algorithm = Algorithm.HMAC256(secret);
+			DecodedJWT decode = JWT.require(algorithm).build().verify(token);
+			CodigoAndEmail codigoAndEmail = new CodigoAndEmail(decode.getSubject(), decode.getClaim("codVerificacao").asInt());
+			
+			return Optional.of(codigoAndEmail);
+			
+		}catch (JWTVerificationException ex) {
+			return Optional.empty();
+		}
+	}
+	
+	
 	
 	
 	public Optional<JWTUserData> validateToken(String token){
