@@ -12,27 +12,29 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome (ícones) -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- Normalize CSS (opcional, compatibilidade entre navegadores) -->
+    <!-- Normalize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <!-- Seu arquivo CSS -->
+    <!-- Estilos do site -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
+
 <body>
-    <!-- Cabeçalho -->
+    <!-- HEADER -->
     <header>
         <div class="container-header">
-            <!-- Lado esquerdo: Logo -->
             <div class="logo">
                 <a href="index.html">
                     <img src="img/logos/logo1.png" alt="Logo Lumine Empório">
                 </a>
             </div>
 
-            <!-- Centro: Pesquisa e link -->
             <div class="center-content">
                 <div class="search-box">
                     <button><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -41,7 +43,6 @@
                 <a href="#" class="sobre">Sobre</a>
             </div>
 
-            <!-- Lado direito: ícones -->
             <div class="icons">
                 <button class="btn-theme" title="Mudar tema">
                     <i class="fa-solid fa-sun"></i>
@@ -56,12 +57,32 @@
         </div>
     </header>
 
-    <!-- Rodapé -->
+    <!-- MODAL DE LOGIN -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-content">
+            <h3>Login</h3>
+            <input type="email" placeholder="Email" id="loginEmail">
+
+            <div class="password-container">
+                <input type="password" placeholder="Senha" id="loginPassword">
+                <i class="fa-solid fa-eye" id="togglePassword"></i>
+            </div>
+
+            <p class="forgot-password"><a href="recuperar-senha.html">Esqueceu a senha?</a></p>
+
+            <button id="btnLogin">Entrar</button>
+            <button id="btnGoogle"><i class="fa-brands fa-google"></i> Entrar com Google</button>
+            <p>Não tem conta? <a href="cadastro.html">Registrar</a></p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
     <footer class="footer">
         <p>&copy; 2025 Lumine Empório. Todos os direitos reservados.</p>
     </footer>
 
     <!-- Script principal -->
-    <script src="js/script.js"></script>
+    <script type="module" src="js/script.js"></script>
+
 </body>
 </html>

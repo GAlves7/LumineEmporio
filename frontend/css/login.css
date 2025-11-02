@@ -1,0 +1,107 @@
+/* Modal de Login */
+.login-modal {
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    width: 300px;
+    background-color: var(--cor-caixa);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    padding: 20px;
+    display: none; /* escondido por padrão */
+    z-index: 100;
+}
+
+.login-content h3 {
+    margin-top: 0;
+    color: var(--cor-principal);
+    text-align: center;
+}
+
+/* Inputs */
+.login-content input {
+    width: 93%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* Botões */
+.login-content button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--cor-principal);
+    color: var(--cor-fundo);
+    font-weight: 600;
+    transition: background 0.3s;
+    cursor: pointer;
+}
+
+.login-content button:hover {
+    background-color: #ffd700;
+}
+
+/* Texto inferior */
+.login-content p {
+    text-align: center;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.login-content a {
+    color: var(--cor-principal);
+    text-decoration: none;
+}
+
+.login-content a:hover {
+    text-decoration: underline;
+}
+
+/* Campo de senha com ícone */
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input {
+    width: 83%;
+    padding: 10px 40px 10px 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+.password-container i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #191919;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.password-container i:hover {
+    color: var(--cor-principal);
+}
+
+/* Link "Esqueceu a senha?" */
+.forgot-password {
+    text-align: right;
+    margin: 5px 0 10px 0;
+    font-size: 0.85rem;
+}
+
+.forgot-password a {
+    color: var(--cor-principal);
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}

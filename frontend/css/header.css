@@ -1,0 +1,110 @@
+/* HEADER */
+header {
+    background-color: var(--cor-fundo);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 10px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Container principal do header */
+.container-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo */
+.logo img {
+    width: 120px;
+    position: relative;
+    top: 3px;
+    left: -5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05); 
+}
+
+/* Centro: Pesquisa e link */
+.center-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--cor-caixa);
+    border-radius: 25px;
+    overflow: hidden;
+    background-color: var(--cor-caixa);
+    padding-left: 2px;
+    width: 60px;
+    transition: width 0.4s ease;
+}
+
+.search-box.active {
+    width: 400px;
+}
+
+.search-box button {
+    background-color: transparent;
+    border: none;
+    color: var(--cor-principal);
+    padding: 8px 10px;
+    transition: color 0.2s;
+}
+
+.search-box button:hover {
+    color: #000;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    padding: 8px 12px;
+    width: 100%;
+    font-size: 0.95rem;
+    background-color: var(--cor-caixa);
+    color: var(--cor-principal);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.search-box.active input {
+    opacity: 1;
+}
+
+.sobre {
+    color: var(--cor-principal);
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.sobre:hover {
+    color: #000;
+}
+
+/* Ícones à direita */
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icons button {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    color: var(--cor-principal);
+    transition: color 0.2s, transform 0.2s;
+}
+
+.icons button:hover {
+    color: #000;
+}
