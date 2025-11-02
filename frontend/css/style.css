@@ -1,0 +1,133 @@
+/* Estilo geral */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: #191919;
+}
+
+/* HEADER */
+header {
+    background-color: #191919;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 10px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Container principal do header */
+.container-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    margin-top: 4.5px;    /* desce um pouco */
+}
+
+.logo img {
+    height: 50px; /* ajuste conforme o tamanho da logo */
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+/* Centro: Pesquisa e link */
+.center-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #272727;
+    border-radius: 25px;
+    overflow: hidden;
+    background-color: #272727;
+    padding-left: 2px;
+    width: 60px; /* tamanho retraído */
+    transition: width 0.4s ease;
+}
+
+.search-box.active {
+    width: 400px; /* tamanho expandido */
+}
+
+.search-box button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px 10px;
+    color: #fff297;
+    transition: color 0.2s, transform 0.2s; /* adiciona transição de escala */
+}
+
+.search-box button:hover {
+    color: #000; /* muda a cor da lupa */
+    transform: scale(1.2); /* aumenta levemente */
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    padding: 8px 12px;
+    width: 100%;
+    font-size: 0.95rem;
+    background-color: #272727;
+    color: #fff297;
+    opacity: 0; /* escondido quando retraído */
+    transition: opacity 0.3s ease;
+}
+
+.search-box.active input {
+    opacity: 1;
+}
+
+.sobre {
+    text-decoration: none;
+    color: #fff297;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.sobre:hover {
+    color: #000;
+}
+
+/* Ícones à direita */
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #fff297;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.icons button:hover {
+    color: #000;
+}
+
+.footer {
+    color: #ffffff;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 15px;
+}
