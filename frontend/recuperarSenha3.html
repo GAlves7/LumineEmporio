@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/recuperarSenha.css">
 </head>
 <body>
@@ -68,6 +69,25 @@
         </div>
     </section>
 
+    <!-- MODAL DE LOGIN -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-content">
+            <h3>Login</h3>
+            <input type="email" placeholder="Email" id="loginEmail">
+
+            <div class="password-container">
+                <input type="password" placeholder="Senha" id="loginPassword">
+                <i class="fa-solid fa-eye" id="togglePassword"></i>
+            </div>
+
+            <p class="forgot-password"><a href="recuperar-senha.html">Esqueceu a senha?</a></p>
+
+            <button id="btnLogin">Entrar</button>
+            <p>Não tem conta? <a href="cadastro.html">Registrar</a></p>
+        </div>
+    </div>
+
+
     <!-- FOOTER -->
     <footer class="footer">
         <p>&copy; 2025 Lumine Empório. Todos os direitos reservados.</p>
@@ -93,5 +113,9 @@
             toggleConfirmarSenha.classList.toggle('fa-eye-slash');
         });
     </script>
+
+    <!-- Script principal -->
+    <script type="module" src="js/script.js"></script>
+
 </body>
 </html>
