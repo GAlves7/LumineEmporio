@@ -36,7 +36,7 @@
     object-position: center;   /* centraliza a imagem */
     display: block;
     cursor: pointer;
-    background-color: #000;    /* opcional: evita espaços em branco visíveis */
+    background-color: #191919;    /* opcional: evita espaços em branco visíveis */
 }
 
 /* Botões */
@@ -74,7 +74,7 @@
     height: 12px;
     width: 12px;
     margin: 0 5px;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: #191919;
     border-radius: 50%;
     display: inline-block;
     cursor: pointer;
