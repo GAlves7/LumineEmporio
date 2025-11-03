@@ -20,7 +20,7 @@
 
 /* Inputs */
 .login-content input {
-    width: 93%;
+    width: 93.5%;
     padding: 10px;
     margin: 10px 0;
     border: none;
@@ -69,11 +69,15 @@
 }
 
 .password-container input {
-    width: 83%;
-    padding: 10px 40px 10px 10px;
+    width: 100%;
+    padding-right: 35px; /* espaço pro ícone */
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border: none;
     border-radius: 5px;
     outline: none;
+    box-sizing: border-box;
 }
 
 .password-container i {
@@ -85,6 +89,7 @@
     cursor: pointer;
     transition: color 0.3s;
 }
+
 
 .password-container i:hover {
     color: var(--cor-principal);

@@ -1,0 +1,105 @@
+.cadastro-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px; /* mais espaço entre os dois */
+    margin: 60px auto;
+    max-width: 1100px;
+    flex-wrap: wrap; /* empilha em telas pequenas */
+    flex-direction: row-reverse; /* imagem à direita */
+}
+
+/* Imagem */
+.cadastro-imagem img {
+    width: 540px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Formulário */
+.cadastro-container {
+    max-width: 400px;
+    background-color: var(--cor-caixa);
+    padding: 30px;
+    border-radius: 10px;
+    color: var(--cor-principal);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.cadastro-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.cadastro-container input {
+    width: 95%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.cadastro-container button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--cor-principal);
+    color: var(--cor-fundo);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.cadastro-container button:hover {
+    background-color: #ffd700;
+}
+
+/* Olhos das senhas */
+.password-container {
+    position: relative;
+    width: 100%;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 35px; /* espaço para o ícone */
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    box-sizing: border-box; /* garante que padding não quebre o layout */
+}
+
+.password-container i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #191919;
+    transition: color 0.3s;
+}
+
+.password-container i:hover {
+    color: var(--cor-principal);
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+    .cadastro-wrapper {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .cadastro-imagem img {
+        width: 80%;
+        max-width: 350px;
+    }
+}

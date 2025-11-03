@@ -3,30 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Lumine Empório - Moda com estilo e conforto. Encontre roupas femininas e masculinas para todas as ocasiões.">
-    <meta name="author" content="Lumine Empório">
-    <meta name="keywords" content="moda, roupas, ecommerce, feminino, masculino, estilo, loja de roupas, lajedo, cosmeticos, perfume, creme">
-
-    <title>Lumine Empório</title>
+    <title>Lumine Empório - Cadastro</title>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
     <!-- Normalize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-
-    <!-- Estilos do site -->
+    <!-- Estilos -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/cadastro.css">
 </head>
-
 <body>
-    <!-- HEADER -->
+    <!-- Header (reaproveitado do index) -->
     <header>
         <div class="container-header">
             <div class="logo">
@@ -34,7 +27,6 @@
                     <img src="img/logos/logo1.png" alt="Logo Lumine Empório">
                 </a>
             </div>
-
             <div class="center-content">
                 <div class="search-box">
                     <button><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -42,7 +34,6 @@
                 </div>
                 <a href="#" class="sobre">Sobre</a>
             </div>
-
             <div class="icons">
                 <button class="btn-theme" title="Mudar tema">
                     <i class="fa-solid fa-sun"></i>
@@ -57,31 +48,57 @@
         </div>
     </header>
 
-    <!-- MODAL DE LOGIN -->
+    <!-- Modal de Login (reaproveitado) -->
     <div class="login-modal" id="loginModal">
         <div class="login-content">
             <h3>Login</h3>
             <input type="email" placeholder="Email" id="loginEmail">
-
             <div class="password-container">
                 <input type="password" placeholder="Senha" id="loginPassword">
                 <i class="fa-solid fa-eye" id="togglePassword"></i>
             </div>
-
             <p class="forgot-password"><a href="recuperar-senha.html">Esqueceu a senha?</a></p>
-
             <button id="btnLogin">Entrar</button>
             <p>Não tem conta? <a href="cadastro.html">Registrar</a></p>
         </div>
     </div>
 
-    <!-- FOOTER -->
+    <main class="cadastro-wrapper">
+        <!-- Imagem da loja -->
+        <div class="cadastro-imagem">
+            <img src="img/banners/bannerCadastro.png" alt="Modelos da Lumine Empório">
+        </div>
+
+        <!-- Formulário de cadastro -->
+        <div class="cadastro-container">
+            <h2>Cadastro</h2>
+            <form id="formCadastro">
+                <input type="text" placeholder="Nome completo" required>
+                <input type="tel" placeholder="Telefone (XX) 9XXXX-XXXX" required>
+                <input type="email" placeholder="Email" required>
+
+                <div class="password-container">
+                    <input type="password" placeholder="Senha" id="cadastroSenha" required>
+                    <i class="fa-solid fa-eye" id="toggleCadastroSenha"></i>
+                </div>
+
+                <div class="password-container">
+                    <input type="password" placeholder="Repita a senha" id="cadastroRepetirSenha" required>
+                    <i class="fa-solid fa-eye" id="toggleCadastroRepetirSenha"></i>
+                </div>
+
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
     <footer class="footer">
         <p>&copy; 2025 Lumine Empório. Todos os direitos reservados.</p>
     </footer>
 
     <!-- Script principal -->
     <script type="module" src="js/script.js"></script>
-
+    <script type="module" src="js/cadastro.js"></script>
 </body>
 </html>
