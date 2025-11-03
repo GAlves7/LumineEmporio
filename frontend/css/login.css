@@ -1,76 +1,80 @@
-/* Modal de Login */
+/* ==== MODAL DE LOGIN ==== */
+/* Container do modal */
 .login-modal {
-    position: absolute;
-    top: 60px;
-    right: 40px;
-    width: 300px;
-    background-color: var(--cor-caixa);
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    position: absolute; /* posicionado em relação à tela */
+    top: 60px;          /* distância do topo */
+    right: 40px;        /* distância da direita */
+    width: 300px;       /* largura fixa */
+    background-color: var(--cor-caixa); /* cor de fundo escura */
+    border-radius: 10px; /* cantos arredondados */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* sombra para destaque */
     padding: 20px;
     display: none; /* escondido por padrão */
-    z-index: 100;
+    z-index: 100; /* sobrepõe outros elementos */
 }
 
+/* Título do modal */
 .login-content h3 {
     margin-top: 0;
-    color: var(--cor-principal);
+    color: var(--cor-principal); /* cor do destaque */
     text-align: center;
 }
 
-/* Inputs */
+/* ==== INPUTS ==== */
 .login-content input {
-    width: 93.5%;
+    width: 93.5%; /* ocupa quase toda a largura */
     padding: 10px;
     margin: 10px 0;
     border: none;
     border-radius: 5px;
-    outline: none;
+    outline: none; /* remove borda de foco padrão */
 }
 
-/* Botões */
+/* ==== BOTÕES ==== */
 .login-content button {
     width: 100%;
     padding: 10px;
     margin: 5px 0;
     border: none;
     border-radius: 5px;
-    background-color: var(--cor-principal);
-    color: var(--cor-fundo);
+    background-color: var(--cor-principal); /* cor de destaque */
+    color: var(--cor-fundo); /* cor do texto */
     font-weight: 600;
-    transition: background 0.3s;
+    transition: background 0.3s; /* efeito suave ao passar mouse */
     cursor: pointer;
 }
 
+/* Hover do botão */
 .login-content button:hover {
-    background-color: #ffd700;
+    background-color: #ffd700; /* cor mais clara ao passar mouse */
 }
 
-/* Texto inferior */
+/* ==== TEXTO INFERIOR ==== */
 .login-content p {
     text-align: center;
     color: #fff;
     font-size: 0.9rem;
 }
 
+/* Links dentro do modal */
 .login-content a {
     color: var(--cor-principal);
     text-decoration: none;
 }
 
 .login-content a:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* efeito ao passar mouse */
 }
 
-/* Campo de senha com ícone */
+/* ==== CAMPO DE SENHA COM ÍCONE ==== */
 .password-container {
-    position: relative;
+    position: relative; /* necessário para posicionar o ícone dentro do input */
     width: 100%;
 }
 
 .password-container input {
     width: 100%;
-    padding-right: 35px; /* espaço pro ícone */
+    padding-right: 35px; /* espaço para o ícone */
     padding-left: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -80,22 +84,22 @@
     box-sizing: border-box;
 }
 
+/* Ícone de mostrar/ocultar senha */
 .password-container i {
     position: absolute;
     right: 10px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%); /* centraliza verticalmente */
     color: #191919;
     cursor: pointer;
     transition: color 0.3s;
 }
 
-
 .password-container i:hover {
     color: var(--cor-principal);
 }
 
-/* Link "Esqueceu a senha?" */
+/* ==== LINK "ESQUECEU A SENHA?" ==== */
 .forgot-password {
     text-align: right;
     margin: 5px 0 10px 0;
@@ -108,5 +112,5 @@
 }
 
 .forgot-password a:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* efeito ao passar mouse */
 }

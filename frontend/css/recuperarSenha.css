@@ -1,3 +1,5 @@
+/* ==== Container principal da página de recuperação de senha ==== */
+/* Centraliza o conteúdo horizontal e verticalmente e define altura mínima */
 .recuperar-container {
     display: flex;
     justify-content: center;
@@ -5,6 +7,8 @@
     min-height: 70vh;
 }
 
+/* Caixa que contém o formulário de recuperação */
+/* Fundo, padding, borda arredondada, sombra e largura máxima */
 .recuperar-box {
     background-color: var(--cor-caixa);
     padding: 40px;
@@ -15,17 +19,20 @@
     text-align: center;
 }
 
+/* Título do formulário */
 .recuperar-box h2 {
-    color: var(--cor-principal);
+    color: var(--cor-principal); /* cor principal para destaque */
     margin-bottom: 45px;
 }
 
+/* Parágrafos explicativos dentro do formulário */
 .recuperar-box p {
-    color: #fff;
+    color: #fff; /* cor branca */
     font-size: 0.95rem;
     margin-bottom: 20px;
 }
 
+/* Campos de input do formulário */
 .recuperar-box input {
     width: 95%;
     padding: 10px;
@@ -36,6 +43,7 @@
     outline: none;
 }
 
+/* Botão padrão dentro da caixa de recuperação */
 .recuperar-box button {
     width: 100%;
     padding: 10px;
@@ -45,13 +53,15 @@
     color: var(--cor-fundo);
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.3s; /* efeito suave ao passar o mouse */
 }
 
+/* Alteração da cor do botão ao passar o mouse */
 .recuperar-box button:hover {
     background-color: #ffd700;
 }
 
+/* Botão estilizado como link para envio do código */
 .btn-enviar {
     display: inline-block;
     width: 95%;
@@ -67,16 +77,19 @@
     transition: background 0.3s;
 }
 
+/* Hover do botão enviar */
 .btn-enviar:hover {
     background-color: #ffd700;
 }
 
-/* Campo de senha com ícone */
+/* ==== Campo de senha com ícone de visibilidade ==== */
+/* Container relativo para posicionar o ícone sobre o input */
 .password-container {
     position: relative;
     width: 100%;
 }
 
+/* Input de senha com padding à direita para o ícone */
 .password-container input {
     width: 100%;
     padding-right: 40px; /* espaço para o ícone */
@@ -89,6 +102,7 @@
     box-sizing: border-box;
 }
 
+/* Ícone dentro do campo de senha */
 .password-container i {
     position: absolute;
     right: 10px;
@@ -99,13 +113,15 @@
     transition: color 0.3s;
 }
 
+/* Efeito hover no ícone de senha */
 .password-container i:hover {
     color: var(--cor-principal);
 }
 
+/* ==== Responsivo ==== */
 @media (max-width: 600px) {
     .recuperar-box {
         width: 95%;
-        padding: 30px 20px;
+        padding: 30px 20px; /* reduz padding em telas pequenas */
     }
 }

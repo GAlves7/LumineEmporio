@@ -1,41 +1,43 @@
-/* HEADER */
+/* ==== HEADER ==== */
+/* Estilo principal do header */
 header {
-    background-color: var(--cor-fundo);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    padding: 10px 40px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    background-color: var(--cor-fundo); /* cor de fundo escura */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* sombra sutil */
+    padding: 10px 40px; /* espaçamento interno */
+    position: sticky;   /* fica fixo ao rolar a página */
+    top: 0;             /* posição no topo */
+    z-index: 10;        /* sobrepõe elementos abaixo */
 }
 
-/* Container principal do header */
+/* Container principal do header: logo, centro e ícones */
 .container-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; /* distribui espaço entre itens */
 }
 
-/* Logo */
+/* ==== LOGO ==== */
 .logo img {
     width: 120px;
     position: relative;
     top: 3px;
     left: -5px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+    cursor: pointer; /* indica clicável */
+    transition: transform 0.3s ease; /* animação suave ao passar mouse */
 }
 
 .logo img:hover {
-    transform: scale(1.05); 
+    transform: scale(1.05); /* leve zoom ao passar mouse */
 }
 
-/* Centro: Pesquisa e link */
+/* ==== CENTRO: PESQUISA E LINK "SOBRE" ==== */
 .center-content {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 15px; /* espaço entre os elementos */
 }
 
+/* Caixa de pesquisa */
 .search-box {
     display: flex;
     align-items: center;
@@ -44,14 +46,16 @@ header {
     overflow: hidden;
     background-color: var(--cor-caixa);
     padding-left: 2px;
-    width: 60px;
-    transition: width 0.4s ease;
+    width: 60px; /* tamanho inicial pequeno */
+    transition: width 0.4s ease; /* animação ao expandir */
 }
 
+/* Expansão da pesquisa ao focar */
 .search-box.active {
     width: 400px;
 }
 
+/* Botão da lupa */
 .search-box button {
     background-color: transparent;
     border: none;
@@ -64,6 +68,7 @@ header {
     color: #000;
 }
 
+/* Input da pesquisa */
 .search-box input {
     border: none;
     outline: none;
@@ -72,14 +77,16 @@ header {
     font-size: 0.95rem;
     background-color: var(--cor-caixa);
     color: var(--cor-principal);
-    opacity: 0;
+    opacity: 0; /* invisível até ativar */
     transition: opacity 0.3s ease;
 }
 
+/* Torna o input visível quando ativo */
 .search-box.active input {
     opacity: 1;
 }
 
+/* Link "Sobre" */
 .sobre {
     color: var(--cor-principal);
     font-weight: 500;
@@ -90,11 +97,11 @@ header {
     color: #000;
 }
 
-/* Ícones à direita */
+/* ==== ÍCONES À DIREITA ==== */
 .icons {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 15px; /* espaço entre os ícones */
 }
 
 .icons button {
@@ -106,5 +113,5 @@ header {
 }
 
 .icons button:hover {
-    color: #000;
+    color: #000; /* muda cor ao passar mouse */
 }

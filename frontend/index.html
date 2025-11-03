@@ -1,47 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade -->
     <meta name="description" content="Lumine Empório - Moda com estilo e conforto. Encontre roupas femininas e masculinas para todas as ocasiões.">
     <meta name="author" content="Lumine Empório">
     <meta name="keywords" content="moda, roupas, ecommerce, feminino, masculino, estilo, loja de roupas, lajedo, cosmeticos, perfume, creme">
 
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico"> <!-- Ícone do site -->
     <title>Lumine Empório</title>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
+    <!-- Font Awesome (ícones) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- Normalize CSS -->
+    <!-- Normalize CSS (padroniza estilos entre navegadores) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <!-- Estilos globais -->
+    <!-- CSS globais -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/login.css">
-    <!-- Estilos da página principal -->
+    <!-- CSS exclusivo da página principal -->
     <link rel="stylesheet" href="css/pagePrincipal.css">
 </head>
 <body>
-    <!-- HEADER -->
+    <!-- HEADER: barra superior com logo, busca e ícones -->
     <header>
         <div class="container-header">
+            <!-- Logo -->
             <div class="logo">
                 <a href="index.html">
                     <img src="img/logos/logo1.png" alt="Logo Lumine Empório">
                 </a>
             </div>
 
+            <!-- Área central: busca e link sobre -->
             <div class="center-content">
                 <div class="search-box">
                     <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                    <input type="text" placeholder="Buscar...">
+                    <input type="text" placeholder="Buscar..."> <!-- Campo de busca -->
                 </div>
-                <a href="#" class="sobre">Sobre</a>
+                <a href="#" class="sobre">Sobre</a> <!-- Link para seção "Sobre" -->
             </div>
 
+            <!-- Ícones interativos: tema, carrinho e perfil -->
             <div class="icons">
                 <button class="btn-theme" title="Mudar tema">
                     <i class="fa-solid fa-sun"></i>
@@ -56,15 +59,17 @@
         </div>
     </header>
 
-    <!-- BANNER PRINCIPAL -->
+    <!-- BANNER PRINCIPAL: carrossel de imagens clicáveis -->
     <section class="banner">
         <div class="carousel">
             <div class="slides">
+                <!-- Slide 1: Moda Feminina -->
                 <div class="slide">
                     <a href="moda-feminina.html">
                         <img src="img/banners/modaFem.png" alt="Moda Feminina">
                     </a>
                 </div>
+                <!-- Slide 2: Cosméticos -->
                 <div class="slide">
                     <a href="cosmeticos.html">
                         <img src="img/banners/cosme.png" alt="Cosméticos">
@@ -72,11 +77,11 @@
                 </div>
             </div>
 
-            <!-- Setas -->
+            <!-- Botões de navegação -->
             <button class="prev"><i class="fa-solid fa-chevron-left"></i></button>
             <button class="next"><i class="fa-solid fa-chevron-right"></i></button>
 
-            <!-- Indicadores -->
+            <!-- Indicadores de slide (bolinhas) -->
             <div class="dots">
                 <span class="dot active"></span>
                 <span class="dot"></span>
@@ -84,14 +89,14 @@
         </div>
     </section>
 
-    <!-- MODAL DE LOGIN -->
+    <!-- MODAL DE LOGIN: aparece ao clicar no ícone de usuário -->
     <div class="login-modal" id="loginModal">
         <div class="login-content">
             <h3>Login</h3>
             <input type="email" placeholder="Email" id="loginEmail">
             <div class="password-container">
                 <input type="password" placeholder="Senha" id="loginPassword">
-                <i class="fa-solid fa-eye" id="togglePassword"></i>
+                <i class="fa-solid fa-eye" id="togglePassword"></i> <!-- Mostrar/ocultar senha -->
             </div>
             <p class="forgot-password"><a href="recuperarSenha.html">Esqueceu a senha?</a></p>
             <button id="btnLogin">Entrar</button>
@@ -99,14 +104,13 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
+    <!-- FOOTER: rodapé do site -->
     <footer class="footer">
         <p>&copy; 2025 Lumine Empório. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Scripts globais -->
-    <script type="module" src="js/script.js"></script>
-    <!-- Script da página principal -->
-    <script src="js/pagePrincipal.js"></script>
+    <!-- Scripts JS -->
+    <script type="module" src="js/script.js"></script> <!-- Funcionalidades globais -->
+    <script src="js/pagePrincipal.js"></script> <!-- Carrossel da página principal -->
 </body>
 </html>
