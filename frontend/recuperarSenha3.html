@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Senha - Lumine Empório</title>
+
+    <!-- Google Fonts e ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/recuperarSenha.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container-header">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img/logos/logo1.png" alt="Logo Lumine Empório">
+                </a>
+            </div>
+
+            <div class="center-content">
+                <div class="search-box">
+                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <input type="text" placeholder="Buscar...">
+                </div>
+                <a href="#" class="sobre">Sobre</a>
+            </div>
+
+            <div class="icons">
+                <button class="btn-theme" title="Mudar tema">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+                <button class="btn-cart" title="Carrinho">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </button>
+                <button class="btn-user" title="Perfil">
+                    <i class="fa-solid fa-user"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <section class="recuperar-container">
+        <div class="recuperar-box">
+            <h2>Definir Nova Senha</h2>
+            <p>Digite a nova senha e confirme para concluir a recuperação:</p>
+
+            <div class="password-container">
+                <input type="password" placeholder="Nova senha" id="novaSenha">
+                <i class="fa-solid fa-eye" id="toggleNovaSenha"></i>
+            </div>
+
+            <div class="password-container">
+                <input type="password" placeholder="Repita a nova senha" id="confirmarNovaSenha">
+                <i class="fa-solid fa-eye" id="toggleConfirmarSenha"></i>
+            </div>
+
+            <!-- Botão estilizado como link -->
+            <a href="index.html" class="btn-enviar">Concluir</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>&copy; 2025 Lumine Empório. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Script para mostrar/ocultar senha -->
+    <script>
+        const toggleNovaSenha = document.getElementById('toggleNovaSenha');
+        const novaSenha = document.getElementById('novaSenha');
+
+        toggleNovaSenha.addEventListener('click', () => {
+            const type = novaSenha.getAttribute('type') === 'password' ? 'text' : 'password';
+            novaSenha.setAttribute('type', type);
+            toggleNovaSenha.classList.toggle('fa-eye-slash');
+        });
+
+        const toggleConfirmarSenha = document.getElementById('toggleConfirmarSenha');
+        const confirmarNovaSenha = document.getElementById('confirmarNovaSenha');
+
+        toggleConfirmarSenha.addEventListener('click', () => {
+            const type = confirmarNovaSenha.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmarNovaSenha.setAttribute('type', type);
+            toggleConfirmarSenha.classList.toggle('fa-eye-slash');
+        });
+    </script>
+</body>
+</html>
