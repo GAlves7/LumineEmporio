@@ -15,22 +15,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.lumine_emporio.config.TokenConfig;
 import com.api.lumine_emporio.dtos.CodigoAndEmail;
 import com.api.lumine_emporio.dtos.LoginRequest;
 import com.api.lumine_emporio.dtos.LoginResponse;
-import com.api.lumine_emporio.dtos.RecuperarSenhaConfirm;
 import com.api.lumine_emporio.dtos.RecuperarSenhaRequest;
 import com.api.lumine_emporio.dtos.RegisterRequest;
 import com.api.lumine_emporio.dtos.RegisterResponse;
+import com.api.lumine_emporio.dtos.VerificarCodigoDTO;
+import com.api.lumine_emporio.entity.PasswordResetToken;
 import com.api.lumine_emporio.entity.UsuarioEntity;
 import com.api.lumine_emporio.entity.enums.Role;
 import com.api.lumine_emporio.service.MailService;
 import com.api.lumine_emporio.service.UsuarioService;
-
-import com.auth0.jwt.interfaces.DecodedJWT;
 
 import jakarta.validation.Valid;
 
@@ -75,40 +75,45 @@ public class AuthController {
 	}
 	
 	
-	@PostMapping("/recuperar-senha")
+	@PostMapping("/redefinir-senha")
 	public ResponseEntity<Object> recuperarSenha(@RequestBody @Valid RecuperarSenhaRequest recuperarSenhaRequest){
-		int codVerificacao = new Random().nextInt(100000);
 		UsuarioEntity usuario = usuarioService.findByEmail(recuperarSenhaRequest.email());
-		Map<String, String> response = new HashMap<>();
-		response.put("token", tokenConfig.generateRecuperarSenhaToken(usuario, codVerificacao));
+		usuarioService.criarTokenReset(usuario);
 		
-		mailService.enviarEmailTexto(usuario.getEmail(), "Código de Verificação.", "Código de Verificação:"+codVerificacao);
-		
-		return ResponseEntity.ok(response);
+		return ResponseEntity.ok("Codigo de verificação enviado por email.");
 	}
 	
-	@PostMapping("/recuperar-senha/confirm")
-	public ResponseEntity<Object> recuperarSenhaConfirm(@RequestBody @Valid RecuperarSenhaConfirm recuperarSenhaConfirm){
-		Optional<CodigoAndEmail> optCodigoAndEmailt = tokenConfig.recuperarCod(recuperarSenhaConfirm.token());
+	
+	@PostMapping("/verificar-codigo")
+	public ResponseEntity<Object> verificarCodigo(@RequestBody VerificarCodigoDTO verificarCodigoDTO){
+		UsuarioEntity usuario = usuarioService.findByEmail(verificarCodigoDTO.email());
 		
-		if(optCodigoAndEmailt.isEmpty()) 
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Token invalido ou expirado.");
-		CodigoAndEmail codigoAndEmail = optCodigoAndEmailt.get();
+		Optional<String> codigoOPT = usuarioService.getCodigoResetarSenha(usuario);
 		
-		if(codigoAndEmail.codigo() == recuperarSenhaConfirm.codVerificacao()) {
-			UsuarioEntity usuario = usuarioService.findByEmail(codigoAndEmail.email());
-			usuario.setPassword(passwordEncoder.encode(recuperarSenhaConfirm.newPassword()));
+		if(codigoOPT.isPresent() && verificarCodigoDTO.codigo().equals(codigoOPT.get())) {
+			usuario.setPassword(passwordEncoder.encode(verificarCodigoDTO.novaSenha()));
 			usuarioService.save(usuario);
-			return ResponseEntity.ok(new RegisterResponse(usuario.getNome(), usuario.getEmail()));
+			usuarioService.deleteTokenByUsuario(usuario);
+			return ResponseEntity.ok("senha alterada com sucesso.");
 		}
-		
+
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Codigo invalido.");
-		
-			
 	}
 	
 	
-	
+	@PostMapping("/verificar-link")
+	public ResponseEntity<Object> verificarLink(@RequestParam String token, @RequestParam String senha){
+		Optional<PasswordResetToken> passwordResetTokenOPT = usuarioService.findPasswordResetTokenByToken(token);
+		if(passwordResetTokenOPT.isPresent()) {
+			UsuarioEntity usuario = passwordResetTokenOPT.get().getUsuario();
+			usuario.setPassword(passwordEncoder.encode(senha));
+			usuarioService.save(usuario);
+			usuarioService.deleteToken(passwordResetTokenOPT.get());
+			return ResponseEntity.ok("senha alterada com sucesso.");
+		}
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Codigo invalido.");
+	}
 	
 	
 	
