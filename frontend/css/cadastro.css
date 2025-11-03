@@ -1,0 +1,107 @@
+/* ==== WRAPPER DO CADASTRO ==== */
+/* Container principal que organiza imagem e formulário lado a lado */
+.cadastro-wrapper {
+    display: flex;                     /* organiza conteúdo em linha */
+    justify-content: center;           /* centraliza horizontalmente */
+    align-items: center;               /* centraliza verticalmente */
+    gap: 100px;                        /* espaçamento entre formulário e imagem */
+    margin: 60px auto;                 /* espaçamento vertical e centralização horizontal */
+    max-width: 1100px;                 /* largura máxima do container */
+    flex-wrap: wrap;                    /* empilha itens em telas pequenas */
+    flex-direction: row-reverse;       /* coloca a imagem à direita do formulário */
+}
+
+/* ==== IMAGEM DO CADASTRO ==== */
+.cadastro-imagem img {
+    width: 540px;                       /* largura da imagem */
+    height: auto;                        /* altura proporcional */
+    border-radius: 10px;                 /* bordas arredondadas */
+    object-fit: cover;                   /* garante que a imagem cubra o espaço sem distorcer */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* sombra ao redor da imagem */
+}
+
+/* ==== FORMULÁRIO DE CADASTRO ==== */
+.cadastro-container {
+    max-width: 400px;                    /* largura máxima do formulário */
+    background-color: var(--cor-caixa);  /* cor de fundo do formulário */
+    padding: 30px;                        /* espaçamento interno */
+    border-radius: 10px;                  /* cantos arredondados */
+    color: var(--cor-principal);          /* cor do texto */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* sombra do formulário */
+}
+
+.cadastro-container h2 {
+    text-align: center;                   /* título centralizado */
+    margin-bottom: 20px;                  /* espaçamento abaixo do título */
+}
+
+.cadastro-container input {
+    width: 95%;                            /* largura dos campos de entrada */
+    padding: 10px;                         /* espaçamento interno */
+    margin: 10px 0;                        /* espaçamento entre os inputs */
+    border-radius: 5px;                     /* bordas arredondadas */
+    border: none;                           /* sem borda padrão */
+    outline: none;                          /* remove outline ao focar */
+}
+
+.cadastro-container button {
+    width: 100%;                            /* botão ocupa toda a largura */
+    padding: 10px;                           /* espaçamento interno */
+    margin-top: 10px;                        /* espaçamento acima do botão */
+    border-radius: 5px;                       /* bordas arredondadas */
+    border: none;                             /* sem borda padrão */
+    background-color: var(--cor-principal);   /* cor de fundo do botão */
+    color: var(--cor-fundo);                  /* cor do texto do botão */
+    font-weight: 600;                         /* texto em negrito */
+    cursor: pointer;                          /* cursor pointer */
+    transition: background 0.3s;              /* transição suave ao passar o mouse */
+}
+
+.cadastro-container button:hover {
+    background-color: #ffd700;                /* muda a cor do botão ao passar o mouse */
+}
+
+/* ==== CAMPOS DE SENHA COM ÍCONE ==== */
+.password-container {
+    position: relative;                       /* necessário para posicionar o ícone dentro do input */
+    width: 100%;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 35px;                      /* espaço para o ícone de mostrar/ocultar senha */
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    box-sizing: border-box;                   /* garante que padding não quebre o layout */
+}
+
+.password-container i {
+    position: absolute;                       /* ícone posicionado dentro do input */
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);             /* centraliza verticalmente o ícone */
+    cursor: pointer;                          /* cursor pointer para ícone */
+    color: #191919;                           /* cor inicial do ícone */
+    transition: color 0.3s;                   /* animação suave ao passar o mouse */
+}
+
+.password-container i:hover {
+    color: var(--cor-principal);             /* muda a cor do ícone ao passar o mouse */
+}
+
+/* ==== RESPONSIVIDADE ==== */
+@media (max-width: 900px) {
+    .cadastro-wrapper {
+        flex-direction: column;               /* empilha a imagem e o formulário verticalmente */
+        gap: 40px;                            /* menor espaçamento em telas pequenas */
+    }
+
+    .cadastro-imagem img {
+        width: 80%;                            /* reduz a largura da imagem */
+        max-width: 350px;                      /* largura máxima em telas pequenas */
+    }
+}

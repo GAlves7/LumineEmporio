@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade -->
+    <title>Recuperar Senha - Lumine Empório</title>
+
+    <!-- Google Fonts e ícones Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- CSS do site -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css"> <!-- Estilos do header -->
+    <link rel="stylesheet" href="css/footer.css"> <!-- Estilos do footer -->
+    <link rel="stylesheet" href="css/login.css"> <!-- Estilos do modal de login -->
+    <link rel="stylesheet" href="css/recuperarSenha.css"> <!-- Estilos exclusivos desta página -->
+
+</head>
+<body>
+    <!-- HEADER: reutilizado do index, contém logo, busca e ícones -->
+    <header>
+        <div class="container-header">
+            <!-- Logo da loja -->
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img/logos/logo1.png" alt="Logo Lumine Empório">
+                </a>
+            </div>
+
+            <!-- Área central: busca e link sobre -->
+            <div class="center-content">
+                <div class="search-box">
+                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <input type="text" placeholder="Buscar...">
+                </div>
+                <a href="#" class="sobre">Sobre</a>
+            </div>
+
+            <!-- Ícones interativos: tema, carrinho e perfil -->
+            <div class="icons">
+                <button class="btn-theme" title="Mudar tema">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+                <button class="btn-cart" title="Carrinho">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </button>
+                <button class="btn-user" title="Perfil">
+                    <i class="fa-solid fa-user"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL DA PÁGINA DE RECUPERAÇÃO -->
+    <section class="recuperar-container">
+        <div class="recuperar-box">
+            <h2>Recuperar Senha</h2>
+            <p>Para recuperar sua senha, enviaremos um código. Informe abaixo o e-mail cadastrado em sua conta:</p>
+
+            <!-- Campo para inserir o e-mail cadastrado -->
+            <input type="email" placeholder="Digite seu e-mail" id="emailRecuperar">
+
+            <!-- Botão estilizado como link que leva para a etapa 2 da recuperação -->
+            <a href="recuperarSenha2.html" class="btn-enviar">Enviar código para e-mail</a>
+        </div>
+    </section>
+
+    <!-- MODAL DE LOGIN: reutilizado do index -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-content">
+            <h3>Login</h3>
+            <input type="email" placeholder="Email" id="loginEmail">
+
+            <!-- Campo senha com ícone para mostrar/ocultar -->
+            <div class="password-container">
+                <input type="password" placeholder="Senha" id="loginPassword">
+                <i class="fa-solid fa-eye" id="togglePassword"></i>
+            </div>
+
+            <!-- Link para recuperar senha -->
+            <p class="forgot-password"><a href="recuperar-senha.html">Esqueceu a senha?</a></p>
+
+            <button id="btnLogin">Entrar</button>
+            <p>Não tem conta? <a href="cadastro.html">Registrar</a></p>
+        </div>
+    </div>
+
+    <!-- FOOTER: rodapé do site -->
+    <footer class="footer">
+        <p>&copy; 2025 Lumine Empório. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Script principal: funcionalidades globais -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="js/script.js"></script>
+    <script type="module" src="js/recuperarSenha.js"></script>
+
+</body>
+</html>

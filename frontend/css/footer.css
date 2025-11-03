@@ -1,0 +1,8 @@
+/* ==== FOOTER ==== */
+/* Estilo principal do footer */
+.footer {
+    text-align: center;           /* centraliza o texto */
+    color: #ffffff;               /* cor do texto branca */
+    padding: 20px 0;              /* espaçamento interno vertical */
+    background-color: var(--cor-fundo); /* cor de fundo escura consistente com o site */
+}
