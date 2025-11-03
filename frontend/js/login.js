@@ -1,3 +1,5 @@
+import api from './api.js';
+
 // Seleciona o botão de usuário no header que abre o modal de login
 const btnUser = document.querySelector('.btn-user');
 
@@ -32,4 +34,40 @@ togglePassword.addEventListener('click', () => {
 
     // Alterna a classe do ícone para mostrar a animação de olho aberto/fechado
     togglePassword.classList.toggle('fa-eye-slash');
+});
+
+// Seleciona botão de login
+const btnLogin = document.getElementById('btnLogin');
+
+btnLogin.addEventListener('click', async () => {
+    const email = document.getElementById('loginEmail').value.trim();
+    const senha = document.getElementById('loginPassword').value.trim();
+
+    if (!email || !senha) {
+        alert("Preencha todos os campos!");
+        return;
+    }
+
+    try {
+        const response = await api.post('/auth/login', {
+            email: email,
+            password: senha // ou 'password', depende do backend
+        });
+
+        // Login bem-sucedido
+        console.log("Login realizado:", response.data);
+        alert("Login realizado com sucesso!");
+
+        // Salvar token e redirecionar
+        localStorage.setItem('token', response.data.token);
+        console.log("Token:", response.data.token)
+        // window.location.href = "paginaPrincipal.html";
+
+        // Fecha o modal
+        loginModal.style.display = 'none';
+
+    } catch (error) {
+        console.error("Erro ao fazer login:", error.response || error);
+        alert("Erro no login! Verifique email e senha.");
+    }
 });
