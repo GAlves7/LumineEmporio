@@ -3,28 +3,22 @@ package com.api.lumine_emporio.entity.enums;
 
 /*@JsonFormat(shape = JsonFormat.Shape.OBJECT)*/
  public enum Role {
-	ADMIN("A", "Administrador"),
-	BASIC("B", "Basico");
+	A("Administrador"),
+	B("Basico");
 	
-	private String codigo;
 	private String descricao;
 	
-	private Role(String codigo, String descricao) {
-		this.codigo = codigo;
+	private Role(String descricao) {
 		this.descricao = descricao;
 	}
 	
 	/*@JsonCreator*/
 	public static Role getRole(String codigo) {
-		if (codigo.equals("A")) return ADMIN;
-		else if (codigo.equals("B")) return BASIC;
+		if (codigo.equals("A")) return A;
+		else if (codigo.equals("B")) return B;
 		return null;
 	}
-
-	public String getCodigo() {
-		return codigo;
-	}
-
+	
 	public String getDescricao() {
 		return descricao;
 	}

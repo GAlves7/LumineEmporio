@@ -10,44 +10,37 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 
 @Entity
-public class PasswordResetToken {
+public class LinkVerificacaoEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(unique = true)
-	private String token;
-	private String codigoVerificacao;
+	
+	@Column(unique = true, nullable = false)
+	private String link;
+	
+	@Column(nullable = false)
 	private LocalDateTime dataExpiracao;
 	
 	@OneToOne
 	private UsuarioEntity usuario;
 
-	public PasswordResetToken(String token, String codigoVerificacao, LocalDateTime dataExpiracao,
-			UsuarioEntity usuario) {
-		this.token = token;
-		this.codigoVerificacao = codigoVerificacao;
+	
+	public LinkVerificacaoEntity(String link, LocalDateTime dataExpiracao, UsuarioEntity usuario) {
+		this.link = link;
 		this.dataExpiracao = dataExpiracao;
 		this.usuario = usuario;
 	}
-	
 
-	public PasswordResetToken() {}
+	public LinkVerificacaoEntity() {}
 
 
-	public String getToken() {
-		return token;
+
+	public String getLink() {
+		return link;
 	}
 
-	public void setToken(String token) {
-		this.token = token;
-	}
-
-	public String getCodigoVerificacao() {
-		return codigoVerificacao;
-	}
-
-	public void setCodigoVerificacao(String codigoVerificacao) {
-		this.codigoVerificacao = codigoVerificacao;
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 	public LocalDateTime getDataExpiracao() {

@@ -23,6 +23,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.api.lumine_emporio.entity.enums.Role;
+import com.api.lumine_emporio.entity.enums.UsuarioStatus;
 
 
 @Entity
@@ -47,10 +48,17 @@ public class UsuarioEntity implements UserDetails{
 	@Column(nullable=false, unique = true, length = 35)
 	private String telefone;
 	
+	@Column(nullable=false, unique = true, length = 11)
+	private String cpf;
+	
 	@Column(nullable=false)
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
+	
+	@Column(nullable=false)
+	@Enumerated(EnumType.STRING)
+	private UsuarioStatus status;
 	
 	//Relacionamentos
 	@OneToMany(mappedBy = "usuario")
@@ -71,7 +79,7 @@ public class UsuarioEntity implements UserDetails{
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		if(this.role == Role.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+		if(this.role == Role.A) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
 		return List.of(new SimpleGrantedAuthority("ROLE_USER"));
 	}
 
@@ -99,8 +107,6 @@ public class UsuarioEntity implements UserDetails{
 		this.favoritos = favoritos;
 		this.itensCarrinho = itensCarrinho;
 	}
-	
-	
 	
 	public UsuarioEntity() {}
 
@@ -171,5 +177,21 @@ public class UsuarioEntity implements UserDetails{
 
 	public UUID getIdUsuario() {
 		return idUsuario;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public UsuarioStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(UsuarioStatus status) {
+		this.status = status;
 	}
 }

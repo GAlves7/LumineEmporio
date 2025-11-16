@@ -1,9 +1,6 @@
 package com.api.lumine_emporio.controller;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
-import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,11 +22,11 @@ import com.api.lumine_emporio.dtos.LoginResponse;
 import com.api.lumine_emporio.dtos.RecuperarSenhaRequest;
 import com.api.lumine_emporio.dtos.RegisterRequest;
 import com.api.lumine_emporio.dtos.RegisterResponse;
-import com.api.lumine_emporio.dtos.VerificarCodigoDTO;
-import com.api.lumine_emporio.entity.PasswordResetToken;
 import com.api.lumine_emporio.entity.UsuarioEntity;
 import com.api.lumine_emporio.entity.enums.Role;
-import com.api.lumine_emporio.service.MailService;
+import com.api.lumine_emporio.entity.enums.UsuarioStatus;
+import com.api.lumine_emporio.service.CodigoVerificacaoService;
+import com.api.lumine_emporio.service.LinkVerificacaoService;
 import com.api.lumine_emporio.service.UsuarioService;
 
 import jakarta.validation.Valid;
@@ -46,7 +43,10 @@ public class AuthController {
 	@Autowired
 	private TokenConfig tokenConfig;
 	@Autowired
-	private MailService mailService;
+	private CodigoVerificacaoService codigoVerificacaoService;
+	@Autowired
+	private LinkVerificacaoService linkVerificacaoService;
+	
 	
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest login){
@@ -55,6 +55,8 @@ public class AuthController {
 		Authentication authentication = authenticationManager.authenticate(userAndPass);
 		
 		UsuarioEntity usuario = (UsuarioEntity) authentication.getPrincipal();
+		if(!usuario.getStatus().equals(UsuarioStatus.A)) 
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		
 		String token = tokenConfig.generateToken(usuario);
 		return ResponseEntity.ok(new LoginResponse(token));
@@ -67,52 +69,53 @@ public class AuthController {
 		usuario.setNome(registerRequest.nome());
 		usuario.setEmail(registerRequest.email());
 		usuario.setTelefone(registerRequest.telefone());
-		usuario.setRole(Role.BASIC);
+		usuario.setCpf(registerRequest.cpf());
+		usuario.setRole(Role.B);
+		usuario.setStatus(UsuarioStatus.P);
 		usuario.setPassword(passwordEncoder.encode(registerRequest.password()));
 		
 		usuarioService.save(usuario);
+		codigoVerificacaoService.criarCodigo(usuario);
 		return ResponseEntity.status(HttpStatus.CREATED).body(new RegisterResponse(usuario.getNome(), usuario.getEmail()));
+	}
+	
+	
+	@PostMapping("/register/verificar-email")
+	public ResponseEntity<String> registerVerificarEmail(@Valid @RequestBody CodigoAndEmail codigoAndEmail){
+		UsuarioEntity usuario = usuarioService.findByEmail(codigoAndEmail.email());
+		if (codigoVerificacaoService.compararCodigo(usuario, codigoAndEmail.codigo())) {
+			usuario.setStatus(UsuarioStatus.A);
+			codigoVerificacaoService.deletebyUsuario(usuario);
+			return ResponseEntity.ok("Email autenticado com sucesso.");
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email ou codigo invalido.");
+		
 	}
 	
 	
 	@PostMapping("/redefinir-senha")
 	public ResponseEntity<Object> recuperarSenha(@RequestBody @Valid RecuperarSenhaRequest recuperarSenhaRequest){
 		UsuarioEntity usuario = usuarioService.findByEmail(recuperarSenhaRequest.email());
-		usuarioService.criarTokenReset(usuario);
+		linkVerificacaoService.criarLink(usuario);
 		
 		return ResponseEntity.ok("Codigo de verificação enviado por email.");
 	}
 	
 	
-	@PostMapping("/verificar-codigo")
-	public ResponseEntity<Object> verificarCodigo(@RequestBody VerificarCodigoDTO verificarCodigoDTO){
-		UsuarioEntity usuario = usuarioService.findByEmail(verificarCodigoDTO.email());
-		
-		Optional<String> codigoOPT = usuarioService.getCodigoResetarSenha(usuario);
-		
-		if(codigoOPT.isPresent() && verificarCodigoDTO.codigo().equals(codigoOPT.get())) {
-			usuario.setPassword(passwordEncoder.encode(verificarCodigoDTO.novaSenha()));
-			usuarioService.save(usuario);
-			usuarioService.deleteTokenByUsuario(usuario);
-			return ResponseEntity.ok("senha alterada com sucesso.");
-		}
-
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Codigo invalido.");
-	}
-	
-	
 	@PostMapping("/verificar-link")
-	public ResponseEntity<Object> verificarLink(@RequestParam String token, @RequestParam String senha){
-		Optional<PasswordResetToken> passwordResetTokenOPT = usuarioService.findPasswordResetTokenByToken(token);
-		if(passwordResetTokenOPT.isPresent()) {
-			UsuarioEntity usuario = passwordResetTokenOPT.get().getUsuario();
-			usuario.setPassword(passwordEncoder.encode(senha));
+	public ResponseEntity<Object> verificarLink(@RequestParam String token, @RequestParam String novaSenha){
+		Optional<UsuarioEntity> usuarioOpt = linkVerificacaoService.consultarLink(token);
+		
+		if(usuarioOpt.isPresent()) {
+			UsuarioEntity usuario = usuarioOpt.get();
+			usuario.setPassword(passwordEncoder.encode(novaSenha));
+			linkVerificacaoService.deleteByUsuario(usuario);
 			usuarioService.save(usuario);
-			usuarioService.deleteToken(passwordResetTokenOPT.get());
+			
 			return ResponseEntity.ok("senha alterada com sucesso.");
 		}
 
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Codigo invalido.");
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Link invalido.");
 	}
 	
 	
