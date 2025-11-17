@@ -1,0 +1,102 @@
+/* ==== WRAPPER GERAL ==== */
+.perfil-wrapper {
+    max-width: 1100px;
+    margin: 140px auto 80px auto; /* distancia do header + centralização */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+/* ==== FOTO DO USUÁRIO ==== */
+.perfil-foto img {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--cor-principal);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+/* ==== CARD COM INFORMAÇÕES ==== */
+.perfil-info {
+    background: var(--cor-caixa);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    width: 420px;
+    color: var(--cor-principal);
+}
+
+.perfil-info h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* ==== DADOS INDIVIDUAIS ==== */
+.perfil-dado {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.perfil-dado .label {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.perfil-dado .valor {
+    font-size: 16px;
+    margin-top: 2px;
+}
+
+/* ==== BOTÕES ==== */
+.perfil-botoes {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn {
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+    color: var(--cor-fundo);
+    background: var(--cor-principal);
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #ffd700;
+    color: #000;
+}
+
+.btn.sair {
+    background: #c0392b;
+}
+
+.btn.sair:hover {
+    background: #e74c3c;
+}
+
+/* ==== RESPONSIVO ==== */
+@media (max-width: 900px) {
+    .perfil-wrapper {
+        gap: 40px;
+        margin-top: 120px;
+    }
+
+    .perfil-info {
+        width: 90%;
+        max-width: 420px;
+    }
+
+    .perfil-foto img {
+        width: 220px;
+        height: 220px;
+    }
+}
