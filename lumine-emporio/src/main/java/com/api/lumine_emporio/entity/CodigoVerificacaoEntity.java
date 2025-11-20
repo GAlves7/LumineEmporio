@@ -7,7 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class CodigoVerificacaoEntity {
@@ -15,44 +14,50 @@ public class CodigoVerificacaoEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(nullable = false)
-	private String codigo;
+	@Column(nullable = false, name = "hash_codigo")
+	private String hashCodigo;
 
 	@Column(nullable = false)
 	private LocalDateTime dataExpiracao;
 	
-	@OneToOne
-	private UsuarioEntity usuario;
-
-	public CodigoVerificacaoEntity(String codigo, String codigoVerificacao, LocalDateTime dataExpiracao,
-			UsuarioEntity usuario) {
-		this.codigo = codigo;
+	@Column(nullable = false, unique = true, length = 40)
+	private String email;
+	
+	
+	public CodigoVerificacaoEntity(String hashCodigo, LocalDateTime dataExpiracao, String email) {
+		this.hashCodigo = hashCodigo;
 		this.dataExpiracao = dataExpiracao;
-		this.usuario = usuario;
+		this.email = email;
 	}
 
 	public CodigoVerificacaoEntity() {}
+	
+	
+	
+	public String getHashCodigo() {
+		return hashCodigo;
+	}
 
-	
-	
-	public String getCodigo() {
-		return codigo;
+	public void setHashCodigo(String hashCodigo) {
+		this.hashCodigo = hashCodigo;
 	}
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
+
 	public LocalDateTime getDataExpiracao() {
 		return dataExpiracao;
 	}
+
 	public void setDataExpiracao(LocalDateTime dataExpiracao) {
 		this.dataExpiracao = dataExpiracao;
 	}
-	public UsuarioEntity getUsuario() {
-		return usuario;
+
+	public String getEmail() {
+		return email;
 	}
-	public void setUsuario(UsuarioEntity usuario) {
-		this.usuario = usuario;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
+
 	public Long getId() {
 		return id;
 	}

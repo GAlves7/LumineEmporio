@@ -1,9 +1,10 @@
 package com.api.lumine_emporio.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.api.lumine_emporio.entity.UsuarioEntity;
-import com.api.lumine_emporio.exception.NaoEncontradoException;
 import com.api.lumine_emporio.repository.UsuarioRepository;
 
 import jakarta.transaction.Transactional;
@@ -20,8 +21,8 @@ public class UsuarioService {
 		return usuarioRepository.save(usuarioEntity);
 	}
 	
-	public UsuarioEntity findByEmail(String email) {
-		return (UsuarioEntity) usuarioRepository.findByEmail(email).orElseThrow(() -> new NaoEncontradoException("Usuario com email: "+email+" não encontrado."));
+	public Optional<UsuarioEntity> findByEmail(String email) {
+		return usuarioRepository.findUsuarioEntityByEmail(email);
 	}
 	
 	

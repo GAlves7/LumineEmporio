@@ -10,6 +10,7 @@ import com.api.lumine_emporio.entity.UsuarioEntity;
 
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, UUID>{
 	Optional<UserDetails> findByEmail(String email);
+	Optional<UsuarioEntity> findUsuarioEntityByEmail(String email);
 	
 	boolean existsByTelefoneOrEmail(String telefone, String email);
 }

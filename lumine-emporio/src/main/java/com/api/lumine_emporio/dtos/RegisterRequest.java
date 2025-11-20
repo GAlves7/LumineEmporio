@@ -7,5 +7,6 @@ public record RegisterRequest (
 		@NotNull String email,
 		@NotNull String password,
 		@NotNull String telefone,
-		@NotNull String cpf
+		@NotNull String cpf,
+		@NotNull String codigo
 ) {}

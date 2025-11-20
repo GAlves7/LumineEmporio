@@ -1,6 +1,7 @@
 package com.api.lumine_emporio.entity;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,8 +16,11 @@ public class LinkVerificacaoEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@Column(nullable = false)
+	private UUID tokenId;
+	
 	@Column(unique = true, nullable = false)
-	private String link;
+	private String token;
 	
 	@Column(nullable = false)
 	private LocalDateTime dataExpiracao;
@@ -25,40 +29,40 @@ public class LinkVerificacaoEntity {
 	private UsuarioEntity usuario;
 
 	
-	public LinkVerificacaoEntity(String link, LocalDateTime dataExpiracao, UsuarioEntity usuario) {
-		this.link = link;
+
+	public LinkVerificacaoEntity(UUID tokenId, String token, LocalDateTime dataExpiracao, UsuarioEntity usuario) {
+		this.tokenId = tokenId;
+		this.token = token;
 		this.dataExpiracao = dataExpiracao;
 		this.usuario = usuario;
 	}
-
 	public LinkVerificacaoEntity() {}
-
-
-
-	public String getLink() {
-		return link;
+	
+	
+	public UUID getTokenId() {
+		return tokenId;
 	}
-
-	public void setLink(String link) {
-		this.link = link;
+	public void setTokenId(UUID tokenId) {
+		this.tokenId = tokenId;
 	}
-
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
+	}
 	public LocalDateTime getDataExpiracao() {
 		return dataExpiracao;
 	}
-
 	public void setDataExpiracao(LocalDateTime dataExpiracao) {
 		this.dataExpiracao = dataExpiracao;
 	}
-
 	public UsuarioEntity getUsuario() {
 		return usuario;
 	}
-
 	public void setUsuario(UsuarioEntity usuario) {
 		this.usuario = usuario;
 	}
-
 	public Long getId() {
 		return id;
 	}

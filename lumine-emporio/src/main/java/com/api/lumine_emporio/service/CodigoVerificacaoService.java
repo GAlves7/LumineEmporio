@@ -2,13 +2,14 @@ package com.api.lumine_emporio.service;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.api.lumine_emporio.entity.CodigoVerificacaoEntity;
-import com.api.lumine_emporio.entity.UsuarioEntity;
-import com.api.lumine_emporio.entity.enums.UsuarioStatus;
+import com.api.lumine_emporio.exception.NaoEncontradoException;
 import com.api.lumine_emporio.repository.CodigoVerificacaoRepository;
 
 import jakarta.transaction.Transactional;
@@ -21,44 +22,48 @@ public class CodigoVerificacaoService{
 	@Autowired
 	private MailService mailService;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@Transactional
 	public CodigoVerificacaoEntity save(CodigoVerificacaoEntity codigoVerificacaoEntity) {
 		return codigoVerificacaoRepository.save(codigoVerificacaoEntity);
 	}
 	
 	@Transactional
-	public void criarCodigo(UsuarioEntity usuario){
-		if (!usuario.getStatus().equals(UsuarioStatus.P)) return;
+	public void criarCodigo(String email){
+		Optional<CodigoVerificacaoEntity> existentCodigo = codigoVerificacaoRepository.findByEmail(email);
+			if (existentCodigo.isPresent()) {
+				if(existentCodigo.get().getDataExpiracao().isAfter(LocalDateTime.now())) return;
+				codigoVerificacaoRepository.delete(existentCodigo.get());
+			}
 		
-		if (codigoVerificacaoRepository.existsByUsuario(usuario)) {
-			CodigoVerificacaoEntity existentCodigo = codigoVerificacaoRepository.findByUsuario(usuario);
-			if (existentCodigo.getDataExpiracao().isAfter(LocalDateTime.now())) return;
-			codigoVerificacaoRepository.delete(existentCodigo);
-		}
 		
 		CodigoVerificacaoEntity codigoEntity = new CodigoVerificacaoEntity();
-		codigoEntity.setCodigo(String.format("%06d", new SecureRandom().nextInt(999999)));
-		codigoEntity.setUsuario(usuario);
+		String codigo = String.format("%06d", new SecureRandom().nextInt(999999));
+		
+		codigoEntity.setHashCodigo(passwordEncoder.encode(codigo));
 		codigoEntity.setDataExpiracao(LocalDateTime.now().plusMinutes(5));
+		codigoEntity.setEmail(email);
 		codigoVerificacaoRepository.save(codigoEntity);
 		
-		mailService.enviarEmailTexto(usuario.getEmail(), "Email de verificação.", "Link de Verificação: "+codigoEntity.getCodigo());
-		System.out.print("Codigo de Verificação: "+codigoEntity.getCodigo());
+		mailService.enviarEmailTexto(email, "Email de verificação.", "Codigo de Verificação: "+codigo);
 		
-		return;
+		System.out.print("Codigo de Verificação: "+codigo);
 	}
 	
 	
-	public Boolean compararCodigo(UsuarioEntity usuario, String codigo) {
-		CodigoVerificacaoEntity codigoEntity = codigoVerificacaoRepository.findByUsuario(usuario);
+	public Boolean compararCodigo(String email, String codigo) {
+		CodigoVerificacaoEntity codigoEntity = codigoVerificacaoRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Codigo invalido."));
+		
 		if (codigoEntity.getDataExpiracao().isBefore(LocalDateTime.now())) throw new RuntimeException("Codigo expirado.");
 				
-		return codigoEntity.getCodigo().equals(codigo);
+		return passwordEncoder.matches(codigo, codigoEntity.getHashCodigo());
 	}
 	
 	@Transactional
-	public void deletebyUsuario(UsuarioEntity usuario) {
-		codigoVerificacaoRepository.deleteByUsuario(usuario);
+	public void deletebyEmail(String email) {
+		codigoVerificacaoRepository.deleteByEmail(email);
 	}
 	
 	
