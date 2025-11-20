@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <!-- Normalize CSS (padroniza estilos entre navegadores) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
     <!-- CSS globais -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
@@ -25,39 +26,9 @@
     <link rel="stylesheet" href="css/pagePrincipal.css">
 </head>
 <body>
+
     <!-- HEADER: barra superior com logo, busca e ícones -->
-    <header>
-        <div class="container-header">
-            <!-- Logo -->
-            <div class="logo">
-                <a href="index.html">
-                    <img src="img/logos/logo1.png" alt="Logo Lumine Empório">
-                </a>
-            </div>
-
-            <!-- Área central: busca e link sobre -->
-            <div class="center-content">
-                <div class="search-box">
-                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                    <input type="text" placeholder="Buscar..."> <!-- Campo de busca -->
-                </div>
-                <a href="#" class="sobre">Sobre</a> <!-- Link para seção "Sobre" -->
-            </div>
-
-            <!-- Ícones interativos: tema, carrinho e perfil -->
-            <div class="icons">
-                <button class="btn-theme" title="Mudar tema">
-                    <i class="fa-solid fa-sun"></i>
-                </button>
-                <button class="btn-cart" title="Carrinho">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </button>
-                <button class="btn-user" title="Perfil">
-                    <i class="fa-solid fa-user"></i>
-                </button>
-            </div>
-        </div>
-    </header>
+    <div id="headerArea"></div>
 
     <!-- BANNER PRINCIPAL: carrossel de imagens clicáveis -->
     <section class="banner">
@@ -90,28 +61,20 @@
     </section>
 
     <!-- MODAL DE LOGIN: aparece ao clicar no ícone de usuário -->
-    <div class="login-modal" id="loginModal">
-        <div class="login-content">
-            <h3>Login</h3>
-            <input type="email" placeholder="Email" id="loginEmail">
-            <div class="password-container">
-                <input type="password" placeholder="Senha" id="loginPassword">
-                <i class="fa-solid fa-eye" id="togglePassword"></i> <!-- Mostrar/ocultar senha -->
-            </div>
-            <p class="forgot-password"><a href="recuperarSenha.html">Esqueceu a senha?</a></p>
-            <button id="btnLogin">Entrar</button>
-            <p>Não tem conta? <a href="cadastro.html">Registrar</a></p>
-        </div>
-    </div>
+    <div id="modalLoginArea"></div>
 
     <!-- FOOTER: rodapé do site -->
-    <footer class="footer">
-        <p>&copy; 2025 Lumine Empório. Todos os direitos reservados.</p>
-    </footer>
+    <div id="footerArea"></div>
 
     <!-- Scripts JS -->
+    <script type="module">
+        import { loadComponent } from "./js/include.js";
+        loadComponent("headerArea", "header.html", "js/header.js");
+        loadComponent("footerArea", "footer.html");
+        loadComponent("modalLoginArea", "modalLogin.html", "js/login.js");
+    </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script type="module" src="js/script.js"></script> <!-- Funcionalidades globais -->
     <script src="js/pagePrincipal.js"></script> <!-- Carrossel da página principal -->
 </body>
 </html>

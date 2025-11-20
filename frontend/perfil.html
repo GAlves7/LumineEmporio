@@ -14,41 +14,13 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/perfil.css">
 </head>
 <body>
 
     <!-- HEADER: reutilizado do index, contém logo, busca e ícones -->
-    <header>
-        <div class="container-header">
-            <!-- Logo -->
-            <div class="logo">
-                <a href="index.html">
-                    <img src="img/logos/logo1.png" alt="Logo Lumine Empório">
-                </a>
-            </div>
-            <!-- Área central: busca e link sobre -->
-            <div class="center-content">
-                <div class="search-box">
-                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                    <input type="text"> <!-- Campo de busca -->
-                </div>
-                <a href="#" class="sobre">Sobre</a>
-            </div>
-            <!-- Ícones interativos: tema, carrinho e perfil -->
-            <div class="icons">
-                <button class="btn-theme" title="Mudar tema">
-                    <i class="fa-solid fa-sun"></i>
-                </button>
-                <button class="btn-cart" title="Carrinho">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </button>
-                <button class="btn-user" title="Perfil">
-                    <i class="fa-solid fa-user"></i>
-                </button>
-            </div>
-        </div>
-    </header>
+    <div id="headerArea"></div>
 
     <!-- ======== CONTAINER PRINCIPAL ======== -->
     <div class="perfil-wrapper">
@@ -87,11 +59,21 @@
 
     </div>
 
-    <!-- FOOTER: rodapé do site -->
-    <footer class="footer">
-        <p>&copy; 2025 Lumine Empório. Todos os direitos reservados.</p>
-    </footer>
+    <!-- MODAL DE LOGIN: aparece ao clicar no ícone de usuário -->
+    <div id="modalLoginArea"></div>
 
+    <!-- FOOTER: rodapé do site -->
+    <div id="footerArea"></div>
+
+    <!-- Scripts JS -->
+    <script type="module">
+        import { loadComponent } from "./js/include.js";
+        loadComponent("headerArea", "header.html", "js/header.js");
+        loadComponent("footerArea", "footer.html");
+        loadComponent("modalLoginArea", "modalLogin.html", "js/login.js");
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="js/perfil.js"></script>
 </body>
 </html>

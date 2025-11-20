@@ -51,7 +51,7 @@ btnLogin.addEventListener('click', async () => {
     try {
         const response = await api.post('/auth/login', {
             email: email,
-            password: senha // ou 'password', depende do backend
+            password: senha //
         });
 
         // Login bem-sucedido
