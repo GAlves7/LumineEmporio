@@ -18,6 +18,7 @@ import org.springframework.http.MediaType;
 import com.api.lumine_emporio.entity.ImagemProdutoEntity;
 import com.api.lumine_emporio.entity.ProdutoEntity;
 import com.api.lumine_emporio.entity.ProdutoVariacaoEntity;
+import com.api.lumine_emporio.service.CategoriaService;
 import com.api.lumine_emporio.service.ImagemProdutoService;
 import com.api.lumine_emporio.service.ProdutoService;
 import com.api.lumine_emporio.service.ProdutoVariacaoService;
@@ -39,6 +40,8 @@ public class CatalogoController {
 	
 	@Autowired
 	private ImagemProdutoService imagemProdutoService;
+	@Autowired
+	private CategoriaService categoriaService;
 	
 	@GetMapping
 	public Page<ProdutoEntity> listarProdutos( @RequestParam(value = "page", defaultValue = "0") int page,
@@ -94,9 +97,14 @@ public class CatalogoController {
 		}
 	}
 	
+	@GetMapping("/categoria/{id}")
+	public ResponseEntity<Object> listProdutoByCategoria(@PathVariable Long id){
+		return ResponseEntity.ok(categoriaService.findById(id).getProdutos());
+	}
 	
-	
-	
-	
+	@GetMapping("/categoria")
+	public ResponseEntity<Object> listCategoria(){
+		return ResponseEntity.ok(categoriaService.findAll());
+	}
 	
 }

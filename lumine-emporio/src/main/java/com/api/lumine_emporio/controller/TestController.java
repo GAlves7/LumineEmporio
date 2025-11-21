@@ -158,13 +158,6 @@ public class TestController {
 		produtoEntity4.addCategoria(categoria);
 		produtoService.save(produtoEntity4);
 		
-		ProdutoEntity produtoEntity5 = new ProdutoEntity();
-		produtoEntity5.setNome("VICTORIA'S SECRET - LOVE SPELL");
-		produtoEntity5.setPreco(9.34);
-		produtoEntity5.setDescricao("VICTORIA'S SECRET - LOVE SPELL");
-		produtoEntity5.addCategoria(categoria);
-		produtoService.save(produtoEntity5);
-		
 		
 		CategoriaEntity categoria2 = new CategoriaEntity();
 		categoria2.setNome("roupa");
@@ -200,12 +193,7 @@ public class TestController {
 		produtoEntity9.addCategoria(categoria2);
 		produtoService.save(produtoEntity9);
 		
-		ProdutoEntity produtoEntity10 = new ProdutoEntity();
-		produtoEntity10.setNome("VESTIDO PRETO");
-		produtoEntity10.setPreco(23.55);
-		produtoEntity10.setDescricao("VESTIDO PRETO");
-		produtoEntity10.addCategoria(categoria2);
-		produtoService.save(produtoEntity10);
+		
 		
 		
 		return ResponseEntity.ok(null);
@@ -214,7 +202,7 @@ public class TestController {
 	@PostMapping("/imagem-adicionar")
 	public ResponseEntity<Object> adicionarImagem(){
 		
-		for(int i = 1; i <= 10; i++) {
+		for(int i = 1; i <= 8; i++) {
 			ProdutoEntity produtoEntity = produtoService.findById((long) i);
 			String url = imagemProdutoService.getCaminho(produtoEntity.getIdProduto(), i, "sla.jpg");
 		
