@@ -66,7 +66,7 @@ public class AuthController {
 	@PostMapping("/register")
 	public ResponseEntity<Object> register(@Valid @RequestBody RegisterRequest registerRequest){
 		if(!codigoVerificacaoService.compararCodigo(registerRequest.email(), registerRequest.codigo()))
-			return ResponseEntity.badRequest().body("Codigo invalido.");
+			return ResponseEntity.badRequest().body("Codigo invalido ou expirado.");
 		
 		
 		UsuarioEntity usuario = new UsuarioEntity();

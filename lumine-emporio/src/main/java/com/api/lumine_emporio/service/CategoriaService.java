@@ -1,5 +1,7 @@
 package com.api.lumine_emporio.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +23,9 @@ public class CategoriaService {
 	
 	public CategoriaEntity findById(Long id) {
 		return categoriaRepository.findById(id).orElseThrow(() -> new NaoEncontradoException("Categoria com ID: "+id+" não encontrado."));
+	}
+	
+	public List<CategoriaEntity> findAll(){
+		return categoriaRepository.findAll();
 	}
 }

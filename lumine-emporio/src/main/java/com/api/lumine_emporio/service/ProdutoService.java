@@ -3,6 +3,8 @@ package com.api.lumine_emporio.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.api.lumine_emporio.entity.ProdutoEntity;
@@ -21,15 +23,19 @@ public class ProdutoService {
 		return produtoRepository.save(produtoEntity);
 	}
 	
-	public List<ProdutoEntity> findAll(){
-		return produtoRepository.findAll();
+	public Page<ProdutoEntity> findAll(Pageable pageable){
+		return produtoRepository.findAll(pageable);
 	}
 	
 	public ProdutoEntity findById(Long id) {
 		return produtoRepository.findById(id).orElseThrow(() -> new NaoEncontradoException("Produto com ID: "+id+" não encontrado."));
 	}
 	
-	public List<ProdutoEntity> findByNomeOrDescricao(String q){
-		return produtoRepository.findByNomeOrDescricao(q);
+	public Page<ProdutoEntity> findByNomeOrDescricao(String q, Pageable pageable){
+		return produtoRepository.findByNomeOrDescricao(q, pageable);
+	}
+	
+	public List<ProdutoEntity> findAll(){
+		return produtoRepository.findAll();
 	}
 }

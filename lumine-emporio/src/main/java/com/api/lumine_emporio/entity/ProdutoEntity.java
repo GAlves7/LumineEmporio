@@ -1,7 +1,9 @@
 package com.api.lumine_emporio.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -39,6 +41,7 @@ public class ProdutoEntity {
 			joinColumns = @JoinColumn(name = "id_produto"),
 			inverseJoinColumns = @JoinColumn(name = "id_categoria")
 	)
+	@JsonBackReference
 	private Set<CategoriaEntity> categorias;
 	
 	@ManyToMany
@@ -143,15 +146,18 @@ public class ProdutoEntity {
 		this.avaliacoes = avaliacoes;
 	}
 
-	public Long getIdProduto() {
-		return idProduto;
-	}
-
 	public double getPreco() {
 		return preco;
 	}
 
 	public void setPreco(double preco) {
 		this.preco = preco;
+	}
+	public Long getIdProduto() {
+		return idProduto;
+	}
+	public void addCategoria(CategoriaEntity categoria) {
+		if (categorias == null) categorias = new HashSet<>();
+		categorias.add(categoria);
 	}
 }

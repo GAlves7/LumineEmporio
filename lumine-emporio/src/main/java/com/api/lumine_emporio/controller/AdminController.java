@@ -18,15 +18,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
+import com.api.lumine_emporio.config.TokenConfig;
 import com.api.lumine_emporio.dtos.CategoriaDTO;
 import com.api.lumine_emporio.dtos.CorDTO;
+import com.api.lumine_emporio.dtos.MarcaDTO;
 import com.api.lumine_emporio.dtos.ProdutoDTO;
 import com.api.lumine_emporio.dtos.ProdutoVariacaoDTO;
 import com.api.lumine_emporio.dtos.PromocaoDTO;
 import com.api.lumine_emporio.entity.CategoriaEntity;
 import com.api.lumine_emporio.entity.CorEntity;
 import com.api.lumine_emporio.entity.ImagemProdutoEntity;
+import com.api.lumine_emporio.entity.MarcaEntity;
 import com.api.lumine_emporio.entity.ProdutoEntity;
 import com.api.lumine_emporio.entity.ProdutoVariacaoEntity;
 import com.api.lumine_emporio.entity.PromocaoEntity;
@@ -49,8 +51,10 @@ public class AdminController {
 	private PromocaoService promocaoService;
 	@Autowired
 	private CorService corService;
+	@Autowired
+	private MarcaService marcaService;
 
-
+	
 	@PostMapping("/produto")
 	public ResponseEntity<Object> salvarPorduto(@RequestBody @Valid ProdutoDTO produtoDTO) {
 		var produtoEntity = new ProdutoEntity();
@@ -69,7 +73,7 @@ public class AdminController {
 	}
 
 
-	@PostMapping("/produto/{id}/variacao") 
+	@PostMapping("/produto/{id}/variacao")
 	public ResponseEntity<Object> salvarProdutoVariacao(@PathVariable(name="id") long idProduto, @RequestBody @Valid ProdutoVariacaoDTO produtoVariacaoDTO){
 		ProdutoVariacaoEntity produtoVariacaoEntity = new ProdutoVariacaoEntity();
 
@@ -87,7 +91,7 @@ public class AdminController {
 
 	}
 
-	@PostMapping("/cor") 
+	@PostMapping("/cor")
 	public CorEntity salvarCor(@RequestBody @Valid CorDTO corDTO) {
 		CorEntity corEntity = new CorEntity();
 		BeanUtils.copyProperties(corDTO, corEntity);
@@ -95,7 +99,7 @@ public class AdminController {
 		return corService.save(corEntity);
 	}
 
-	@PostMapping("/imagem/adicionar") 
+	@PostMapping("/imagem/adicionar")
 	public ResponseEntity<Object> adicionarImagem(@RequestParam MultipartFile arquivo, @RequestParam Long idProduto){
 		if (arquivo.isEmpty()) return ResponseEntity.badRequest().body("Arquivo vazio.");
 		Random random = new Random();
@@ -130,7 +134,14 @@ public class AdminController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(categoriaService.save(categoria));
 	}
 
-
+	
+	@PostMapping("/marca")
+	public ResponseEntity<Object> addMarca(@Valid @RequestBody MarcaDTO marcaDTO){
+		var marcaEntity = new MarcaEntity();
+		BeanUtils.copyProperties(marcaDTO, marcaEntity);
+		marcaService.save(marcaEntity);
+		return ResponseEntity.ok(marcaEntity);
+	}
 
 
 

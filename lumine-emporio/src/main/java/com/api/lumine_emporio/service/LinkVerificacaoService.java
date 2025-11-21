@@ -69,7 +69,6 @@ public class LinkVerificacaoService {
 		//Se linkEntityOpt é nulo, ou esta expirado, ou o token está incorreto retorna nulo
 		if (linkEntityOpt.isEmpty() || linkEntityOpt.get().getDataExpiracao().isBefore(LocalDateTime.now()) 
 				|| !passwordEncoder.matches(token, linkEntityOpt.get().getToken())) {
-			System.out.println("Token:"+token);
 			return Optional.empty();
 		}
 		
