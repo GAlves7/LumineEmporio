@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/pagePrincipal.css">
     <link rel="stylesheet" href="css/catalogo.css">
+
 </head>
 <body>
 
@@ -54,6 +55,21 @@
         </div>
     </section>
 
+    <!-- CATALOGO -->
+    <section class="catalogo-container">
+
+        <div class="categoria">
+            <h2 class="titulo-categoria">Moda Feminina</h2>
+            <div class="cards-container" id="cat-feminina"></div>
+        </div>
+
+        <div class="categoria">
+            <h2 class="titulo-categoria">Cosméticos</h2>
+            <div class="cards-container" id="cat-cosmeticos"></div>
+        </div>
+
+    </section>
+
     <!-- MODAL DE LOGIN -->
     <div id="modalLoginArea"></div>
 
@@ -67,8 +83,9 @@
         loadComponent("footerArea", "footer.html");
         loadComponent("modalLoginArea", "modalLogin.html", "js/login.js");
     </script>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="js/pagePrincipal.js"></script>
-    <script src="js/catalogo.js"></script>
+
 </body>
 </html>

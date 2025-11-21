@@ -47,3 +47,35 @@ function resetInterval() {
 }
 
 showSlide(0);
+
+function gerarCard(produto) {
+    return `
+        <div class="card-produto">
+            <img src="${produto.imagem || ''}" alt="${produto.nome || ''}">
+            <h3>${produto.nome || ''}</h3>
+            <p class="preco">${produto.preco ? 'R$ ' + produto.preco : ''}</p>
+
+            <div class="card-actions">
+                <button class="btn-card btn-add">
+                    <i class="fa-solid fa-cart-plus"></i>
+                </button>
+
+                <button class="btn-card btn-reservar">Reservar</button>
+            </div>
+        </div>
+    `;
+}
+
+// Mock por enquanto — será substituído pelo backend
+const produtosFeminina = [{}, {}, {}, {}];
+const produtosCosmeticos = [{}, {}, {}, {}];
+
+function carregarCatalogo() {
+    document.getElementById("cat-feminina").innerHTML =
+        produtosFeminina.map(p => gerarCard(p)).join("");
+
+    document.getElementById("cat-cosmeticos").innerHTML =
+        produtosCosmeticos.map(p => gerarCard(p)).join("");
+}
+
+carregarCatalogo();
