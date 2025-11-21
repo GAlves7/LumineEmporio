@@ -1,19 +1,30 @@
-// Seleciona o container da caixa de busca
+// Busca expandida
 const searchBox = document.querySelector('.search-box');
+const searchInput = searchBox.querySelector('input');
 
-// Seleciona o input dentro da caixa de busca
-const searchInput = document.querySelector('.search-box input');
-
-// Event listener ao focar no input (quando o usuário clica ou tabula para ele)
-searchInput.addEventListener('focus', () => {
-    // Adiciona a classe 'active' ao container da busca, expandindo-o visualmente
-    searchBox.classList.add('active');
-});
-
-// Event listener ao perder o foco (quando o usuário clica fora do input)
+searchInput.addEventListener('focus', () => searchBox.classList.add('active'));
 searchInput.addEventListener('blur', () => {
-    // Remove a classe 'active' apenas se o input estiver vazio, mantendo a busca expandida se houver texto
-    if (searchInput.value === '') {
-        searchBox.classList.remove('active');
-    }
+    if (searchInput.value === '') searchBox.classList.remove('active');
 });
+
+// CHECA EXPIRAÇÃO DO LOGIN
+const expiration = localStorage.getItem('expiration');
+if (expiration && Date.now() > expiration) {
+    // Expirou: desloga
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userImage');
+    localStorage.removeItem('token');
+    localStorage.removeItem('expiration');
+}
+
+// Atualiza botão de usuário se estiver logado
+const isLoggedIn = localStorage.getItem('isLoggedIn');
+const userImage = localStorage.getItem('userImage');
+const btnUser = document.querySelector('.btn-user');
+
+if (isLoggedIn && userImage) {
+    btnUser.innerHTML = `<img src="${userImage}" alt="Perfil" class="user-avatar">`;
+    btnUser.onclick = () => window.location.href = 'perfil.html';
+} else {
+    btnUser.innerHTML = `<i class="fa-solid fa-user"></i>`;
+}

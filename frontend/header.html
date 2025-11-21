@@ -10,11 +10,19 @@
 
         <!-- Área central: busca e link sobre -->
         <div class="center-content">
-            <div class="search-box">
-                <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                <input type="text" placeholder="Buscar..."> <!-- Campo de busca -->
-            </div>
-            <a href="#" class="sobre">Sobre</a> <!-- Link para seção "Sobre" -->
+            <form class="search-form" autocomplete="off">
+                <div class="search-box">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <input 
+                        type="text" 
+                        placeholder="Buscar..." 
+                        name="search_ignore_123" 
+                        autocomplete="off" 
+                        autocorrect="off"
+                    >
+                </div>
+            </form>
+            <a href="#" class="sobre">Sobre</a>
         </div>
 
         <!-- Ícones interativos: tema, carrinho e perfil -->

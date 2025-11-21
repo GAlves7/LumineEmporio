@@ -115,3 +115,11 @@ header {
 .icons button:hover {
     color: #000; /* muda cor ao passar mouse */
 }
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 0.5px solid var(--cor-principal);
+}

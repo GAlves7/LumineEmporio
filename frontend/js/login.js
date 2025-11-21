@@ -1,47 +1,36 @@
 import api from './api.js';
 
-// Seleciona o botão de usuário no header que abre o modal de login
+// Seleciona elementos do modal
 const btnUser = document.querySelector('.btn-user');
-
-// Seleciona o modal de login pelo ID
 const loginModal = document.getElementById('loginModal');
+const togglePassword = document.getElementById('togglePassword');
+const loginPassword = document.getElementById('loginPassword');
+const btnLogin = document.getElementById('btnLogin');
+const keepLogged = document.getElementById('keepLogged'); // checkbox "manter logado"
 
-// Event listener para abrir/fechar o modal ao clicar no botão de usuário
+// Abrir/fechar modal ao clicar no ícone de usuário
 btnUser.addEventListener('click', () => {
-    // Se o modal estiver aberto (display 'block'), fecha; se estiver fechado, abre
-    loginModal.style.display = loginModal.style.display === 'block' ? 'none' : 'block';
-});
-
-// Event listener para fechar o modal ao clicar fora da caixa de login
-window.addEventListener('click', (e) => {
-    // Se o alvo do clique for o próprio modal (área de fundo), fecha o modal
-    if (e.target === loginModal) {
-        loginModal.style.display = 'none';
+    if (!localStorage.getItem('isLoggedIn')) {
+        loginModal.style.display = loginModal.style.display === 'block' ? 'none' : 'block';
     }
 });
 
-// Seleciona o ícone de olho para mostrar/ocultar a senha
-const togglePassword = document.getElementById('togglePassword');
+// Fechar modal ao clicar fora da caixa
+window.addEventListener('click', (e) => {
+    if (e.target === loginModal) loginModal.style.display = 'none';
+});
 
-// Seleciona o campo de senha do login
-const loginPassword = document.getElementById('loginPassword');
-
-// Event listener para alternar o tipo do input (password/text) ao clicar no ícone
+// Mostrar/ocultar senha
 togglePassword.addEventListener('click', () => {
-    // Se o input estiver como 'password', muda para 'text' e vice-versa
     const type = loginPassword.getAttribute('type') === 'password' ? 'text' : 'password';
     loginPassword.setAttribute('type', type);
-
-    // Alterna a classe do ícone para mostrar a animação de olho aberto/fechado
     togglePassword.classList.toggle('fa-eye-slash');
 });
 
-// Seleciona botão de login
-const btnLogin = document.getElementById('btnLogin');
-
+// Botão de login
 btnLogin.addEventListener('click', async () => {
     const email = document.getElementById('loginEmail').value.trim();
-    const senha = document.getElementById('loginPassword').value.trim();
+    const senha = loginPassword.value.trim();
 
     if (!email || !senha) {
         alert("Preencha todos os campos!");
@@ -49,25 +38,25 @@ btnLogin.addEventListener('click', async () => {
     }
 
     try {
-        const response = await api.post('/auth/login', {
-            email: email,
-            password: senha //
-        });
+        const response = await api.post('/auth/login', { email, password: senha });
 
-        // Login bem-sucedido
-        console.log("Login realizado:", response.data);
-        alert("Login realizado com sucesso!");
-
-        // Salvar token e redirecionar
+        // Salvar estado do login
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userImage', 'img/userPerfil/userNovo.png'); // temporário
         localStorage.setItem('token', response.data.token);
-        console.log("Token:", response.data.token)
-        // window.location.href = "paginaPrincipal.html";
 
-        // Fecha o modal
+        // Salvar tempo de expiração
+        const expirationTime = keepLogged.checked
+            ? Date.now() + 14 * 24 * 60 * 60 * 1000 // 14 dias
+            : Date.now() + 2 * 60 * 60 * 1000;     // 2 horas
+        localStorage.setItem('expiration', expirationTime);
+
+        // Fecha modal e redireciona para o perfil
         loginModal.style.display = 'none';
+        window.location.href = 'index.html'; // Redirecionamento automático
 
     } catch (error) {
-        console.error("Erro ao fazer login:", error.response || error);
+        console.error("Erro no login:", error.response || error);
         alert("Erro no login! Verifique email e senha.");
     }
 });

@@ -114,3 +114,19 @@
 .forgot-password a:hover {
     text-decoration: underline; /* efeito ao passar mouse */
 }
+
+/* ==== CHECKBOX "MANTER LOGADO" ==== */
+.keep-logged {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    font-size: 0.85rem;
+    color: #fff;
+}
+
+.keep-logged input[type="checkbox"] {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}

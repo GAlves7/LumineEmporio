@@ -1,76 +1,83 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8"> <!-- Define a codificação de caracteres -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade -->
-    <title>Lumine Empório - Cadastro</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome (ícones) -->
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <title>Cadastro - Lumine Empório</title>
+
+    <!-- Fonts / Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- Normalize CSS (padroniza estilos entre navegadores) -->
+
+    <!-- Normalize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <!-- CSS do site -->
+
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="css/cadastro.css"> <!-- CSS exclusivo da página de cadastro -->
+    <link rel="stylesheet" href="css/cadastro.css">
 </head>
 <body>
-    <!-- HEADER: reutilizado do index, contém logo, busca e ícones -->
-    <div id="headerArea"></div>
 
-    <!-- Modal de Login: reutilizado do index, aparece ao clicar no ícone de usuário -->
+    <div id="headerArea"></div>
     <div id="modalLoginArea"></div>
 
-    <!-- MAIN: área principal da página de cadastro -->
     <main class="cadastro-wrapper">
-        <!-- Imagem ilustrativa da loja -->
+
         <div class="cadastro-imagem">
             <img src="img/banners/bannerCadastro.png" alt="Modelos da Lumine Empório">
         </div>
 
-        <!-- Formulário de cadastro -->
         <div class="cadastro-container">
             <h2>Cadastro</h2>
-            <form id="formCadastro">
-                <!-- Campos do formulário -->
-                <input type="text" placeholder="Nome completo" required>
-                <input type="tel" placeholder="Telefone (XX) 9XXXX-XXXX" required>
-                <input type="email" placeholder="Email" required>
 
-                <!-- Campo senha com ícone para mostrar/ocultar -->
+            <form id="formCadastro">
+
+                <input type="text" id="nomeCompleto" placeholder="Nome completo" required>
+
+                <input type="tel" id="telefone" placeholder="Telefone" required>
+
+                <div class="email-group">
+                    <input type="text" id="emailUser" placeholder="Email" required>
+                    <span>@gmail.com</span>
+                </div>
+
+                <div class="codigo-group">
+                    <input type="text" id="codigoInput" placeholder="Código" maxlength="6">
+                    <button type="button" id="btnEnviarCodigo">Enviar código</button>
+                </div>
+
+                <input type="text" id="cpf" placeholder="CPF" required>
+
                 <div class="password-container">
                     <input type="password" placeholder="Senha" id="cadastroSenha" required>
                     <i class="fa-solid fa-eye" id="toggleCadastroSenha"></i>
                 </div>
 
-                <!-- Campo repetir senha -->
                 <div class="password-container">
                     <input type="password" placeholder="Repita a senha" id="cadastroRepetirSenha" required>
                     <i class="fa-solid fa-eye" id="toggleCadastroRepetirSenha"></i>
                 </div>
 
-                <!-- Botão de envio do formulário -->
                 <button type="submit">Cadastrar</button>
             </form>
         </div>
+
     </main>
 
-    <!-- FOOTER: rodapé do site -->
     <div id="footerArea"></div>
 
-    <!-- Scripts JS -->
-     <script type="module">
+    <script type="module">
         import { loadComponent } from "./js/include.js";
         loadComponent("headerArea", "header.html", "js/header.js");
         loadComponent("footerArea", "footer.html");
         loadComponent("modalLoginArea", "modalLogin.html", "js/login.js");
     </script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script type="module" src="js/cadastro.js"></script> <!-- Funcionalidades exclusivas do cadastro -->
+    <script type="module" src="js/cadastro.js"></script>
 </body>
 </html>

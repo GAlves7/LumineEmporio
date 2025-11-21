@@ -1,74 +1,134 @@
 import api from './api.js';
 
-// Seleciona o ícone para mostrar/ocultar a senha do campo principal de cadastro
-const toggleCadastroSenha = document.getElementById('toggleCadastroSenha');
-// Seleciona o input de senha do cadastro
-const cadastroSenha = document.getElementById('cadastroSenha');
+const nomeInput = document.getElementById("nomeCompleto");
+const telInput = document.getElementById("telefone");
+const emailUserInput = document.getElementById("emailUser");
+const codigoInput = document.getElementById("codigoInput");
+const btnEnviarCodigo = document.getElementById("btnEnviarCodigo");
+const cpfInput = document.getElementById("cpf");
 
-// Adiciona evento de clique ao ícone
-toggleCadastroSenha.addEventListener('click', () => {
-    // Alterna o tipo do input entre 'password' e 'text' para mostrar ou esconder a senha
-    const type = cadastroSenha.getAttribute('type') === 'password' ? 'text' : 'password';
-    cadastroSenha.setAttribute('type', type);
-    // Alterna a classe do ícone para mudar a aparência (olho aberto/fechado)
-    toggleCadastroSenha.classList.toggle('fa-eye-slash');
+const cadastroSenha = document.getElementById("cadastroSenha");
+const cadastroRepetirSenha = document.getElementById("cadastroRepetirSenha");
+const toggleCadastroSenha = document.getElementById("toggleCadastroSenha");
+const toggleCadastroRepetirSenha = document.getElementById("toggleCadastroRepetirSenha");
+
+const formCadastro = document.getElementById("formCadastro");
+
+nomeInput.addEventListener("input", () => {
+    nomeInput.value = nomeInput.value.replace(/[0-9]/g, "");
 });
 
-// Seleciona o ícone para mostrar/ocultar a senha de confirmação
-const toggleCadastroRepetirSenha = document.getElementById('toggleCadastroRepetirSenha');
-// Seleciona o input de repetir senha
-const cadastroRepetirSenha = document.getElementById('cadastroRepetirSenha');
-
-// Adiciona evento de clique ao ícone de repetir senha
-toggleCadastroRepetirSenha.addEventListener('click', () => {
-    // Alterna o tipo do input entre 'password' e 'text'
-    const type = cadastroRepetirSenha.getAttribute('type') === 'password' ? 'text' : 'password';
-    cadastroRepetirSenha.setAttribute('type', type);
-    // Alterna a classe do ícone para mudar a aparência (olho aberto/fechado)
-    toggleCadastroRepetirSenha.classList.toggle('fa-eye-slash');
+nomeInput.addEventListener("blur", () => {
+    nomeInput.value = nomeInput.value
+        .toLowerCase()
+        .replace(/\b\w/g, (l) => l.toUpperCase());
 });
 
-// Seleciona o formulário de cadastro
-const formCadastro = document.getElementById('formCadastro');
+telInput.addEventListener("input", () => {
+    let v = telInput.value.replace(/\D/g, "");
 
-// Adiciona evento de envio
-formCadastro.addEventListener('submit', async (event) => {
-    event.preventDefault(); // Impede o recarregamento da página
+    if (v.length > 11) v = v.slice(0, 11);
 
-    // Captura os valores dos campos do formulário
-    const nome = formCadastro.querySelector('input[placeholder="Nome completo"]').value.trim();
-    const telefone = formCadastro.querySelector('input[placeholder="Telefone (XX) 9XXXX-XXXX"]').value.trim();
-    const email = formCadastro.querySelector('input[placeholder="Email"]').value.trim();
-    const senha = document.getElementById('cadastroSenha').value.trim();
-    const repetirSenha = document.getElementById('cadastroRepetirSenha').value.trim();
+    if (v.length > 6) {
+        telInput.value = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7,11)}`;
+    } else if (v.length > 2) {
+        telInput.value = `(${v.slice(0,2)}) ${v.slice(2,7)}`;
+    } else {
+        telInput.value = v;
+    }
+});
 
-    // Validação simples: senhas iguais
+emailUserInput.addEventListener("input", () => {
+    emailUserInput.value = emailUserInput.value.replace(/[^a-zA-Z0-9._]/g, "");
+});
+
+cpfInput.addEventListener("input", () => {
+    let v = cpfInput.value.replace(/\D/g, "");
+
+    if (v.length > 11) v = v.slice(0, 11);
+
+    if (v.length > 9) {
+        cpfInput.value = `${v.slice(0,3)}.${v.slice(3,6)}.${v.slice(6,9)}-${v.slice(9,11)}`;
+    } else if (v.length > 6) {
+        cpfInput.value = `${v.slice(0,3)}.${v.slice(3,6)}.${v.slice(6,9)}`;
+    } else if (v.length > 3) {
+        cpfInput.value = `${v.slice(0,3)}.${v.slice(3,6)}`;
+    } else {
+        cpfInput.value = v;
+    }
+});
+
+toggleCadastroSenha.addEventListener("click", () => {
+    const type = cadastroSenha.type === "password" ? "text" : "password";
+    cadastroSenha.type = type;
+    toggleCadastroSenha.classList.toggle("fa-eye-slash");
+});
+
+toggleCadastroRepetirSenha.addEventListener("click", () => {
+    const type = cadastroRepetirSenha.type === "password" ? "text" : "password";
+    cadastroRepetirSenha.type = type;
+    toggleCadastroRepetirSenha.classList.toggle("fa-eye-slash");
+});
+
+let codigoGerado = null;
+
+btnEnviarCodigo.addEventListener("click", () => {
+    codigoGerado = Math.floor(100000 + Math.random() * 900000).toString();
+    alert("Código enviado! (temporário): " + codigoGerado);
+});
+
+formCadastro.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    // valida código
+    if (codigoInput.value !== codigoGerado) {
+        alert("Código inválido!");
+        return;
+    }
+
+    const emailCompleto = emailUserInput.value + "@gmail.com";
+
+    // valida senha
+    const senha = cadastroSenha.value;
+    const repetirSenha = cadastroRepetirSenha.value;
+
+    const senhaRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_]).{5,}$/;
+
+    if (!senhaRegex.test(senha)) {
+        alert("A senha deve ter: 1 letra maiúscula, 1 número, 1 caractere especial e mínimo 5 caracteres.");
+        return;
+    }
+
     if (senha !== repetirSenha) {
         alert("As senhas não coincidem!");
         return;
     }
 
-    // Cria o objeto com os dados do usuário
+    // cria objeto para API
     const usuario = {
-        nome: nome,
-        email: email,
+        nome: nomeInput.value,
+        email: emailCompleto,
         password: senha,
-        telefone: telefone
+        telefone: telInput.value,
+        cpf: cpfInput.value
     };
 
     try {
-        // Envia os dados para o backend (ajuste a rota conforme o backend do grupo)
-        const response = await api.post('/auth/register', usuario);
+        const response = await api.post("/auth/register", usuario);
 
-        // Sucesso
-        alert("Cadastro realizado com sucesso!");
-        console.log(response.data);
+        alert("Cadastro realizado!");
 
-        // Redireciona, se quiser:
-        // window.location.href = "login.html";
+        // login automático
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("userImage", "img/userPerfil/userNovo.png");
+        localStorage.setItem("token", response.data.token);
+
+        localStorage.setItem("expiration", Date.now() + 14 * 24 * 60 * 60 * 1000);
+
+        window.location.href = "index.html";
 
     } catch (error) {
-        console.error("Erro ao cadastrar usuário:", error);
-        alert("Erro ao cadastrar! Verifique os dados ou tente novamente.");
+        console.error(error);
+        alert("Erro ao cadastrar!");
     }
 });
