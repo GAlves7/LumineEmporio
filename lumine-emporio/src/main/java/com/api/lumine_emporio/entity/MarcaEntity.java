@@ -36,6 +36,9 @@ public class MarcaEntity {
 	}
 	
 	
+	public MarcaEntity() {}
+
+
 	//Getters e Setters
 	public String getNome() {
 		return nome;

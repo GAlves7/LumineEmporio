@@ -9,7 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.api.lumine_emporio.entity.CodigoVerificacaoEntity;
-import com.api.lumine_emporio.exception.NaoEncontradoException;
 import com.api.lumine_emporio.repository.CodigoVerificacaoRepository;
 
 import jakarta.transaction.Transactional;
@@ -54,11 +53,13 @@ public class CodigoVerificacaoService{
 	
 	
 	public Boolean compararCodigo(String email, String codigo) {
-		CodigoVerificacaoEntity codigoEntity = codigoVerificacaoRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Codigo invalido."));
+		Optional<CodigoVerificacaoEntity> codigoEntityOpt = codigoVerificacaoRepository.findByEmail(email);
 		
-		if (codigoEntity.getDataExpiracao().isBefore(LocalDateTime.now())) throw new RuntimeException("Codigo expirado.");
+		if (codigoEntityOpt.isEmpty() || codigoEntityOpt.get().getDataExpiracao().isBefore(LocalDateTime.now()) 
+				|| !passwordEncoder.matches(codigo, codigoEntityOpt.get().getHashCodigo())) 
+			return false;
 				
-		return passwordEncoder.matches(codigo, codigoEntity.getHashCodigo());
+		return true;
 	}
 	
 	@Transactional

@@ -31,7 +31,6 @@ public class ProdutoVariacaoEntity {
 	@Column(nullable=false)
 	private int estoque;
 	
-	@Column(nullable=false)
 	@Enumerated(EnumType.STRING)
 	private Tamanho tamanho;
 	

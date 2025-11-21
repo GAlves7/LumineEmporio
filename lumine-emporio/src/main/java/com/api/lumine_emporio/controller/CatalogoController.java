@@ -24,6 +24,8 @@ import com.api.lumine_emporio.service.ProdutoVariacaoService;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 
 @RestController
@@ -39,8 +41,10 @@ public class CatalogoController {
 	private ImagemProdutoService imagemProdutoService;
 	
 	@GetMapping
-	public List<ProdutoEntity> listarProdutos(){
-		return produtoService.findAll();
+	public Page<ProdutoEntity> listarProdutos( @RequestParam(value = "page", defaultValue = "0") int page,
+										@RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
+		
+		return produtoService.findAll(PageRequest.of(page, pageSize));
 	}
 	
 	@GetMapping("/promocao")
@@ -59,8 +63,10 @@ public class CatalogoController {
 	}
 	
 	@GetMapping("/pesquisa")
-	public List<ProdutoEntity> pesquisarProduto(@RequestParam String q){
-		return produtoService.findByNomeOrDescricao(q);
+	public Page<ProdutoEntity> pesquisarProduto(@RequestParam String q, @RequestParam(value = "page", defaultValue = "0") int page,
+			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
+		
+		return produtoService.findByNomeOrDescricao(q, PageRequest.of(page, pageSize));
 	}
 	
 	@GetMapping("/produto/{id}/imagens")

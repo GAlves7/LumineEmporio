@@ -143,15 +143,14 @@ public class ProdutoEntity {
 		this.avaliacoes = avaliacoes;
 	}
 
-	public Long getIdProduto() {
-		return idProduto;
-	}
-
 	public double getPreco() {
 		return preco;
 	}
 
 	public void setPreco(double preco) {
 		this.preco = preco;
+	}
+	public Long getIdProduto() {
+		return idProduto;
 	}
 }
