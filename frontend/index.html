@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8"> <!-- Define a codificação de caracteres -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Lumine Empório - Moda com estilo e conforto. Encontre roupas femininas e masculinas para todas as ocasiões.">
     <meta name="author" content="Lumine Empório">
     <meta name="keywords" content="moda, roupas, ecommerce, feminino, masculino, estilo, loja de roupas, lajedo, cosmeticos, perfume, creme">
 
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico"> <!-- Ícone do site -->
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <title>Catálogo - Lumine Empório</title>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome (ícones) -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- Normalize CSS (padroniza estilos entre navegadores) -->
+    <!-- Normalize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
     <!-- CSS globais -->
@@ -22,37 +22,31 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/login.css">
-    <!-- CSS exclusivo da página principal -->
     <link rel="stylesheet" href="css/pagePrincipal.css">
+    <link rel="stylesheet" href="css/catalogo.css">
 </head>
 <body>
 
-    <!-- HEADER: barra superior com logo, busca e ícones -->
+    <!-- HEADER -->
     <div id="headerArea"></div>
 
-    <!-- BANNER PRINCIPAL: carrossel de imagens clicáveis -->
+    <!-- BANNER PRINCIPAL -->
     <section class="banner">
         <div class="carousel">
             <div class="slides">
-                <!-- Slide 1: Moda Feminina -->
                 <div class="slide">
                     <a href="moda-feminina.html">
                         <img src="img/banners/modaFem.png" alt="Moda Feminina">
                     </a>
                 </div>
-                <!-- Slide 2: Cosméticos -->
                 <div class="slide">
                     <a href="cosmeticos.html">
                         <img src="img/banners/cosme.png" alt="Cosméticos">
                     </a>
                 </div>
             </div>
-
-            <!-- Botões de navegação -->
             <button class="prev"><i class="fa-solid fa-chevron-left"></i></button>
             <button class="next"><i class="fa-solid fa-chevron-right"></i></button>
-
-            <!-- Indicadores de slide (bolinhas) -->
             <div class="dots">
                 <span class="dot active"></span>
                 <span class="dot"></span>
@@ -60,21 +54,21 @@
         </div>
     </section>
 
-    <!-- MODAL DE LOGIN: aparece ao clicar no ícone de usuário -->
+    <!-- MODAL DE LOGIN -->
     <div id="modalLoginArea"></div>
 
-    <!-- FOOTER: rodapé do site -->
+    <!-- FOOTER -->
     <div id="footerArea"></div>
 
-    <!-- Scripts JS -->
+    <!-- SCRIPTS -->
     <script type="module">
         import { loadComponent } from "./js/include.js";
         loadComponent("headerArea", "header.html", "js/header.js");
         loadComponent("footerArea", "footer.html");
         loadComponent("modalLoginArea", "modalLogin.html", "js/login.js");
     </script>
-    
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="js/pagePrincipal.js"></script> <!-- Carrossel da página principal -->
+    <script src="js/pagePrincipal.js"></script>
+    <script src="js/catalogo.js"></script>
 </body>
 </html>

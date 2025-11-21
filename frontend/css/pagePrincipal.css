@@ -1,76 +1,65 @@
 /* ==== BANNER PRINCIPAL ==== */
-/* Container do banner que envolve o carrossel */
 .banner {
     width: 100%;
     position: relative;
-    margin-top: 30px; /* espaço entre header e banner */
-    overflow: hidden; /* esconde partes que ultrapassam o container */
+    margin-top: 30px;
+    overflow: hidden;
 }
 
-/* Carrossel em si */
 .carousel {
     position: relative;
     width: 100%;
-    max-height: 300px;  /* limite máximo no desktop */
-    min-height: 180px;  /* limite mínimo para telas pequenas */
-    height: auto;       /* altura automática baseada na imagem */
+    max-height: 300px;
+    min-height: 180px;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;   /* esconde o excesso de slides */
+    overflow: hidden;
 }
 
-/* Container que mantém todos os slides */
 .slides {
-    display: flex; /* alinha os slides horizontalmente */
-    transition: transform 0.6s ease-in-out; /* animação de transição suave */
+    display: flex;
+    transition: transform 0.6s ease-in-out;
 }
 
-/* Cada slide individual */
 .slide {
-    min-width: 100%; /* ocupa toda a largura do container */
+    min-width: 100%;
     box-sizing: border-box;
 }
 
-/* Imagem dentro do slide */
 .slide img {
     width: 100%;
     height: 100%;
-    object-fit: contain;       /* mostra a imagem inteira sem cortar */
-    object-position: center;   /* centraliza a imagem */
+    object-fit: contain;
+    object-position: center;
     display: block;
     cursor: pointer;
-    background-color: #191919; /* evita espaços em branco visíveis */
+    background-color: #191919;
 }
 
-/* ==== BOTÕES DE NAVEGAÇÃO ==== */
-/* Botões "anterior" e "próximo" */
 .prev, .next {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%); /* centraliza verticalmente */
+    transform: translateY(-50%);
     background-color: #191919;
     color: #fff297;
     border: none;
     font-size: 1.7rem;
     padding: 10px 15px;
     cursor: pointer;
-    border-radius: 50%; /* formato circular */
-    transition: background 0.3s; /* efeito suave ao hover */
-    z-index: 2; /* garante que fique sobre a imagem */
+    border-radius: 50%;
+    transition: background 0.3s;
+    z-index: 2;
 }
 
-/* Hover nos botões */
 .prev:hover, .next:hover {
     background-color: rgba(46, 46, 46, 0.9);
 }
 
-/* Posicionamento específico de cada botão */
 .prev { left: 20px; }
 .next { right: 20px; }
 
-/* ==== INDICADORES (BOLINHAS) ==== */
-/* Container das bolinhas */
 .dots {
     position: absolute;
     bottom: 15px;
@@ -78,7 +67,6 @@
     text-align: center;
 }
 
-/* Cada bolinha */
 .dot {
     height: 12px;
     width: 12px;
@@ -90,18 +78,19 @@
     transition: background-color 0.3s;
 }
 
-/* Bolinha ativa */
 .dot.active {
     background-color: #fff;
 }
 
 /* ==== RESPONSIVO ==== */
-@media (max-width: 1024px) { 
-    .carousel { max-height: 280px; } /* reduz altura para tablets grandes */
+@media (max-width: 1024px) {
+    .card { flex: 0 0 28%; }
 }
-@media (max-width: 768px)  { 
-    .carousel { max-height: 220px; } /* tablets menores e alguns smartphones grandes */
+
+@media (max-width: 768px) {
+    .card { flex: 0 0 45%; }
 }
-@media (max-width: 480px)  { 
-    .carousel { max-height: 180px; } /* smartphones pequenos */
+
+@media (max-width: 480px) {
+    .card { flex: 0 0 80%; }
 }

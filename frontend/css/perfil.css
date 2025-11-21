@@ -45,11 +45,13 @@
 .perfil-dado .label {
     font-weight: 600;
     font-size: 15px;
+    color: var(--cor-principal);
 }
 
 .perfil-dado .valor {
     font-size: 16px;
     margin-top: 2px;
+    color: #ffffff;
 }
 
 /* ==== BOTÕES ==== */
