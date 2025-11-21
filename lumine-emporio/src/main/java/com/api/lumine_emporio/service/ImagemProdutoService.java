@@ -27,8 +27,6 @@ public class ImagemProdutoService {
 
 	public String getCaminho(Long idProduto, int nome, String tipoArquivo) {
 		String extencao = tipoArquivo.substring(tipoArquivo.lastIndexOf("."));
-		
-		System.out.println(extencao);
 		return "imagem-produtos/"+idProduto+"/"+nome+extencao;
 	}
 	
