@@ -14,7 +14,9 @@ const toggleCadastroRepetirSenha = document.getElementById("toggleCadastroRepeti
 
 const formCadastro = document.getElementById("formCadastro");
 
-// --- Máscaras e formatação ---
+// ============================================================================
+// MÁSCARAS
+// ============================================================================
 nomeInput.addEventListener("input", () => {
     nomeInput.value = nomeInput.value.replace(/[0-9]/g, "");
 });
@@ -34,7 +36,6 @@ telInput.addEventListener("input", () => {
     else telInput.value = v;
 });
 
-// Permite letras, números, ponto, underline e hífen no email
 emailUserInput.addEventListener("input", () => {
     emailUserInput.value = emailUserInput.value.replace(/[^a-zA-Z0-9._-]/g, "");
 });
@@ -49,44 +50,58 @@ cpfInput.addEventListener("input", () => {
     else cpfInput.value = v;
 });
 
-// --- Mostrar / ocultar senha ---
+// ============================================================================
+// EXIBIR / OCULTAR SENHA
+// ============================================================================
 toggleCadastroSenha.addEventListener("click", () => {
-    const type = cadastroSenha.type === "password" ? "text" : "password";
-    cadastroSenha.type = type;
+    cadastroSenha.type = cadastroSenha.type === "password" ? "text" : "password";
     toggleCadastroSenha.classList.toggle("fa-eye-slash");
 });
 
 toggleCadastroRepetirSenha.addEventListener("click", () => {
-    const type = cadastroRepetirSenha.type === "password" ? "text" : "password";
-    cadastroRepetirSenha.type = type;
+    cadastroRepetirSenha.type = cadastroRepetirSenha.type === "password" ? "text" : "password";
     toggleCadastroRepetirSenha.classList.toggle("fa-eye-slash");
 });
 
-// --- Código de verificação ---
-let codigoGerado = null;
+// ============================================================================
+// ENVIAR CÓDIGO PARA O EMAIL
+// ============================================================================
+btnEnviarCodigo.addEventListener("click", async () => {
+    const emailCompleto = emailUserInput.value.trim() + "@gmail.com";
 
-btnEnviarCodigo.addEventListener("click", () => {
-    codigoGerado = Math.floor(100000 + Math.random() * 900000).toString();
-    alert("Código enviado! (temporário): " + codigoGerado);
-});
-
-// --- Submit do formulário ---
-formCadastro.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    // Valida código
-    if (codigoInput.value !== codigoGerado) {
-        alert("Código inválido!");
+    if (emailUserInput.value.trim() === "") {
+        alert("Digite um email antes de enviar o código.");
         return;
     }
 
-    const emailCompleto = emailUserInput.value + "@gmail.com";
+    try {
+        const formData = new FormData();
+        formData.append("email", emailCompleto);
 
-    // Valida senha
+        await api.post("auth/register/enviar-codigo", formData, {
+            headers: { "Content-Type": "multipart/form-data" }
+        });
+
+        console.log("Código enviado para seu email!");
+
+    } catch (error) {
+        console.error(error);
+        alert("Erro ao enviar o código. Tente novamente.");
+    }
+});
+
+// ============================================================================
+// CADASTRAR USUÁRIO
+// ============================================================================
+formCadastro.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const emailCompleto = emailUserInput.value.trim() + "@gmail.com";
+
     const senha = cadastroSenha.value;
     const repetirSenha = cadastroRepetirSenha.value;
 
-    // Mínimo 8 caracteres, 1 maiúscula, 1 número, 1 caractere especial
+    // Senha forte
     const senhaRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_]).{8,}$/;
 
     if (!senhaRegex.test(senha)) {
@@ -99,27 +114,33 @@ formCadastro.addEventListener("submit", async (event) => {
         return;
     }
 
+    if (codigoInput.value.trim() === "") {
+        alert("Digite o código enviado para seu email.");
+        return;
+    }
+
     const usuario = {
-        nome: nomeInput.value,
+        nome: nomeInput.value.trim(),
         email: emailCompleto,
         password: senha,
-        telefone: telInput.value.replace(/\D/g, ""), // remove tudo que não é número
-        cpf: cpfInput.value.replace(/\D/g, "")       // remove tudo que não é número
+        telefone: telInput.value.replace(/\D/g, ""),
+        cpf: cpfInput.value.replace(/\D/g, ""),
+        codigo: codigoInput.value.trim()
     };
 
     try {
-        const response = await api.post("/auth/register", usuario);
+        const response = await api.post("auth/register", usuario);
 
-        // Para produção, usaremos cookies seguros ao invés de localStorage
+        // Login automático pós cadastro
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("userImage", "img/userPerfil/userNovo.png");
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("expiration", Date.now() + 14 * 24 * 60 * 60 * 1000);
 
         window.location.href = "index.html";
-        
+
     } catch (error) {
-        console.error(error);
-        alert("Erro no servidor, tente novamente mais tarde!");
+        console.log(error);
+        alert(error.response?.data?.message || "Erro no servidor. Tente novamente.");
     }
 });
