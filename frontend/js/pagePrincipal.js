@@ -53,8 +53,8 @@ function gerarCard(produto) {
 
     return `
         <div class="card-produto">
-            <img src="${imagemFinal}" alt="${produto.descricao}">
-            <h3>${produto.descricao}</h3>
+            <img src="${imagemFinal}" alt="${produto.nome}">
+            <h3>${produto.nome}</h3>
             <p class="preco">R$ ${precoFormatado}</p>
             <div class="card-actions">
                 <button class="btn-card btn-add">

@@ -1,40 +1,36 @@
 /* ==== HEADER ==== */
-/* Estilo principal do header */
 header {
-    background-color: var(--cor-fundo); /* cor de fundo escura */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* sombra sutil */
-    padding: 10px 40px; /* espaçamento interno */
-    position: sticky;   /* fica fixo ao rolar a página */
-    top: 0;             /* posição no topo */
-    z-index: 10;        /* sobrepõe elementos abaixo */
+    background-color: var(--cor-fundo);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 10px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-/* Container principal do header: logo, centro e ícones */
 .container-header {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* distribui espaço entre itens */
+    justify-content: space-between;
 }
 
 /* ==== LOGO ==== */
 .logo img {
     width: 120px;
-    position: relative;
-    top: 3px;
-    left: -5px;
-    cursor: pointer; /* indica clicável */
-    transition: transform 0.3s ease; /* animação suave ao passar mouse */
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
 .logo img:hover {
-    transform: scale(1.05); /* leve zoom ao passar mouse */
+    transform: scale(1.05);
 }
 
 /* ==== CENTRO: PESQUISA E LINK "SOBRE" ==== */
 .center-content {
     display: flex;
     align-items: center;
-    gap: 15px; /* espaço entre os elementos */
+    gap: 15px;
+    position: relative;
 }
 
 /* Caixa de pesquisa */
@@ -46,8 +42,8 @@ header {
     overflow: hidden;
     background-color: var(--cor-caixa);
     padding-left: 2px;
-    width: 60px; /* tamanho inicial pequeno */
-    transition: width 0.4s ease; /* animação ao expandir */
+    width: 60px;
+    transition: width 0.4s ease;
 }
 
 /* Expansão da pesquisa ao focar */
@@ -77,7 +73,7 @@ header {
     font-size: 0.95rem;
     background-color: var(--cor-caixa);
     color: var(--cor-principal);
-    opacity: 0; /* invisível até ativar */
+    opacity: 0;
     transition: opacity 0.3s ease;
 }
 
@@ -87,13 +83,14 @@ header {
 }
 
 /* Link "Sobre" */
-.sobre {
+.sobre,
+.social-instagram {
     color: var(--cor-principal);
-    font-weight: 500;
     transition: color 0.2s;
 }
 
-.sobre:hover {
+.sobre:hover,
+.social-instagram:hover {
     color: #000;
 }
 
@@ -101,7 +98,7 @@ header {
 .icons {
     display: flex;
     align-items: center;
-    gap: 15px; /* espaço entre os ícones */
+    gap: 15px;
 }
 
 .icons button {
@@ -113,7 +110,7 @@ header {
 }
 
 .icons button:hover {
-    color: #000; /* muda cor ao passar mouse */
+    color: #000;
 }
 
 .user-avatar {
@@ -124,13 +121,34 @@ header {
     border: 0.5px solid var(--cor-principal);
 }
 
-/* Ícone do Instagram */
-.social-instagram {
-    font-size: 1.2rem;
-    color: var(--cor-principal);
-    transition: color 0.2s ease;
+/* ==== RESULTADOS DA PESQUISA ==== */
+.search-results {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    width: 100%;
+    background-color: var(--cor-caixa);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: none;
+    flex-direction: column;
+    z-index: 20;
+    padding: 5px 0;
 }
 
-.social-instagram:hover {
-    color: #000;
+.search-results .result-card {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.search-results .result-card:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.search-results .ver-todos {
+    font-weight: bold;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
 }
