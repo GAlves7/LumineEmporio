@@ -27,7 +27,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 
 @RestController
 @RequestMapping("/catalogo")
@@ -44,10 +45,18 @@ public class CatalogoController {
 	private CategoriaService categoriaService;
 	
 	@GetMapping
-	public Page<ProdutoEntity> listarProdutos( @RequestParam(value = "page", defaultValue = "0") int page,
-										@RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
-		
-		return produtoService.findAll(PageRequest.of(page, pageSize));
+	public Page<ProdutoEntity> listarProdutos(
+	        @RequestParam(defaultValue = "0") int page,
+	        @RequestParam(defaultValue = "10") int pageSize,
+	        @RequestParam(required = false) List<Long> categorias, // << lista de IDs
+	        @RequestParam(defaultValue = "preco,asc") String sort
+	) {
+
+	    String[] sortParams = sort.split(",");
+	    Sort.Direction direction = Sort.Direction.fromString(sortParams[1]);
+	    Pageable pageable = PageRequest.of(page, pageSize, Sort.by(direction, sortParams[0]));
+
+	    return produtoService.findAll(categorias, pageable);
 	}
 	
 	@GetMapping("/promocao")
@@ -66,10 +75,19 @@ public class CatalogoController {
 	}
 	
 	@GetMapping("/pesquisa")
-	public Page<ProdutoEntity> pesquisarProduto(@RequestParam String q, @RequestParam(value = "page", defaultValue = "0") int page,
-			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize){
-		
-		return produtoService.findByNomeOrDescricao(q, PageRequest.of(page, pageSize));
+	public Page<ProdutoEntity> pesquisar(
+	        @RequestParam(defaultValue = "0") int page,
+	        @RequestParam(defaultValue = "10") int pageSize,
+	        @RequestParam(required = false) List<Long> categorias,
+	        @RequestParam(defaultValue = "preco,asc") String sort,
+	        @RequestParam String q
+	) {
+
+	    String[] sortParams = sort.split(",");
+	    Sort.Direction direction = Sort.Direction.fromString(sortParams[1]);
+	    Pageable pageable = PageRequest.of(page, pageSize, Sort.by(direction, sortParams[0]));
+
+	    return produtoService.pesquisar(categorias, q, pageable);
 	}
 	
 	@GetMapping("/produto/{id}/imagens")
