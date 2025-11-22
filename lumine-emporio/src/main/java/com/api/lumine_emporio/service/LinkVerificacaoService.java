@@ -32,16 +32,15 @@ public class LinkVerificacaoService {
 	@Transactional
 	public void criarLink(UsuarioEntity usuario) {
 	    // 1. Busca direto
-	    LinkVerificacaoEntity link = linkVerificacaoRepository.findByUsuario(usuario);
+	    Optional<LinkVerificacaoEntity> linkOpt = linkVerificacaoRepository.findByUsuarioForUpdate(usuario);
 	    
 	    // 2. Se existe e não expirou → não criar novo
-	    if (link != null && link.getDataExpiracao().isAfter(LocalDateTime.now())) {
+	    if (linkOpt.isPresent() && linkOpt.get().getDataExpiracao().isAfter(LocalDateTime.now())) {
 	        return;
 	    }
-
 	    // 3. Se existe e expirou → remover e criar novo
-	    if (link != null) {
-	        linkVerificacaoRepository.delete(link);
+	    if (linkOpt.isPresent()) {
+	        linkVerificacaoRepository.delete(linkOpt.get());
 	    }
 
 	    // 4. Criar novo link
