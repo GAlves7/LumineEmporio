@@ -5,44 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade -->
 
     <link rel="icon" type="image/x-icon" href="img/favicon.ico"> <!-- Ícone do site -->
-    <title>Verificação de Código - Lumine Empório</title>
+    <title>Nova Senha - Lumine Empório</title>
 
-    <!-- Google Fonts e ícones Font Awesome -->
+    <!-- Google Fonts e Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- CSS do site -->
-    <link rel="stylesheet" href="css/style.css"> <!-- Estilos globais -->
-    <link rel="stylesheet" href="css/header.css"> <!-- Estilos do header -->
-    <link rel="stylesheet" href="css/footer.css"> <!-- Estilos do footer -->
-    <link rel="stylesheet" href="css/login.css"> <!-- Estilos do modal de login -->
-    <link rel="stylesheet" href="css/recuperarSenha.css"> <!-- Estilos específicos da página de recuperação -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/recuperarSenha.css">
 </head>
 <body>
-    <!-- HEADER: reutilizado do index, contém logo, busca e ícones -->
+
+    <!-- HEADER -->
     <div id="headerArea"></div>
 
-    <!-- CONTEÚDO PRINCIPAL DA PÁGINA DE VERIFICAÇÃO DE CÓDIGO -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <section class="recuperar-container">
         <div class="recuperar-box">
-            <h2>Verificação de Código</h2>
-            <p>Enviamos um código para seu e-mail. Digite-o abaixo para continuar:</p>
+            <h2>Definir Nova Senha</h2>
+            <p>Digite a nova senha e confirme para concluir a recuperação:</p>
 
-            <!-- Campo para digitar o código enviado por e-mail -->
-            <input type="text" placeholder="Digite o código" id="codigoRecuperar">
+            <!-- Campo nova senha -->
+            <div class="password-container">
+                <input type="password" placeholder="Nova senha" id="novaSenha">
+                <i class="fa-solid fa-eye" id="toggleNovaSenha"></i>
+            </div>
 
-            <!-- Botão estilizado como link para ir para a próxima etapa -->
-            <a href="recuperarSenha3.html" class="btn-enviar">Continuar</a>
+            <!-- Campo confirmar senha -->
+            <div class="password-container">
+                <input type="password" placeholder="Repita a nova senha" id="confirmarNovaSenha">
+                <i class="fa-solid fa-eye" id="toggleConfirmarSenha"></i>
+            </div>
+
+            <!-- Botão -->
+            <button class="btn-enviar" id="btnSalvarSenha">Salvar nova senha</button>
         </div>
     </section>
 
-    <!-- MODAL DE LOGIN: reutilizado do index -->
+    <!-- MODAL LOGIN -->
     <div id="modalLoginArea"></div>
 
-    <!-- FOOTER: rodapé do site -->
+    <!-- FOOTER -->
     <div id="footerArea"></div>
 
-    <!-- Script principal: funcionalidades globais -->
+    <!-- Includes Globais -->
     <script type="module">
         import { loadComponent } from "./js/include.js";
         loadComponent("headerArea", "header.html", "js/header.js");
@@ -50,6 +60,32 @@
         loadComponent("modalLoginArea", "modalLogin.html", "js/login.js");
     </script>
 
+    <!-- Mostrar/Ocultar Senha -->
+    <script>
+        const toggleNovaSenha = document.getElementById('toggleNovaSenha');
+        const novaSenha = document.getElementById('novaSenha');
+
+        toggleNovaSenha.addEventListener('click', () => {
+            const type = novaSenha.type === 'password' ? 'text' : 'password';
+            novaSenha.type = type;
+            toggleNovaSenha.classList.toggle('fa-eye-slash');
+        });
+
+        const toggleConfirmarSenha = document.getElementById('toggleConfirmarSenha');
+        const confirmarNovaSenha = document.getElementById('confirmarNovaSenha');
+
+        toggleConfirmarSenha.addEventListener('click', () => {
+            const type = confirmarNovaSenha.type === 'password' ? 'text' : 'password';
+            confirmarNovaSenha.type = type;
+            toggleConfirmarSenha.classList.toggle('fa-eye-slash');
+        });
+    </script>
+
+    <!-- Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Script de recuperação (mesmo arquivo do passo 1) -->
+    <script type="module" src="js/recuperarSenha.js"></script>
+
 </body>
 </html>
