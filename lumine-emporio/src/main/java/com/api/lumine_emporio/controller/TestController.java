@@ -21,11 +21,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.api.lumine_emporio.dtos.ProdutoDTO;
 import com.api.lumine_emporio.entity.CategoriaEntity;
+import com.api.lumine_emporio.entity.CorEntity;
 import com.api.lumine_emporio.entity.ImagemProdutoEntity;
 import com.api.lumine_emporio.entity.ProdutoEntity;
 import com.api.lumine_emporio.entity.ProdutoVariacaoEntity;
 import com.api.lumine_emporio.entity.enums.Tamanho;
 import com.api.lumine_emporio.service.CategoriaService;
+import com.api.lumine_emporio.service.CorService;
 import com.api.lumine_emporio.service.ImagemProdutoService;
 import com.api.lumine_emporio.service.MarcaService;
 import com.api.lumine_emporio.service.ProdutoService;
@@ -46,6 +48,8 @@ public class TestController {
     private CategoriaService categoriaService;
 	@Autowired
 	private ImagemProdutoService imagemProdutoService;
+	@Autowired
+	private CorService corService;
 	
 	@GetMapping
 	public String get() {
@@ -168,7 +172,7 @@ public class TestController {
 		ProdutoEntity produtoEntity6 = new ProdutoEntity();
 		produtoEntity6.setNome("CALÇA PRETA");
 		produtoEntity6.setPreco(49.99);
-		produtoEntity6.setDescricao("CALÇA PRETA");
+		produtoEntity6.setDescricao("Calça preta feminina wide leg, tecido leve, cintura alta e bolsos laterais.");
 		produtoEntity6.addCategoria(categoria2);
 		produtoService.save(produtoEntity6);
 		
@@ -210,6 +214,26 @@ public class TestController {
 			imagemProdutoService.save(imagem);
 			
 		}
+		
+		return ResponseEntity.ok(null);
+	}
+	
+	@PostMapping("/produtoVar-adicionar")
+	public ResponseEntity<Object> produtoVarAdicionar(){
+		CorEntity corEntity= new CorEntity();
+		corEntity.setNome("Preto");
+		corEntity.setCodigoHex("000000");
+		corService.save(corEntity);
+		
+		
+		ProdutoVariacaoEntity produtoVariacaoEntity = new ProdutoVariacaoEntity();
+		produtoVariacaoEntity.setProduto(produtoService.findById(5L));
+		produtoVariacaoEntity.addCor(corEntity);
+		produtoVariacaoEntity.setDescricao("CALÇA PRETA");
+		produtoVariacaoEntity.setEstoque(50);
+		produtoVariacaoEntity.setTamanho(Tamanho.M);
+		produtoVariacaoEntity.setPreco(produtoService.findById(5L).getPreco());
+		produtoVariacaoService.save(produtoVariacaoEntity);
 		
 		return ResponseEntity.ok(null);
 	}

@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,37 +31,41 @@ public class LinkVerificacaoService {
 	
 	@Transactional
 	public void criarLink(UsuarioEntity usuario) {
-		if (usuario.getStatus().equals(UsuarioStatus.P)) return;
-		if (linkVerificacaoRepository.existsByUsuario(usuario)) {
-			LinkVerificacaoEntity existentLink = linkVerificacaoRepository.findByUsuario(usuario);
-			if (existentLink.getDataExpiracao().isAfter(LocalDateTime.now())) return;
-			linkVerificacaoRepository.delete(existentLink);
-		}
-		
-		LinkVerificacaoEntity linkEntity = new LinkVerificacaoEntity();
-		
-		//Geração do token
-		SecureRandom random = new SecureRandom();
-		byte[] bytes = new byte[32];
-		random.nextBytes(bytes);
-		String token = Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
-		
-		
-		linkEntity.setUsuario(usuario);
-		linkEntity.setTokenId(UUID.randomUUID());
-		linkEntity.setToken(passwordEncoder.encode(token));
-		linkEntity.setDataExpiracao(LocalDateTime.now().plusMinutes(5));
-		
-		linkVerificacaoRepository.save(linkEntity);
-		
-		String link = "Link: http://localhost:8080/auth/verificar-link?token="
-				+token+"&tokenId="+linkEntity.getTokenId()
-				+ "\nExpira em 5 minutos.";
-		
-		mailService.enviarEmailTexto(usuario.getEmail(), "Email de Verificação;", link);
-		
-		System.out.println("Link criado com sucesso: "+link);
-		System.out.println(token);
+	    // 1. Busca direto
+	    Optional<LinkVerificacaoEntity> linkOpt = linkVerificacaoRepository.findByUsuarioForUpdate(usuario);
+	    
+	    // 2. Se existe e não expirou → não criar novo
+	    if (linkOpt.isPresent() && linkOpt.get().getDataExpiracao().isAfter(LocalDateTime.now())) {
+	        return;
+	    }
+	    // 3. Se existe e expirou → remover e criar novo
+	    if (linkOpt.isPresent()) {
+	        linkVerificacaoRepository.delete(linkOpt.get());
+	    }
+
+	    // 4. Criar novo link
+	    LinkVerificacaoEntity novo = new LinkVerificacaoEntity();
+	    novo.setUsuario(usuario);
+	    novo.setTokenId(UUID.randomUUID());
+	    novo.setDataExpiracao(LocalDateTime.now().plusMinutes(5));
+
+	    // Gerar token real
+	    SecureRandom random = new SecureRandom();
+	    byte[] bytes = new byte[32];
+	    random.nextBytes(bytes);
+	    String token = Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
+
+	    novo.setToken(passwordEncoder.encode(token));
+	    try {
+	        linkVerificacaoRepository.save(novo);
+	        String linkFinal = "http://localhost:8080/auth/verificar-link?token=" + token +
+		            "&tokenId=" + novo.getTokenId();
+	        System.out.println("Link: "+linkFinal);
+		    mailService.enviarEmailTexto(usuario.getEmail(), "Verificação", linkFinal);
+	        
+	    } catch (DataIntegrityViolationException e) {
+	       System.out.println("Falha ao salvar link: "+e.getMessage());
+	    }
 	}
 	
 	public Optional<UsuarioEntity> consultarLink(UUID tokenId, String token) {

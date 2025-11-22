@@ -18,6 +18,7 @@ public class CategoriaService {
 	
 	@Transactional
 	public CategoriaEntity save(CategoriaEntity categoriaEntity) {
+		
 		return categoriaRepository.save(categoriaEntity);
 	}
 	
@@ -27,5 +28,10 @@ public class CategoriaService {
 	
 	public List<CategoriaEntity> findAll(){
 		return categoriaRepository.findAll();
+	}
+	
+	
+	public List<CategoriaEntity> findAllById(List<Long> ids) {
+		return categoriaRepository.findAllById(ids);
 	}
 }
