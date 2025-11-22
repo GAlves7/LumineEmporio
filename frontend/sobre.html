@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <title>Sobre - Lumine Empório</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Normalize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
+    <!-- CSS Geral -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/login.css">
+
+    <!-- CSS específico da página -->
+    <link rel="stylesheet" href="css/sobre.css">
+</head>
+<body>
+
+    <div id="headerArea"></div>
+    <div id="modalLoginArea"></div>
+
+    <section class="sobre-container">
+
+        <h1 class="sobre-titulo">Sobre a Lumine Empório</h1>
+
+        <p class="sobre-descricao">
+            A <strong>Lumine Empório</strong> nasceu com o propósito de oferecer roupas modernas,
+            confortáveis e acessíveis, sempre trazendo o melhor da moda para quem valoriza estilo e autenticidade.
+        </p>
+
+        <!-- Sessão 1 -->
+        <div class="sobre-box">
+            <h2><i class="fa-solid fa-store"></i> Quem Somos</h2>
+            <p>
+                Somos uma loja de moda focada em qualidade e inovação. Trabalhamos com peças selecionadas,
+                priorizando conforto, durabilidade e estilo para o dia a dia.
+            </p>
+        </div>
+
+        <!-- Sessão 2 -->
+        <div class="sobre-box">
+            <h2><i class="fa-solid fa-calendar-day"></i> Nossa História</h2>
+            <p>
+                A Lumine Empório foi fundada em <strong>2025</strong>, com a ideia de transformar a experiência
+                de comprar roupas online, tornando o processo rápido, seguro e agradável.
+            </p>
+        </div>
+
+        <!-- Sessão 3 -->
+        <div class="sobre-box">
+            <h2><i class="fa-solid fa-location-dot"></i> Endereço Físico</h2>
+            <p>
+                Em construção... Novidades em breve!
+            </p>
+        </div>
+
+        <!-- Sessão 4 -->
+        <div class="sobre-box">
+            <h2><i class="fa-brands fa-instagram"></i> Redes Sociais</h2>
+            <p>Siga a Lumine Empório e fique por dentro das novidades:</p>
+            <ul class="social-list">
+                <li>
+                    <a href="https://www.instagram.com/lumineemporio/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <div id="footerArea"></div>
+
+    <script type="module">
+        import { loadComponent } from "./js/include.js";
+        loadComponent("headerArea", "header.html", "js/header.js");
+        loadComponent("footerArea", "footer.html");
+        loadComponent("modalLoginArea", "modalLogin.html", "js/login.js");
+    </script>
+
+</body>
+</html>

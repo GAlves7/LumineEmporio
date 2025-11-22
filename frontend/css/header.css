@@ -123,3 +123,14 @@ header {
     object-fit: cover;
     border: 0.5px solid var(--cor-principal);
 }
+
+/* Ícone do Instagram */
+.social-instagram {
+    font-size: 1.2rem;
+    color: var(--cor-principal);
+    transition: color 0.2s ease;
+}
+
+.social-instagram:hover {
+    color: #000;
+}
