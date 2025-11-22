@@ -1,0 +1,88 @@
+/* ===== CONTAINER PRINCIPAL ===== */
+.historico-container {
+    width: 100%;
+    padding: 20px;
+}
+
+/* Título da página */
+.historico-container h2 {
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-align: left;
+    margin-top: 10px;
+}
+
+/* Container dos cards */
+.historico-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+}
+
+/* ===== CARD DE HISTÓRICO (igual ao catálogo) ===== */
+.card-historico {
+    background-color: var(--cor-caixa);
+    width: 13%;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(29, 29, 29, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform .2s;
+}
+
+.card-historico:hover {
+    transform: translateY(-5px);
+}
+
+.card-historico img {
+    width: 85%;
+    height: 140px;
+    object-fit: contain;
+    background-color: #111;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.card-historico h3 {
+    margin: 10px 0 5px;
+    color: #fff;
+    font-size: 1.05rem;
+    text-align: center;
+}
+
+.card-historico p {
+    color: #fff297;
+    font-weight: bold;
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+/* CORREÇÃO UNIVERSAL DO OVERFLOW HORIZONTAL */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* RESPONSIVO */
+@media (max-width: 1024px) {
+    .card-historico {
+        width: calc(30% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .card-historico {
+        width: calc(45% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .card-historico {
+        width: 100%;
+    }
+}
