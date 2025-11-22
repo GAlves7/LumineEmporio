@@ -31,7 +31,23 @@ function renderResults(produtos, query) {
     produtos.forEach(prod => {
         const card = document.createElement('div');
         card.classList.add('result-card');
-        card.innerHTML = `<strong>${prod.nome}</strong><span>${prod.descricao}</span><span>R$ ${prod.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>`;
+
+        // Pega a imagem do jeito certo via backend
+        const imagemFinal = (prod.imagemProduto && prod.imagemProduto.length > 0)
+            ? `${api.defaults.baseURL}/catalogo/imagem/${prod.imagemProduto[0].idImagemProd}`
+            : "img/userPerfil/userNovo.png"; // fallback caso não tenha imagem
+
+        // Preço formatado com vírgula
+        const precoFormatado = prod.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+        card.innerHTML = `
+            <img src="${imagemFinal}" alt="${prod.nome}" class="card-img">
+            <strong>${prod.nome}</strong>
+            <span>${prod.descricao}</span>
+            <span>R$ ${precoFormatado}</span>
+        `;
+
+        // Redireciona para página completa
         card.onclick = () => window.location.href = `pesquisa.html?q=${encodeURIComponent(query)}`;
         searchResults.appendChild(card);
     });
