@@ -28,3 +28,7 @@ if (isLoggedIn && userImage) {
 } else {
     btnUser.innerHTML = `<i class="fa-solid fa-user"></i>`;
 }
+
+// Botão do carrinho leva para carrinho.html
+const btnCart = document.querySelector('.btn-cart');
+btnCart.onclick = () => window.location.href = 'carrinho.html';

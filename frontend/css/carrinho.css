@@ -1,0 +1,80 @@
+/* ===== CONTAINER PRINCIPAL ===== */
+.carrinho-container {
+    width: 97.5%;
+    padding: 20px;
+}
+
+/* Título da página */
+.carrinho-container h2 {
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-align: left;
+    margin-top: 10px;
+}
+
+/* Container dos cards */
+.carrinho-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ===== CARD DO CARRINHO (horizontal) ===== */
+.card-carrinho {
+    background-color: var(--cor-caixa);
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(29, 29, 29, 0.2);
+    transition: transform .2s;
+}
+
+.card-carrinho:hover {
+    transform: translateY(-5px);
+}
+
+/* Placeholder de imagem do produto */
+.card-img-placeholder {
+    width: 120px;
+    height: 120px;
+    background-color: #111;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+/* Info do produto */
+.card-info h3 {
+    margin: 0 0 5px 0;
+    color: #fff;
+    font-size: 1.05rem;
+}
+
+.card-info p {
+    color: #fff297;
+    font-weight: bold;
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* CORREÇÃO UNIVERSAL DO OVERFLOW HORIZONTAL */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    .card-carrinho {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .card-img-placeholder {
+        width: 100%;
+        height: 150px;
+        margin: 0 0 10px 0;
+    }
+}
