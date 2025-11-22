@@ -58,8 +58,8 @@ public class LinkVerificacaoService {
 	    novo.setToken(passwordEncoder.encode(token));
 	    try {
 	        linkVerificacaoRepository.save(novo);
-	        String linkFinal = "http://localhost:8080/auth/verificar-link?token=" + token +
-		            "&tokenId=" + novo.getTokenId();
+	        String linkFinal = "http://127.0.0.1:5500/recuperarSenha2.html?token=" + token +
+	                "&tokenId=" + novo.getTokenId();
 	        System.out.println("Link: "+linkFinal);
 		    mailService.enviarEmailTexto(usuario.getEmail(), "Verificação", linkFinal);
 	        
