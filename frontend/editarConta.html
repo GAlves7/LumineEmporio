@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico"> <!-- Ícone do site -->
+    <title>Editar conta - Lumine Empório</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/editarConta.css">
+</head>
+<body>
+
+    <!-- HEADER: reutilizado do index, contém logo, busca e ícones -->
+    <div id="headerArea"></div>
+
+    <!-- MODAL DE LOGIN: aparece ao clicar no ícone de usuário -->
+    <div id="modalLoginArea"></div>
+
+    <div class="editar-container">
+
+        <h2 class="editar-titulo">Editar Conta</h2>
+
+        <!-- FOTO DO USUÁRIO -->
+        <div class="editar-foto-area">
+            <img id="fotoPreview" src="img/userPerfil/userNovo.png" alt="Foto do usuário">
+
+            <label for="fotoInput" class="btn trocar-foto-btn">Trocar Foto</label>
+            <input type="file" id="fotoInput" accept="image/*" hidden>
+        </div>
+
+        <!-- FORMULÁRIO -->
+        <form class="editar-form">
+
+            <div class="form-group">
+                <label>Nome completo:</label>
+                <input type="text" id="nomeCompleto">
+            </div>
+
+            <div class="form-group">
+                <label>Telefone:</label>
+                <input type="text" id="telefone" maxlength="15">
+            </div>
+
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" id="email">
+            </div>
+
+            <div class="form-group">
+                <label>Nova senha:</label>
+                <input type="password" id="senha">
+            </div>
+
+            <div class="form-group">
+                <label>Repita a nova senha:</label>
+                <input type="password" id="senha2">
+            </div>
+
+            <button type="button" id="btnSalvar" class="btn salvar-btn">
+                Salvar alterações
+            </button>
+
+        </form>
+    </div>
+
+    <!-- FOOTER: rodapé do site -->
+    <div id="footerArea"></div>
+
+    <!-- Scripts JS -->
+    <script type="module">
+        import { loadComponent } from "./js/include.js";
+        loadComponent("headerArea", "header.html", "js/header.js");
+        loadComponent("footerArea", "footer.html");
+        loadComponent("modalLoginArea", "modalLogin.html", "js/login.js");
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/editarConta.js"></script>
+
+</body>
+</html>
