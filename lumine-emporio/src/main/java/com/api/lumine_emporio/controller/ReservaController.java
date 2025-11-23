@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.lumine_emporio.dtos.ItemCarrinhoDTO;
 import com.api.lumine_emporio.entity.ItemCarrinhoEntity;
 import com.api.lumine_emporio.entity.UsuarioEntity;
+import com.api.lumine_emporio.entity.enums.FormaPagamento;
 import com.api.lumine_emporio.service.ItemCarrinhoService;
 import com.api.lumine_emporio.service.ProdutoVariacaoService;
 import com.api.lumine_emporio.service.ReservaService;
@@ -69,10 +70,27 @@ public class ReservaController {
 	@PostMapping("/iniciar-reserva")
 	public ResponseEntity<String> iniciarReserva(@AuthenticationPrincipal UsuarioEntity usuarioEntity){
 		List<ItemCarrinhoEntity> itensCarrinho = itemCarrinhoService.findAllByUsuario(usuarioEntity);
-		reservaService.criarReserva(usuarioEntity, itensCarrinho);
+		String link = reservaService.criarReserva(usuarioEntity, itensCarrinho);
 		
-		return ResponseEntity.ok(null);
+		System.out.println(link);
+		return ResponseEntity.ok(link);
 	}
+	
+	
+	
+	@PutMapping("/admin/finalizar-reserva")
+	public ResponseEntity<String> finalizarReserva (@RequestParam Long idReserva, @RequestParam FormaPagamento formaPagamento, @RequestParam String endereco){
+		reservaService.finalisarReserva(idReserva, formaPagamento, endereco);
+		
+		return ResponseEntity.ok("Reserva aprovada com sucesso.");
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

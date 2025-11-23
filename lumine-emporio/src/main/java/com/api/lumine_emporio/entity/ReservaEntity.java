@@ -22,6 +22,9 @@ public class ReservaEntity {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long idReserva;
 	
+	@Column(length = 40)
+	private String endereco;
+	
 	@Column(nullable=false)
 	@Enumerated(EnumType.STRING)
 	private StatusReserva status;
@@ -36,11 +39,12 @@ public class ReservaEntity {
 	private UsuarioEntity usuarioEntity;
 
 	public ReservaEntity(StatusReserva status, FormaPagamento formaPagamento, Set<ItemReservaEntity> itensReserva,
-			UsuarioEntity usuarioEntity) {
+			UsuarioEntity usuarioEntity, String endereco) {
 		this.status = status;
 		this.formaPagamento = formaPagamento;
 		this.itensReserva = itensReserva;
 		this.usuarioEntity = usuarioEntity;
+		this.endereco = endereco;
 	}
 
 	public ReservaEntity() {}
@@ -80,5 +84,13 @@ public class ReservaEntity {
 
 	public Long getIdReserva() {
 		return idReserva;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 }
