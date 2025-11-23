@@ -2,6 +2,7 @@ package com.api.lumine_emporio.config;
 
 import java.time.Instant;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
@@ -31,7 +32,7 @@ public class TokenConfig {
 			Algorithm algorithm = Algorithm.HMAC256(secret);
 			DecodedJWT decode = JWT.require(algorithm).build().verify(token);
 			
-			return Optional.of(new JWTUserData(decode.getClaim("userId").asLong(), decode.getSubject()));
+			return Optional.of(new JWTUserData(UUID.fromString(decode.getClaim("UserId").asString()), decode.getSubject()));
 			
 		}catch (JWTVerificationException ex) {
 			return Optional.empty();

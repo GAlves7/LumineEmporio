@@ -1,6 +1,7 @@
 package com.api.lumine_emporio.service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,7 @@ public class UsuarioService {
 		return usuarioRepository.findUsuarioEntityByEmail(email);
 	}
 	
-	
+	public Optional<UsuarioEntity> findById(UUID id){
+		return usuarioRepository.findById(id);
+	}
 }

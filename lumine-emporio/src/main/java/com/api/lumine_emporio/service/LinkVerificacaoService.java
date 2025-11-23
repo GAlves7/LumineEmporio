@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import com.api.lumine_emporio.entity.LinkVerificacaoEntity;
 import com.api.lumine_emporio.entity.UsuarioEntity;
-import com.api.lumine_emporio.entity.enums.UsuarioStatus;
 import com.api.lumine_emporio.repository.LinkVerificacaoRepository;
 
 import jakarta.transaction.Transactional;
