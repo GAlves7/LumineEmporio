@@ -27,7 +27,7 @@ public class ItemCarrinhoEntity {
     @JoinColumn(name = "id_usuario", nullable = false)
     private UsuarioEntity usuario;
 
-    @OneToOne(optional = false) // não pode ser nulo
+    @ManyToOne(optional = false) // não pode ser nulo
     @JoinColumn(name = "id_produtovariacao", nullable = false)
     private ProdutoVariacaoEntity produtoVariacao;
 

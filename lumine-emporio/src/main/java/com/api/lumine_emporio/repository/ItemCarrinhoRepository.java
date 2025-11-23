@@ -1,5 +1,7 @@
 package com.api.lumine_emporio.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,6 +18,8 @@ import com.api.lumine_emporio.entity.UsuarioEntity;
 public interface ItemCarrinhoRepository extends JpaRepository<ItemCarrinhoEntity, Long>{
 	
 	Page<ItemCarrinhoEntity> findAllByUsuario(UsuarioEntity usuarioEntity, Pageable pageable);
+	
+	List<ItemCarrinhoEntity> findAllByUsuario(UsuarioEntity usuarioEntity);
 	
 	boolean existsByUsuarioAndProdutoVariacao(UsuarioEntity usuario, ProdutoVariacaoEntity produtoVariacao);
 	

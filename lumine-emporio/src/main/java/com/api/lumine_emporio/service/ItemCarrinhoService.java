@@ -28,7 +28,7 @@ public class ItemCarrinhoService {
 	}
 	
 	
-	public Page<ItemCarrinhoDTO> findAllByUsuario(UsuarioEntity usuarioEntity, Pageable pageable){
+	public Page<ItemCarrinhoDTO> findAllByUsuarioPage(UsuarioEntity usuarioEntity, Pageable pageable){
 		Page<ItemCarrinhoEntity> page = itemCarrinhoRepository.findAllByUsuario(usuarioEntity, pageable);
 		return page.map(item -> new ItemCarrinhoDTO(
 				item.getProdutoVariacao().getProduto().getNome(),
@@ -38,9 +38,13 @@ public class ItemCarrinhoService {
 				item.getProdutoVariacao().getPreco(),
 				item.getQuantidade()
 				));
-						
-		
 	}
+	
+	public List<ItemCarrinhoEntity> findAllByUsuario(UsuarioEntity usuarioEntity){
+		return itemCarrinhoRepository.findAllByUsuario(usuarioEntity);
+	}
+	
+	
 	
 	
 	@Transactional
@@ -56,8 +60,14 @@ public class ItemCarrinhoService {
 			itemCarrinhoEntity.setProdutoVariacao(produtoVar);
 			itemCarrinhoEntity.setQuantidade(quantidade);
 		}
-		
-		itemCarrinhoRepository.save(itemCarrinhoEntity);
+		try {
+			itemCarrinhoRepository.save(itemCarrinhoEntity);
+			System.out.println("Sucesso ao salvar carrinho.\n");
+		}
+		catch (Exception e) {
+			System.out.println("Falha ao salvar carrinho.\n");
+			throw new RuntimeException("Falha ao salvar carrinho.");
+		}
 	}
 	
 	@Transactional
@@ -73,7 +83,12 @@ public class ItemCarrinhoService {
 		
 	}
 	
-	
+	@Transactional
+	public void deleteAll(List<ItemCarrinhoEntity> carrinhosEntity) {
+		if(carrinhosEntity.isEmpty()) throw new RuntimeException("Falha ao deletar carrinho, lista vazia");
+		
+		itemCarrinhoRepository.deleteAll(carrinhosEntity);
+	}
 	
 	
 	

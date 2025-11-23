@@ -1,6 +1,8 @@
 package com.api.lumine_emporio.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +21,7 @@ import com.api.lumine_emporio.entity.ItemCarrinhoEntity;
 import com.api.lumine_emporio.entity.UsuarioEntity;
 import com.api.lumine_emporio.service.ItemCarrinhoService;
 import com.api.lumine_emporio.service.ProdutoVariacaoService;
+import com.api.lumine_emporio.service.ReservaService;
 
 @RestController
 @RequestMapping("/reserva")
@@ -27,6 +31,8 @@ public class ReservaController {
 	private ProdutoVariacaoService produtoVariacaoService;
 	@Autowired
 	private ItemCarrinhoService itemCarrinhoService;
+	@Autowired
+	private ReservaService reservaService;
 	
 	
 	@GetMapping("/carrinho")
@@ -36,7 +42,7 @@ public class ReservaController {
 	        @AuthenticationPrincipal UsuarioEntity usuarioEntity
 	) {
 		System.out.println(usuarioEntity);
-	    return itemCarrinhoService.findAllByUsuario(usuarioEntity,  PageRequest.of(page, pageSize));
+	    return itemCarrinhoService.findAllByUsuarioPage(usuarioEntity,  PageRequest.of(page, pageSize));
 	}
 	
 	@PutMapping("/carrinho-add")
@@ -60,7 +66,13 @@ public class ReservaController {
 		
 	}
 	
-	
+	@PostMapping("/iniciar-reserva")
+	public ResponseEntity<String> iniciarReserva(@AuthenticationPrincipal UsuarioEntity usuarioEntity){
+		List<ItemCarrinhoEntity> itensCarrinho = itemCarrinhoService.findAllByUsuario(usuarioEntity);
+		reservaService.criarReserva(usuarioEntity, itensCarrinho);
+		
+		return ResponseEntity.ok(null);
+	}
 	
 	
 }
