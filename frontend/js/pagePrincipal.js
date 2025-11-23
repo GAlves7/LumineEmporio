@@ -48,19 +48,18 @@ function gerarCard(produto) {
         ? `${api.defaults.baseURL}/catalogo/imagem/${produto.imagemProduto[0].idImagemProd}`
         : "img/userPerfil/userNovo.png";
 
-    // Formata o preço para R$ 50,00
+    // Formata o preço
     const precoFormatado = produto.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
     return `
         <div class="card-produto">
-            <img src="${imagemFinal}" alt="${produto.nome}">
+            <img src="${imagemFinal}" alt="${produto.nome}" onclick="window.location.href='produto.html?id=${produto.idProduto}'">
             <h3>${produto.nome}</h3>
             <p class="preco">R$ ${precoFormatado}</p>
             <div class="card-actions">
-                <button class="btn-card btn-add">
+                <button class="btn-card btn-add" data-id="${produto.idProduto}">
                     <i class="fa-solid fa-cart-plus"></i>
                 </button>
-                <button class="btn-card btn-reservar">Reservar</button>
             </div>
         </div>
     `;
@@ -71,6 +70,39 @@ async function carregarProdutosPorCategoria(id, destino) {
     try {
         const produtos = (await api.get(`/catalogo/categoria/${id}`)).data;
         document.getElementById(destino).innerHTML = produtos.map(gerarCard).join("");
+
+        // Adicionar evento aos botões de adicionar ao carrinho
+        const botoes = document.querySelectorAll(`#${destino} .btn-add`);
+        botoes.forEach(btn => {
+            btn.addEventListener("click", async (e) => {
+                e.stopPropagation(); // evita que o click abra a página do produto
+
+                const isLoggedIn = localStorage.getItem("isLoggedIn");
+                if (!isLoggedIn) {
+                    alert("Você precisa estar logado para adicionar produtos ao carrinho. Faça login ou cadastre-se.");
+                    return;
+                }
+
+                const idProduto = btn.getAttribute("data-id");
+
+                // Pega o produto inteiro para pegar a variação
+                const produtoData = (await api.get(`/catalogo/produto/${idProduto}`)).data;
+
+                // Pega a primeira variação ou produto padrão
+                const variacao = produtoData.produtoVariacao?.[0] || { idProdutoVar: produtoData.idProduto, preco: produtoData.preco };
+
+                try {
+                    await axios.post("/carrinho/adicionar", {
+                        idProdutoVar: variacao.idProdutoVar,
+                        quantidade: 1
+                    });
+                    alert("Produto adicionado ao carrinho!");
+                } catch {
+                    alert("Erro ao adicionar ao carrinho");
+                }
+            });
+        });
+
     } catch (erro) {
         console.error("Erro ao carregar categoria", id, erro);
         document.getElementById(destino).innerHTML =
@@ -78,9 +110,11 @@ async function carregarProdutosPorCategoria(id, destino) {
     }
 }
 
+/* ================== CARREGAR TODO CATALOGO ================== */
 function carregarCatalogo() {
     carregarProdutosPorCategoria(2, "cat-feminina"); // Moda Feminina
     carregarProdutosPorCategoria(1, "cat-cosmeticos"); // Cosméticos
 }
 
+/* ================== INICIALIZAÇÃO ================== */
 carregarCatalogo();
