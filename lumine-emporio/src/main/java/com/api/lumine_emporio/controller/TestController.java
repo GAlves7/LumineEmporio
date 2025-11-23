@@ -246,7 +246,6 @@ public class TestController {
 		produtoVariacaoEntity2.addCor(corEntity);
 		produtoVariacaoEntity2.setDescricao("Sabonete líquido L'Occitane, fragrância \"Roma\", 175 ml, com pump para um banho suave e perfumado.");
 		produtoVariacaoEntity2.setEstoque(33);
-		produtoVariacaoEntity2.setTamanho(Tamanho.P);
 		produtoVariacaoEntity2.setPreco(produtoService.findById(2L).getPreco());
 		produtoVariacaoService.save(produtoVariacaoEntity2);
 		
