@@ -88,12 +88,11 @@ corEl.addEventListener("change", e => {
 });
 
 /* BOTÃO COMPRAR COM CHECK DE LOGIN E ABRIR MODAL */
-btnComprar.addEventListener("click", () => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-
-    if (!isLoggedIn) {
-        alert("Você precisa estar logado para adicionar produtos ao carrinho. Faça login ou cadastre-se.");
-        return; // não adiciona ao carrinho
+btnComprar.addEventListener("click", async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        alert("Você precisa estar logado para adicionar produtos ao carrinho.");
+        return;
     }
 
     if (!variacaoSelecionada) {
@@ -101,14 +100,23 @@ btnComprar.addEventListener("click", () => {
         return;
     }
 
-    axios.post("/carrinho/adicionar", {
-        idProdutoVar: variacaoSelecionada.idProdutoVar,
-        quantidade: 1
-    }).then(() => {
+    try {
+        const formData = new FormData();
+        formData.append("idProdutoVar", variacaoSelecionada.idProdutoVar);
+        formData.append("quantidade", 1);
+
+        await api.put("/reserva/carrinho-add", formData, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+
         alert("Produto adicionado ao carrinho!");
-    }).catch(() => {
+        // Opcional: atualizar carrinho dinamicamente se quiser
+        // listarCarrinho();
+
+    } catch (erro) {
+        console.error("Erro ao adicionar ao carrinho:", erro);
         alert("Erro ao adicionar ao carrinho");
-    });
+    }
 });
 
 carregarProduto();
