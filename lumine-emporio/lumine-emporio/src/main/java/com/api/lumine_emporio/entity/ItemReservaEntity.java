@@ -7,7 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class ItemReservaEntity {
@@ -22,7 +21,7 @@ public class ItemReservaEntity {
 	@JoinColumn(name = "id_produtovariacao", nullable = false)
 	private ProdutoVariacaoEntity produtoVariacaoEntity;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "id_reserva", nullable = false)
 	private ReservaEntity reservaEntity;
 
