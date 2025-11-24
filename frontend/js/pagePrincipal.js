@@ -77,27 +77,38 @@ async function carregarProdutosPorCategoria(id, destino) {
             btn.addEventListener("click", async (e) => {
                 e.stopPropagation(); // evita que o click abra a página do produto
 
-                const isLoggedIn = localStorage.getItem("isLoggedIn");
-                if (!isLoggedIn) {
-                    alert("Você precisa estar logado para adicionar produtos ao carrinho. Faça login ou cadastre-se.");
+                const token = localStorage.getItem("token");
+                if (!token) {
+                    alert("Você precisa estar logado para adicionar produtos ao carrinho.");
                     return;
                 }
 
                 const idProduto = btn.getAttribute("data-id");
 
-                // Pega o produto inteiro para pegar a variação
-                const produtoData = (await api.get(`/catalogo/produto/${idProduto}`)).data;
-
-                // Pega a primeira variação ou produto padrão
-                const variacao = produtoData.produtoVariacao?.[0] || { idProdutoVar: produtoData.idProduto, preco: produtoData.preco };
-
                 try {
-                    await axios.post("/carrinho/adicionar", {
-                        idProdutoVar: variacao.idProdutoVar,
-                        quantidade: 1
+                    // Pega o produto inteiro para pegar a variação
+                    const produtoData = (await api.get(`/catalogo/produto/${idProduto}`, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    })).data;
+
+                    // Pega a primeira variação ou produto padrão
+                    const variacao = produtoData.produtoVariacao?.[0] || { idProdutoVar: produtoData.idProduto, preco: produtoData.preco };
+
+                    const formData = new FormData();
+                    formData.append("idProdutoVar", variacao.idProdutoVar);
+                    formData.append("quantidade", 1);
+
+                    await api.put("/reserva/carrinho-add", formData, {
+                        headers: { Authorization: `Bearer ${token}` }
                     });
+
                     alert("Produto adicionado ao carrinho!");
-                } catch {
+
+                    // Opcional: atualizar carrinho dinamicamente chamando listarCarrinho()
+                    // listarCarrinho(); // se carrinho.js estiver importado
+
+                } catch (erro) {
+                    console.error("Erro ao adicionar ao carrinho:", erro);
                     alert("Erro ao adicionar ao carrinho");
                 }
             });
