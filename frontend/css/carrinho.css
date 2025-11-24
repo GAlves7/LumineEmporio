@@ -21,48 +21,112 @@
     gap: 20px;
 }
 
-/* ===== CARD DO CARRINHO (horizontal) ===== */
+/* ===== CARD DO CARRINHO ===== */
 .card-carrinho {
-    background-color: var(--cor-caixa);
     display: flex;
-    align-items: center;
+    gap: 20px;
+    background-color: #222;
     padding: 15px;
     border-radius: 12px;
-    box-shadow: 0 0 10px rgba(29, 29, 29, 0.2);
-    transition: transform .2s;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    align-items: center;
 }
 
-.card-carrinho:hover {
-    transform: translateY(-5px);
-}
-
-/* Placeholder de imagem do produto */
 .card-img-placeholder {
     width: 120px;
     height: 120px;
     background-color: #111;
     border-radius: 10px;
-    margin-right: 20px;
+    overflow: hidden;
+    flex-shrink: 0;
 }
 
-/* Info do produto */
+.card-img-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
 .card-info h3 {
-    margin: 0 0 5px 0;
+    margin: 0;
     color: #fff;
-    font-size: 1.05rem;
 }
 
 .card-info p {
-    color: #fff297;
-    font-weight: bold;
     margin: 0;
-    font-size: 1rem;
+    color: #fff297;
+    font-size: 0.95rem;
 }
 
-/* CORREÇÃO UNIVERSAL DO OVERFLOW HORIZONTAL */
-html, body {
-    max-width: 100%;
-    overflow-x: hidden;
+/* Quantidade */
+.card-quantidade {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-qtd {
+    width: 30px;
+    height: 30px;
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-quantidade:hover {
+    background-color: #666;
+}
+
+.qtd-num {
+    min-width: 20px;
+    text-align: center;
+    color: #fff;
+    margin: 15px;
+}
+
+/* Subtotal */
+.subtotal {
+    font-weight: bold;
+}
+
+/* Botão remover */
+.btn-remover {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    align-self: flex-end;
+    margin-top: 10px;
+}
+
+.btn-remover:hover {
+    background-color: #ff1a1a;
+}
+
+/* Total do carrinho */
+.carrinho-total {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    text-align: left;
 }
 
 /* RESPONSIVO */
@@ -75,6 +139,17 @@ html, body {
     .card-img-placeholder {
         width: 100%;
         height: 150px;
-        margin: 0 0 10px 0;
+    }
+
+    .card-info {
+        width: 100%;
+    }
+
+    .card-quantidade {
+        margin-top: 10px;
+    }
+
+    .btn-remover {
+        align-self: flex-start;
     }
 }
