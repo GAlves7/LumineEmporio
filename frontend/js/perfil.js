@@ -1,3 +1,8 @@
+// ==== PERFIL JS ====
+
+// Importa a API
+import api from "./api.js";
+
 // Botão de logout
 const btnSair = document.querySelector('.perfil-botoes .sair');
 
@@ -25,7 +30,7 @@ async function carregarPerfil() {
     }
 
     try {
-        const response = await axios.get("http://localhost:8080/api/perfil", { // Substitua pelo seu endpoint real
+        const response = await api.get("/api/perfil", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -41,6 +46,13 @@ async function carregarPerfil() {
     } catch (error) {
         console.error("Erro ao carregar perfil:", error);
         alert("Erro ao carregar perfil. Faça login novamente.");
+
+        // Limpar token e deslogar se der erro
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userImage');
+        localStorage.removeItem('token');
+        localStorage.removeItem('loginExpiracao');
+
         window.location.href = "index.html";
     }
 }
