@@ -34,8 +34,6 @@ public class ItemCarrinhoEntity {
 		this.produtoVariacao = produtoVariacao;
 	}
 	
-	public ItemCarrinhoEntity() {
-	}
 	
 	//Getters e Setters
 	public int getQuantidade() {

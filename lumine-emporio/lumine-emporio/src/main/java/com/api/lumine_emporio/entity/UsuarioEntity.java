@@ -45,7 +45,7 @@ public class UsuarioEntity implements UserDetails{
 	@Column(nullable=false, unique = true, length = 35)
 	private String email;
 	
-	@Column(nullable=false, unique = true, length = 35)
+	@Column(nullable=false, unique = true, length = 15)
 	private String telefone;
 	
 	@Column(nullable=false, unique = true, length = 11)
