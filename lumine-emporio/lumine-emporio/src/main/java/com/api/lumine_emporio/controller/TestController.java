@@ -144,7 +144,7 @@ public class TestController {
 		ProdutoEntity produtoEntity2 = new ProdutoEntity();
 		produtoEntity2.setNome("L'OCCITANE - SABONE LÍQUIDO");
 		produtoEntity2.setPreco(10.00);
-		produtoEntity2.setDescricao("L'OCCITANE - SABONE LÍQUIDO");
+		produtoEntity2.setDescricao("Sabonete líquido L'Occitane, fragrância \"Roma\", 175 ml, com pump para um banho suave e perfumado.");
 		produtoEntity2.addCategoria(categoria);
 		produtoService.save(produtoEntity2);
 		
@@ -229,11 +229,25 @@ public class TestController {
 		ProdutoVariacaoEntity produtoVariacaoEntity = new ProdutoVariacaoEntity();
 		produtoVariacaoEntity.setProduto(produtoService.findById(5L));
 		produtoVariacaoEntity.addCor(corEntity);
-		produtoVariacaoEntity.setDescricao("CALÇA PRETA");
+		produtoVariacaoEntity.setDescricao("Calça preta feminina wide leg, tecido leve, cintura alta e bolsos laterais.");
 		produtoVariacaoEntity.setEstoque(50);
 		produtoVariacaoEntity.setTamanho(Tamanho.M);
 		produtoVariacaoEntity.setPreco(produtoService.findById(5L).getPreco());
 		produtoVariacaoService.save(produtoVariacaoEntity);
+		
+		
+		CorEntity corEntity2= new CorEntity();
+		corEntity2.setNome("Vermelho");
+		corEntity2.setCodigoHex("FF0000");
+		corService.save(corEntity2);
+		
+		ProdutoVariacaoEntity produtoVariacaoEntity2 = new ProdutoVariacaoEntity();
+		produtoVariacaoEntity2.setProduto(produtoService.findById(2L));
+		produtoVariacaoEntity2.addCor(corEntity);
+		produtoVariacaoEntity2.setDescricao("Sabonete líquido L'Occitane, fragrância \"Roma\", 175 ml, com pump para um banho suave e perfumado.");
+		produtoVariacaoEntity2.setEstoque(33);
+		produtoVariacaoEntity2.setPreco(produtoService.findById(2L).getPreco());
+		produtoVariacaoService.save(produtoVariacaoEntity2);
 		
 		return ResponseEntity.ok(null);
 	}

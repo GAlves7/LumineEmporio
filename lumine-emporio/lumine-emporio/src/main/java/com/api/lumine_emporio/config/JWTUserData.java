@@ -1,7 +1,8 @@
 package com.api.lumine_emporio.config;
 
+import java.util.UUID;
 
 public record JWTUserData(
-		Long userId,
+		UUID userId,
 		String email
 ) {}
