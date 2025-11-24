@@ -122,11 +122,41 @@
 
 /* Total do carrinho */
 .carrinho-total {
-    margin-top: 20px;
+    margin-top: 40px;
     font-size: 1.2rem;
     font-weight: bold;
     color: #fff;
-    text-align: left;
+    text-align: center;
+}
+
+/* Botão Reservar */
+.btn-reservar {
+    width:50%;
+    margin-top: 15px;
+    background: #fff297;
+    color: #191919;
+    border: none;
+    padding: 14px 0;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-reservar:hover {
+    background: #ffcd2a;
+    transform: scale(1.02);
+}
+
+.btn-reservar:active {
+    transform: scale(0.98);
+}
+
+/* CORREÇÃO UNIVERSAL DO OVERFLOW HORIZONTAL */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 /* RESPONSIVO */

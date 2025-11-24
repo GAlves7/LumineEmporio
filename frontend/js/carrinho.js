@@ -18,6 +18,13 @@ function formatarPreco(valor) {
     return valor.toFixed(2).replace('.', ',');
 }
 
+// ================== SVG WHATSAPP ==================
+const svgZap = `
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#1eff00ff" viewBox="0 0 24 24" style="margin-right:8px;">
+    <path d="M20.52 3.48A11.78 11.78 0 0 0 12 0a11.94 11.94 0 0 0-10.4 17.94L0 24l6.26-1.64A12 12 0 0 0 12 24h.01A12 12 0 0 0 24 12a11.76 11.76 0 0 0-3.48-8.52ZM12 22a9.93 9.93 0 0 1-5.09-1.4l-.36-.21-3.72.97 1-3.63-.24-.37A10 10 0 1 1 22 12a9.93 9.93 0 0 1-10 10Zm5.12-7.47c-.28-.14-1.64-.81-1.9-.9s-.44-.14-.63.14-.72.9-.88 1.09-.33.21-.61.07a8.31 8.31 0 0 1-4.1-3.59c-.31-.53.31-.49.88-1.63a.54.54 0 0 0 0-.51c-.07-.14-.63-1.52-.86-2.08s-.46-.48-.63-.49h-.54a1 1 0 0 0-.72.34A3 3 0 0 0 6 8.79a5.25 5.25 0 0 0 1.11 2.76 12.11 12.11 0 0 0 4.86 4.32 16.71 16.71 0 0 0 1.64.61 4 4 0 0 0 1.85.12 3.1 3.1 0 0 0 2-1.44 2.48 2.48 0 0 0 .17-1.44c-.07-.14-.26-.21-.54-.35Z"/>
+</svg>
+`;
+
 // ================== FUNÇÃO PARA LISTAR PRODUTOS ==================
 async function listarCarrinho() {
     try {
@@ -32,7 +39,7 @@ async function listarCarrinho() {
 
         if (produtosCarrinho.length === 0) {
             cardsWrapper.innerHTML = `<p style="color:#fff;">Seu carrinho está vazio.</p>`;
-            return;
+            return; // Nenhum botão aparece
         }
 
         let total = 0;
@@ -54,7 +61,7 @@ async function listarCarrinho() {
             card.classList.add('card-carrinho');
             card.innerHTML = `
                 <div class="card-img-placeholder">
-                    ${imagemURL ? `<img src="${imagemURL}" alt="${produto.nomeProdutoVar}" style="width:100%; height:100%; object-fit:cover; border-radius:10px;">` : ''}
+                    ${imagemURL ? `<img src="${imagemURL}" alt="${produto.nomeProdutoVar}">` : ''}
                 </div>
                 <div class="card-info">
                     <h3>${produto.nomeProdutoVar}</h3>
@@ -66,13 +73,21 @@ async function listarCarrinho() {
                         <button class="btn-qtd" data-id="${produto.idProdutoVar}" data-action="increment">+</button>
                     </div>
                     <p>Subtotal: R$ <span class="subtotal">${formatarPreco(subtotal)}</span></p>
-                    <button class="btn-remover" data-id="${produto.idProdutoVar}" style="background-color:red; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">Remover</button>
+                    <button class="btn-remover" data-id="${produto.idProdutoVar}">Remover</button>
                 </div>
             `;
             cardsWrapper.appendChild(card);
         }
 
-        totalWrapper.innerHTML = `<h3>Total: R$ ${formatarPreco(total)}</h3>`;
+        // RENDERIZA TOTAL + BOTÃO RESERVAR
+        totalWrapper.innerHTML = `
+            <h3>Total: R$ ${formatarPreco(total)}</h3>
+            <button id="btnReservar" class="btn-reservar">
+                ${svgZap} Reservar
+            </button>
+        `;
+
+        document.getElementById('btnReservar').addEventListener('click', iniciarReserva);
 
         // ================== EVENTO INCREMENT/DECREMENT ==================
         document.querySelectorAll('.btn-qtd').forEach(btn => {
@@ -86,28 +101,35 @@ async function listarCarrinho() {
                 else if (action === 'decrement' && novaQtd > 1) novaQtd--;
 
                 try {
-                    // O backend substitui a quantidade, então enviamos a nova
                     const formData = new FormData();
                     formData.append('idProdutoVar', idProdutoVar);
                     formData.append('quantidade', novaQtd);
 
                     await api.put('/reserva/carrinho-add', formData, config);
 
-                    // Atualiza UI
                     qtdSpan.textContent = novaQtd;
+
                     const precoUnit = parseFloat(btn.closest('.card-info')
                         .querySelector('.preco-unitario')
                         .textContent.split('R$ ')[1].replace(',', '.'));
 
-                    btn.closest('.card-info').querySelector('.subtotal').textContent = formatarPreco(precoUnit * novaQtd);
+                    btn.closest('.card-info').querySelector('.subtotal').textContent =
+                        formatarPreco(precoUnit * novaQtd);
 
-                    // Atualiza total
                     let newTotal = 0;
                     document.querySelectorAll('.card-carrinho').forEach(c => {
                         const s = parseFloat(c.querySelector('.subtotal').textContent.replace(',', '.'));
                         newTotal += s;
                     });
-                    totalWrapper.innerHTML = `<h3>Total: R$ ${formatarPreco(newTotal)}</h3>`;
+
+                    totalWrapper.innerHTML = `
+                        <h3>Total: R$ ${formatarPreco(newTotal)}</h3>
+                        <button id="btnReservar" class="btn-reservar">
+                            ${svgZap} Reservar
+                        </button>
+                    `;
+
+                    document.getElementById('btnReservar').addEventListener('click', iniciarReserva);
 
                 } catch (err) {
                     console.error('Erro ao atualizar quantidade:', err);
@@ -129,7 +151,6 @@ async function listarCarrinho() {
                         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
                     });
 
-                    // Recarrega para atualizar o carrinho
                     window.location.reload();
 
                 } catch (err) {
@@ -142,6 +163,36 @@ async function listarCarrinho() {
     } catch (err) {
         console.error('Erro ao listar carrinho:', err);
         cardsWrapper.innerHTML = `<p style="color:#fff;">Erro ao carregar o carrinho.</p>`;
+    }
+}
+
+// ================== FUNÇÃO PARA INICIAR RESERVA ==================
+async function iniciarReserva() {
+    try {
+        const token = localStorage.getItem('token');
+
+        const res = await api.post('/reserva/iniciar-reserva', null, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+
+        const linkWhatsapp = res.data;
+
+        if (!linkWhatsapp) {
+            alert("Erro: o servidor não retornou o link do WhatsApp");
+            return;
+        }
+
+        // Abrir em nova aba
+        window.open(linkWhatsapp, "_blank");
+
+        // Recarrega a página depois de abrir o WhatsApp
+        setTimeout(() => {
+            window.location.reload();
+        }, 500); // pequena espera para garantir a abertura
+
+    } catch (err) {
+        console.error("Erro ao iniciar reserva:", err);
+        alert("Não foi possível iniciar a reserva.");
     }
 }
 
