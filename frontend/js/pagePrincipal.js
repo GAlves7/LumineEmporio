@@ -103,6 +103,7 @@ async function carregarProdutosPorCategoria(id, destino) {
                     });
 
                     alert("Produto adicionado ao carrinho!");
+                    window.location.reload(); // recarrega a página para atualizar o ícone
 
                     // Opcional: atualizar carrinho dinamicamente chamando listarCarrinho()
                     // listarCarrinho(); // se carrinho.js estiver importado

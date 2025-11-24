@@ -110,6 +110,7 @@ btnComprar.addEventListener("click", async () => {
         });
 
         alert("Produto adicionado ao carrinho!");
+        window.location.reload(); // recarrega a página para atualizar o ícone
         // Opcional: atualizar carrinho dinamicamente se quiser
         // listarCarrinho();
 

@@ -53,7 +53,7 @@ async function buscarProdutos(query) {
     }
     try {
         // Alterado de 3 para 5 resultados
-        const { data } = await api.get('catalogo/pesquisa', { params: { q: query, pageSize: 5 } });
+        const { data } = await api.get('catalogo/pesquisa', { params: { q: query, pageSize: 7 } });
         renderResults(data.content);
     } catch (err) {
         console.error('Erro na busca:', err);
@@ -86,3 +86,35 @@ if (isLoggedIn && userImage) {
 
 const btnCart = document.querySelector('.btn-cart');
 btnCart.onclick = () => window.location.href = 'carrinho.html';
+
+// ====================== ATUALIZAR BADGE DO CARRINHO =======================
+async function atualizarBadgeCarrinho() {
+    const token = localStorage.getItem('token');
+    const badge = document.getElementById('cartBadge');
+
+    if (!token) {
+        badge.style.display = 'none';
+        return;
+    }
+
+    try {
+        const { data } = await api.get('/reserva/carrinho', {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+
+        const total = data.totalElements;
+
+        if (total > 0) {
+            badge.textContent = total;
+            badge.style.display = 'flex';
+        } else {
+            badge.style.display = 'none';
+        }
+    } catch (err) {
+        console.error("Erro ao atualizar ícone do carrinho:", err);
+        badge.style.display = 'none';
+    }
+}
+
+// Executar sempre ao carregar o site
+atualizarBadgeCarrinho();

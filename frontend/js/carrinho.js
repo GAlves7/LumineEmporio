@@ -147,3 +147,10 @@ async function listarCarrinho() {
 
 // ================== EXECUTAR ==================
 listarCarrinho();
+
+// Atualiza badge ao carregar carrinho
+import('./header.js').then(() => {
+    if (typeof atualizarBadgeCarrinho === "function") {
+        atualizarBadgeCarrinho();
+    }
+});

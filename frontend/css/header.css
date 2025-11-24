@@ -181,3 +181,22 @@ header {
     font-weight: bold;
     color: #fff297; 
 }
+
+/* Badge do carrinho */
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+    display: none; /* Começa invisível */
+}
+
+/* Deixar o btn-cart relativo para posicionar a badge */
+.btn-cart {
+    position: relative;
+}
