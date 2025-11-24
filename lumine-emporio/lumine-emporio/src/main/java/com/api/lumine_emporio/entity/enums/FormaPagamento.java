@@ -3,7 +3,7 @@ package com.api.lumine_emporio.entity.enums;
 public enum FormaPagamento {
 	V("A vista"),
 	C("Cartao"),
-	B("Boleto");
+	P("Pix");
 	
 	private String descricao;
 
