@@ -72,7 +72,7 @@ public class ReservaService {
 	        // Encoder para URL do WhatsApp
 	        String mensagemEncoded = URLEncoder.encode(mensagem, StandardCharsets.UTF_8);
 
-	        String link = "https://api.whatsapp.com/send?phone=558182407426&text=" + mensagemEncoded;
+	        String link = "https://api.whatsapp.com/send?phone=558194098741&text=" + mensagemEncoded;
 
 	        return link;
 
