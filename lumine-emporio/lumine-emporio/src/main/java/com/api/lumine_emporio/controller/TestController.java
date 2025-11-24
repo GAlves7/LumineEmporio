@@ -142,7 +142,7 @@ public class TestController {
 		produtoService.save(produtoEntity);
 		
 		ProdutoEntity produtoEntity2 = new ProdutoEntity();
-		produtoEntity2.setNome("L'OCCITANE - SABONE LÍQUIDO");
+		produtoEntity2.setNome("L'OCCITANE - SABONETE LÍQUIDO");
 		produtoEntity2.setPreco(10.00);
 		produtoEntity2.setDescricao("Sabonete líquido L'Occitane, fragrância \"Roma\", 175 ml, com pump para um banho suave e perfumado.");
 		produtoEntity2.addCategoria(categoria);
