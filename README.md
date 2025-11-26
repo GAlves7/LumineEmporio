@@ -10,46 +10,45 @@ final** ou **desenvolvedor**.
 
 ------------------------------------------------------------------------
 
-## 🚀 1. Testar o Projeto na Nuvem (Modo Usuário)
+## ✧ 1. Testar o Projeto na Nuvem (Modo Usuário)
 
 A versão oficial do site já está publicada e funcional.\
 Acesse:
 
-👉 **https://lumineemporio.store**
+➜ **https://lumineemporio.store**
 
 Nenhuma configuração é necessária.
 
 ------------------------------------------------------------------------
 
-## 🖥️ 2. Testar Localmente (Modo Desenvolvedor)
+## ✧ 2. Testar Localmente (Modo Desenvolvedor)
 
 Siga os passos abaixo para rodar o projeto completo em sua máquina.
 
 ------------------------------------------------------------------------
 
-## ✅ 2.1 Instalar Dependências Necessárias
+## ✧ 2.1 Instalar Dependências Necessárias
 
 ### 🔧 Backend
 
 -   Baixar **JDK mais recente**\
-    👉 https://www.oracle.com/br/java/technologies/downloads/
+    ➜ https://www.oracle.com/br/java/technologies/downloads/
 
 -   Baixar **Visual C++ Redistribuível v14**\
-    👉
-    https://learn.microsoft.com/pt-br/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-supported-redistributable-version
+    ➜ https://learn.microsoft.com/pt-br/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-supported-redistributable-version
 
 -   Baixar **MySQL Server (última versão)**\
-    👉 https://dev.mysql.com/downloads/mysql/8.0.html
+    ➜ https://dev.mysql.com/downloads/mysql/8.0.html
 
 -   Baixar **MySQL Workbench (última versão)**\
-    👉 https://dev.mysql.com/downloads/workbench/
+    ➜ https://dev.mysql.com/downloads/workbench/
 
 ------------------------------------------------------------------------
 
-## 📝 2.2 VS Code + Extensões Necessárias
+## ✧ 2.2 VS Code + Extensões Necessárias
 
 Baixe o VS Code:\
-👉 https://code.visualstudio.com/
+➜ https://code.visualstudio.com/
 
 Instale as seguintes extensões:
 
@@ -64,17 +63,17 @@ Instale as seguintes extensões:
 
 ------------------------------------------------------------------------
 
-## 📂 2.3 Baixar o Repositório
+## ✧ 2.3 Baixar o Repositório
 
 Baixe o repositório como .zip:\
-👉 https://github.com/GAlves7/LumineEmporio/tree/main
+➜ https://github.com/GAlves7/LumineEmporio/tree/main
 
 Abra **duas janelas/abas** do VS Code: - Uma para o **frontend** - Outra
 para o **backend**
 
 ------------------------------------------------------------------------
 
-## 🗄️ 2.4 Configurar o Banco de Dados
+## ✧ 2.4 Configurar o Banco de Dados
 
 1.  Abra o **MySQL Workbench**
 
@@ -86,7 +85,7 @@ para o **backend**
 
 ------------------------------------------------------------------------
 
-## ⚙️ 2.5 Configurar o Backend
+## ✧ 2.5 Configurar o Backend
 
 No VS Code, acesse o arquivo:
 
@@ -108,20 +107,20 @@ Use a senha da sua conexão MySQL.
 
 ------------------------------------------------------------------------
 
-## ▶️ 2.6 Iniciar os Servidores
+## ✧ 2.6 Iniciar os Servidores
 
-### 🟢 Backend
+### 🔧 Backend
 
 Use a extensão **Spring Boot Dashboard** no VS Code para iniciar o servidor
 backend.
 
-### 🔵 Frontend
+### 💻 Frontend
 
 Na pasta do Frontend, clique com o botão direito do mouse em `index.html` e clique em **Open with Live Server**.
 
 ------------------------------------------------------------------------
 
-# 🧪 2.7 Popular o Banco com Dados de Teste
+## ✧ 2.7 Popular o Banco com Dados de Teste
 
 Abra a extensão **Thunder Client** no VS Code e crie 3 requisições:
 
