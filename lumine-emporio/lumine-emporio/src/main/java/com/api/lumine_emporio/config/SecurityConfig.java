@@ -59,18 +59,10 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(List.of(
-                "http://127.0.0.1:5500",
-                "http://localhost:5500"
-        ));
-
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-
-        // CABEÇALHOS PERMITIDOS → ESSENCIAL
-        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
-
-        // Permitir enviar Authorization: Bearer ...
-        config.setAllowCredentials(true);
+        config.setAllowedOriginPatterns(List.of("*"));  // <-- funciona com credenciais
+        config.setAllowedMethods(List.of("*"));
+        config.setAllowedHeaders(List.of("*"));
+        config.setAllowCredentials(true); // permite enviar cookies e Authorization: Bearer
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);

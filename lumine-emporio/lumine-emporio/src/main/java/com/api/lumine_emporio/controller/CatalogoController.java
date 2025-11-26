@@ -23,6 +23,7 @@ import com.api.lumine_emporio.service.ImagemProdutoService;
 import com.api.lumine_emporio.service.ProdutoService;
 import com.api.lumine_emporio.service.ProdutoVariacaoService;
 
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
@@ -96,24 +97,25 @@ public class CatalogoController {
 		return ResponseEntity.ok(imagens);
 	}
 	
-	@GetMapping("/imagem/{id}")
-	public ResponseEntity<Object> getImagemArquivo(@PathVariable Long id){
-		ImagemProdutoEntity imagem = imagemProdutoService.findById(id);
-		
-		Path caminho = Paths.get(imagem.getUrl());
-		try {
-			Resource recurso = new UrlResource(caminho.toUri());
-			
-			if (!recurso.exists()) return ResponseEntity.notFound().build();
-			
-			return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
-				.header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"")
-				.body(recurso);
-		} catch (MalformedURLException e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body(e.getMessage());
-		}
-	}
+	
+	  @GetMapping("/imagem/{id}") public ResponseEntity<Object>
+	  getImagemArquivo(@PathVariable Long id){ ImagemProdutoEntity imagem =
+	  imagemProdutoService.findById(id);
+	  
+	  Path caminho = Paths.get(imagem.getUrl()); try { Resource recurso = new
+	  UrlResource(caminho.toUri());
+	  
+	  if (!recurso.exists()) return ResponseEntity.notFound().build();
+	  
+	  return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
+	  .header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION,
+	  "attachment; filename=\"" + recurso.getFilename() + "\"") .body(recurso); }
+	  catch (MalformedURLException e) { return
+	  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	  .body(e.getMessage()); } }
+	 
+	
+	
 	
 	@GetMapping("/categoria/{id}")
 	public ResponseEntity<Object> listProdutoByCategoria(@PathVariable Long id){

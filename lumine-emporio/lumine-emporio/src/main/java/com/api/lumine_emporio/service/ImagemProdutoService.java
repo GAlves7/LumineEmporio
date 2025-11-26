@@ -26,8 +26,8 @@ public class ImagemProdutoService {
 	}
 
 	public String getCaminho(Long idProduto, int nome, String tipoArquivo) {
-		String extencao = tipoArquivo.substring(tipoArquivo.lastIndexOf("."));
-		return "imagem-produtos/"+idProduto+"/"+nome+extencao;
+	    String ext = tipoArquivo.substring(tipoArquivo.lastIndexOf("."));
+	    return "/app/imagens/" + idProduto + "/" + nome + ext;
 	}
 	
 	@Transactional
