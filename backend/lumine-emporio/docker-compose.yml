@@ -1,0 +1,16 @@
+services:
+  backend:
+    image: aplicacao-spring
+    container_name: back_lumine
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://nozomi.proxy.rlwy.net:33161/railway?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+    volumes:
+      - imagens:/app/imagens
+
+volumes:
+  imagens:

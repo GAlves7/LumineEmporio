@@ -57,10 +57,10 @@ public class LinkVerificacaoService {
 	    novo.setToken(passwordEncoder.encode(token));
 	    try {
 	        linkVerificacaoRepository.save(novo);
-	        String linkFinal = "http://127.0.0.1:5500/recuperarSenha2.html?token=" + token +
+	        String linkFinal = "https://lumine-emporio.vercel.app/recuperarSenha2.html?token=" + token +
 	                "&tokenId=" + novo.getTokenId();
 	        System.out.println("Link: "+linkFinal);
-		    mailService.enviarEmailTexto(usuario.getEmail(), "Verificação", linkFinal);
+		    mailService.enviarEmailTexto(usuario.getEmail(), "Verificação", "<strong>Link:</strong> "+linkFinal);
 	        
 	    } catch (DataIntegrityViolationException e) {
 	       System.out.println("Falha ao salvar link: "+e.getMessage());
