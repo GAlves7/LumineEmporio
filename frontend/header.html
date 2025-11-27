@@ -1,48 +1,66 @@
 <!-- HEADER: barra superior com logo, busca e ícones -->
 <header>
-    <div class="container-header">
+    <div class="container-header"> <!-- Container principal do header -->
+
         <!-- Logo -->
         <div class="logo">
-            <a href="index.html">
-                <img src="img/logos/logo1.png" alt="Logo Lumine Empório">
+            <a href="index.html"> <!-- Link para a página inicial -->
+                <img src="img/logos/logo1.png" alt="Logo Lumine Empório"> <!-- Imagem do logo -->
             </a>
         </div>
 
-        <!-- Área central: busca e link sobre -->
+        <!-- Área central: busca e link para página Sobre -->
         <div class="center-content">
+
+            <!-- Formulário de busca -->
             <form class="search-form" autocomplete="off">
-                <div class="search-box">
-                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <div class="search-box"> <!-- Box contendo ícone + input -->
+                    <button type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i> <!-- Ícone da lupa -->
+                    </button>
+
+                    <!-- Campo de busca -->
                     <input 
                         type="text" 
-                        placeholder="Buscar..." 
+                        placeholder="Buscar..."  
                         name="search_ignore_123" 
-                        autocomplete="off" 
-                        autocorrect="off"
+                        autocomplete="off"       
+                        autocorrect="off"        
                     >
                 </div>
             </form>
-            <!-- Container para resultados da pesquisa simplificada -->
+
+            <!-- Container onde os resultados de busca serão renderizados via JS -->
             <div class="search-results"></div>
 
+            <!-- Link para página Sobre -->
             <a href="sobre.html" class="sobre">Sobre</a>
+
+            <!-- Link externo para o Instagram da loja -->
             <a href="https://www.instagram.com/lumineemporio/" 
                class="social-instagram" 
-               target="_blank" 
-               title="Instagram da loja">
-                <i class="fa-brands fa-instagram"></i>
+               target="_blank"             
+               title="Instagram da loja">  <!-- Tooltip no hover -->
+                <i class="fa-brands fa-instagram"></i> <!-- Ícone do Instagram -->
             </a>
         </div>
 
-        <!-- Ícones interativos: tema, carrinho e perfil -->
+        <!-- Área dos ícones à direita: tema, carrinho e usuário -->
         <div class="icons">
+
+            <!-- Botão para alternar tema claro/escuro -->
             <button class="btn-theme" title="Mudar tema">
-                <i class="fa-solid fa-sun"></i>
+                <i class="fa-solid fa-sun"></i> <!-- Ícone inicial (muda via JS) -->
             </button>
+
+            <!-- Botão do carrinho -->
             <button class="btn-cart" title="Carrinho">
                 <i class="fa-solid fa-cart-shopping"></i>
+                <!-- Badge que mostra quantidade de itens no carrinho -->
                 <span class="cart-badge" id="cartBadge">0</span>
             </button>
+
+            <!-- Botão do perfil, abre modal ou redireciona login -->
             <button class="btn-user" title="Perfil">
                 <i class="fa-solid fa-user"></i>
             </button>

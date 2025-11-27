@@ -1,23 +1,38 @@
 <!DOCTYPE html>
+<!-- Define que o documento é um arquivo HTML5 -->
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <!-- Define que o site usa acentuação padrão UTF-8 -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Faz o site ficar responsivo em celulares -->
+
     <meta name="description" content="Lumine Empório - Moda com estilo e conforto. Encontre roupas femininas e masculinas para todas as ocasiões.">
+    <!-- Descrição do site (usada por buscadores como Google) -->
+
     <meta name="author" content="Lumine Empório">
+    <!-- Autor do site -->
+
     <meta name="keywords" content="moda, roupas, ecommerce, feminino, masculino, estilo, loja de roupas, lajedo, cosmeticos, perfume, creme">
+    <!-- Palavras-chave para SEO -->
 
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-    <title>Catálogo - Lumine Empório</title>
+    <!-- Ícone do site (favicon) que aparece na aba do navegador -->
 
-    <!-- Google Fonts -->
+    <title>Catálogo - Lumine Empório</title>
+    <!-- Título da aba do navegador -->
+
+    <!-- Importando fontes do Google (usada no layout do site) -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
+
+    <!-- Importando ícones do Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- Normalize CSS -->
+
+    <!-- Normalize.css deixa o estilo do site igual em todos os navegadores -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <!-- CSS globais -->
+    <!-- Arquivos CSS do projeto -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
@@ -27,22 +42,31 @@
 </head>
 <body>
 
-    <!-- HEADER -->
+    <!-- Área onde o header.html será carregado automaticamente com JavaScript -->
     <div id="headerArea"></div>
 
-    <!-- BANNER PRINCIPAL -->
+    <!-- ===== BANNER PRINCIPAL DO SITE ===== -->
     <section class="banner">
         <div class="carousel">
             <div class="slides">
+                
+                <!-- Slide 1 -->
                 <div class="slide">
                         <img src="img/banners/modaFemWhite.png" alt="Moda Feminina">
                 </div>
+
+                <!-- Slide 2 -->
                 <div class="slide">
                         <img src="img/banners/cosmeWhite.png" alt="Cosméticos">
                 </div>
+
             </div>
+
+            <!-- Botões para navegar entre os slides -->
             <button class="prev"><i class="fa-solid fa-chevron-left"></i></button>
             <button class="next"><i class="fa-solid fa-chevron-right"></i></button>
+
+            <!-- Bolinhas que indicam qual slide está ativo -->
             <div class="dots">
                 <span class="dot active"></span>
                 <span class="dot"></span>
@@ -50,36 +74,53 @@
         </div>
     </section>
 
-    <!-- CATALOGO -->
+    <!-- ===== CATALOGO DE PRODUTOS ===== -->
     <section class="catalogo-container">
 
+        <!-- Categoria Moda Feminina -->
         <div class="categoria">
             <h2 class="titulo-categoria">Moda Feminina</h2>
+
+            <!-- Aqui os cards dos produtos serão carregados via JavaScript -->
             <div class="cards-container" id="cat-feminina"></div>
         </div>
 
+        <!-- Categoria Cosméticos -->
         <div class="categoria">
             <h2 class="titulo-categoria">Cosméticos</h2>
+
+            <!-- Aqui os cards dos produtos serão carregados via JavaScript -->
             <div class="cards-container" id="cat-cosmeticos"></div>
         </div>
 
     </section>
 
-    <!-- MODAL DE LOGIN -->
+    <!-- Área onde o modal de login será carregado dinamicamente -->
     <div id="modalLoginArea"></div>
 
-    <!-- FOOTER -->
+    <!-- Área onde o footer.html será carregado -->
     <div id="footerArea"></div>
 
-    <!-- SCRIPTS -->
+    <!-- ===== SCRIPTS DO PROJETO ===== -->
+
     <script type="module">
+        /*  
+            Usa a função loadComponent (do arquivo include.js)
+            para carregar arquivos HTML em divs específicas.
+
+            Isso permite reutilizar header, footer e modal sem repetir código.
+        */
         import { loadComponent } from "./js/include.js";
+
         loadComponent("headerArea", "header.html", "js/header.js");
         loadComponent("footerArea", "footer.html");
         loadComponent("modalLoginArea", "modalLogin.html", "js/login.js");
     </script>
 
+    <!-- Biblioteca Axios (usada para chamadas à API Java + MySQL) -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Arquivo principal da página (carrega produtos, carrossel, etc) -->
     <script type="module" src="js/pagePrincipal.js"></script>
 
 </body>

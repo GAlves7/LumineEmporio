@@ -1,48 +1,49 @@
 /* ==== BANNER PRINCIPAL ==== */
 .banner {
-    width: 100%;
-    position: relative;
-    margin-top: 40px;
-    overflow: hidden;
+    width: 100%;                /* O banner ocupa toda a largura da tela */
+    position: relative;         /* Permite posicionar os botões dentro dele */
+    margin-top: 40px;           /* Espaço para baixo do header */
+    overflow: hidden;           /* Impede imagens de vazarem para fora */
 }
 
 .carousel {
     position: relative;
-    width: 100%;
-    max-height: 300px;
-    min-height: 180px;
+    width: 100%;                /* Ocupa toda a largura disponível */
+    max-height: 300px;          /* Limita ALTURA máxima do banner */
+    min-height: 180px;          /* E altura mínima (em telas menores) */
     height: auto;
-    display: flex;
+    display: flex;              /* Centraliza o conteúdo dentro */
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow: hidden;           /* Impede que imagens escapem */
 }
 
 .slides {
-    display: flex;
-    transition: transform 0.6s ease-in-out;
+    display: flex;              /* Deixa os slides lado a lado (linha) */
+    transition: transform 0.6s ease-in-out;   /* Animação suave ao mexer */
 }
 
 .slide {
-    min-width: 100%;
-    box-sizing: border-box;
+    min-width: 100%;            /* Cada slide ocupa 100% da largura */
+    box-sizing: border-box;     /* Evita que padding/borda aumentem o tamanho */
 }
 
 .slide img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    object-position: center;
+    object-fit: contain;        /* Mantém proporção da imagem */
+    object-position: center;    /* Centraliza a imagem */
     display: block;
-    cursor: pointer;
-    background-color: #191919;
+    cursor: pointer;            /* Para clicar e ir pra página */
+    background-color: #191919;  /* Fundo preto atrás das imagens */
 }
 
+/* ==== BOTÕES DO CARROSSEL (setas) ==== */
 .prev,
 .next {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%); /* Centraliza verticalmente */
     background-color: #191919;
     color: #fff297;
     border: none;
@@ -51,7 +52,7 @@
     cursor: pointer;
     border-radius: 50%;
     transition: background 0.3s;
-    z-index: 2;
+    z-index: 2;                  /* Fica acima das imagens */
 }
 
 .prev:hover,
@@ -59,17 +60,13 @@
     background-color: rgba(46, 46, 46, 0.9);
 }
 
-.prev {
-    left: 20px;
-}
+.prev { left: 20px; }           /* Seta esquerda */
+.next { right: 20px; }          /* Seta direita */
 
-.next {
-    right: 20px;
-}
-
+/* ==== BOLINHAS DO CARROSSEL ==== */
 .dots {
     position: absolute;
-    bottom: 15px;
+    bottom: 15px;                /* Fica embaixo do banner */
     width: 100%;
     text-align: center;
 }
@@ -78,7 +75,7 @@
     height: 12px;
     width: 12px;
     margin: 0 5px;
-    background-color: #191919;
+    background-color: #191919;   /* Cor padrão */
     border-radius: 50%;
     display: inline-block;
     cursor: pointer;
@@ -86,61 +83,61 @@
 }
 
 .dot.active {
-    background-color: #fff;
+    background-color: #fff;      /* Bolinha ativa fica branca */
 }
+
 
 /* ===== CATÁLOGO GERAL ===== */
 .catalogo-container {
     width: 100%;
-    padding: 20px 20px;
+    padding: 20px 20px;          /* Espaçamento interno */
 }
 
 /* Título das categorias alinhado à esquerda */
 .titulo-categoria {
     text-align: left;
-    margin: 20px 0 20px 5px;
-    /* AUMENTEI O ESPAÇO */
+    margin: 20px 0 20px 5px;     /* Espaço em cima e embaixo */
     font-size: 1.6rem;
     font-weight: 600;
     color: #ffffff;
 }
 
-/* Container dos cards */
+/* Container dos cards de produtos */
 .cards-container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 40px; 
-    justify-content: center; 
+    flex-wrap: wrap;             /* Quebra de linha automática */
+    gap: 40px;                   /* Espaço entre os cards */
+    justify-content: center;     /* Centraliza os cards */
 }
+
 
 /* ===== CARD DO PRODUTO ===== */
 .card-produto {
-    background-color: var(--cor-caixa);
-    width: 13%;
+    background-color: var(--cor-caixa); /* Cor definida no :root */
+    width: 13%;                 /* Largura fixa para desktops */
     padding: 15px;
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(29, 29, 29, 0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform .2s;
+    transition: transform .2s;  /* Animação suave ao passar o mouse */
 }
 
 .card-produto:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px); /* Levanta o card ao passar o mouse */
 }
 
-/* Imagem */
+/* Imagem do produto */
 .card-produto img {
     width: 85%;
     height: 140px;
-    /* um pouco menor para ficar proporcional */
-    object-fit: contain;
-    background-color: #111;
+    object-fit: contain;         /* Mantém a proporção */
+    background-color: #111;       /* Fundo preto interno */
     border-radius: 10px;
 }
 
-/* Nome */
+/* Nome do produto */
 .card-produto h3 {
     margin: 10px 0 5px;
     color: #fff;
@@ -175,32 +172,39 @@
     transition: .2s;
 }
 
+/* Botão de adicionar ao carrinho */
 .btn-add {
     background-color: #fff297;
     color: #191919;
 }
 
-/* CORREÇÃO UNIVERSAL DO OVERFLOW HORIZONTAL */
+
+/* EVITA SCROLL HORIZONTAL NO SITE */
 html, body {
     max-width: 100%;
     overflow-x: hidden;
 }
 
-/* RESPONSIVO */
+
+/* ====== RESPONSIVIDADE ====== */
+
+/* Tablets grandes e notebooks pequenos */
 @media (max-width: 1024px) {
     .card-produto {
         width: calc(30% - 20px);
     }
 }
 
+/* Tablets menores */
 @media (max-width: 768px) {
     .card-produto {
         width: calc(45% - 20px);
     }
 }
 
+/* Celulares */
 @media (max-width: 480px) {
     .card-produto {
-        width: 100%;
+        width: 100%;  /* Card ocupa a largura toda */
     }
 }

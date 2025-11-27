@@ -1,42 +1,56 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"> <!-- Garante acentuação e caracteres especiais -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade em mobile -->
 
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico"> <!-- Ícone da aba -->
     <title>Carrinho - Lumine Empório</title>
 
-    <!-- Google Fonts -->
+    <!-- Fonte principal usada no site -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
+
+    <!-- Ícones (carrinho, lixeira, setas, etc.) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- Normalize CSS -->
+
+    <!-- Normalize: remove diferenças entre navegadores -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <!-- CSS globais -->
+    <!-- CSS geral do projeto e CSS específico do carrinho -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="css/carrinho.css">
+    <link rel="stylesheet" href="css/carrinho.css"> <!-- Estilos do carrinho -->
 
 </head>
 <body>
 
+    <!-- HEADER carregado dinamicamente com include.js -->
     <div id="headerArea"></div>
+
+    <!-- Modal de login (pode ser aberto a partir do carrinho caso usuário não esteja logado) -->
     <div id="modalLoginArea"></div>
 
+    <!-- FOOTER carregado via include.js -->
     <div id="footerArea"></div>
 
+    <!-- ============================================
+         Importação dos componentes (header, footer, modal)
+         usando o sistema de includes do projeto
+    ============================================= -->
     <script type="module">
         import { loadComponent } from "./js/include.js";
-        loadComponent("headerArea", "header.html", "js/header.js");
-        loadComponent("footerArea", "footer.html");
-        loadComponent("modalLoginArea", "modalLogin.html", "js/login.js");
+
+        loadComponent("headerArea", "header.html", "js/header.js");      // Carrega header + script dele
+        loadComponent("footerArea", "footer.html");                      // Carrega rodapé
+        loadComponent("modalLoginArea", "modalLogin.html", "js/login.js"); // Modal + script de login
     </script>
 
+    <!-- Axios: necessário para todas as requisições da página -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Script principal do carrinho (lógica de exibir itens, excluir, alterar quantidade, checkout...) -->
     <script type="module" src="js/carrinho.js"></script>
 
 </body>

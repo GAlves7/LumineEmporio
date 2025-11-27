@@ -1,51 +1,58 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br"> <!-- idioma da página definido como português do Brasil -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"> <!-- suporte a caracteres especiais -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- responsividade -->
 
+    <!-- Ícone da aba do navegador -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <title>Sobre - Lumine Empório</title>
 
-    <!-- Font Awesome -->
+    <!-- Font Awesome: biblioteca de ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- Normalize -->
+    <!-- Normalize: reseta estilos padrão dos navegadores -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <!-- CSS Geral -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/login.css">
+    <!-- CSS global do projeto -->
+    <link rel="stylesheet" href="css/style.css"> <!-- estilos gerais -->
+    <link rel="stylesheet" href="css/header.css"> <!-- estilos do header -->
+    <link rel="stylesheet" href="css/footer.css"> <!-- estilos do footer -->
+    <link rel="stylesheet" href="css/login.css">  <!-- estilos do modal de login -->
 
-    <!-- CSS específico da página -->
+    <!-- CSS exclusivo da página Sobre -->
     <link rel="stylesheet" href="css/sobre.css">
 </head>
 <body>
 
+    <!-- Área onde o header será carregado via include.js -->
     <div id="headerArea"></div>
+
+    <!-- Área onde o modal de login será carregado -->
     <div id="modalLoginArea"></div>
 
+    <!-- Container principal da página Sobre -->
     <section class="sobre-container">
 
+        <!-- Título principal -->
         <h1 class="sobre-titulo">Sobre a Lumine Empório</h1>
 
+        <!-- Descrição inicial da marca -->
         <p class="sobre-descricao">
             A <strong>Lumine Empório</strong> nasceu com o propósito de oferecer roupas modernas,
             confortáveis e acessíveis, sempre trazendo o melhor da moda para quem valoriza estilo e autenticidade.
         </p>
 
-        <!-- Sessão 1 -->
-        <div class="sobre-box">
-            <h2><i class="fa-solid fa-store"></i> Quem Somos</h2>
+        <!-- ***** SESSÃO 1: Quem Somos ***** -->
+        <div class="sobre-box"> <!-- bloco com título e conteúdo -->
+            <h2><i class="fa-solid fa-store"></i> Quem Somos</h2> <!-- ícone + título -->
             <p>
                 Somos uma loja de moda focada em qualidade e inovação. Trabalhamos com peças selecionadas,
                 priorizando conforto, durabilidade e estilo para o dia a dia.
             </p>
         </div>
 
-        <!-- Sessão 2 -->
+        <!-- ***** SESSÃO 2: Nossa História ***** -->
         <div class="sobre-box">
             <h2><i class="fa-solid fa-calendar-day"></i> Nossa História</h2>
             <p>
@@ -54,7 +61,7 @@
             </p>
         </div>
 
-        <!-- Sessão 3 -->
+        <!-- ***** SESSÃO 3: Endereço Físico ***** -->
         <div class="sobre-box">
             <h2><i class="fa-solid fa-location-dot"></i> Endereço Físico</h2>
             <p>
@@ -62,16 +69,18 @@
             </p>
         </div>
 
-        <!-- Sessão 4 -->
+        <!-- ***** SESSÃO 4: Redes Sociais ***** -->
         <div class="sobre-box">
             <h2><i class="fa-brands fa-instagram"></i> Redes Sociais</h2>
             <p>Siga a Lumine Empório e fique por dentro das novidades:</p>
+
+            <!-- Lista de links sociais -->
             <ul class="social-list">
                 <li>
                     <a href="https://www.instagram.com/lumineemporio/"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    <i class="fa-brands fa-instagram"></i> Instagram
+                    target="_blank"          
+                    rel="noopener noreferrer"> <!-- segurança -->
+                        <i class="fa-brands fa-instagram"></i> Instagram
                     </a>
                 </li>
             </ul>
@@ -79,14 +88,20 @@
 
     </section>
 
+    <!-- Área onde o footer será carregado -->
     <div id="footerArea"></div>
 
+    <!-- Carrega componentes reutilizáveis com include.js -->
     <script type="module">
         import { loadComponent } from "./js/include.js";
-        loadComponent("headerArea", "header.html", "js/header.js");
-        loadComponent("footerArea", "footer.html");
-        loadComponent("modalLoginArea", "modalLogin.html", "js/login.js");
+
+        loadComponent("headerArea", "header.html", "js/header.js");      // carrega o header
+        loadComponent("footerArea", "footer.html");                      // carrega o footer
+        loadComponent("modalLoginArea", "modalLogin.html", "js/login.js"); // carrega o modal de login
     </script>
 
+    <!-- Axios CDN (caso necessário em scripts locais) -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
 </body>
 </html>

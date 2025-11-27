@@ -1,20 +1,28 @@
-/* ==== HEADER ==== */
+/* =============================== */
+/*            HEADER               */
+/* =============================== */
+
+/* Barra fixa no topo do site */
 header {
     background-color: var(--cor-fundo);
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     padding: 10px 40px;
-    position: sticky;
+    position: sticky;     /* Fica fixo ao rolar */
     top: 0;
-    z-index: 10;
+    z-index: 10;          /* Fica acima do conteúdo */
 }
 
+/* Container principal do header: logo + busca + ícones */
 .container-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-/* ==== LOGO ==== */
+/* =============================== */
+/*              LOGO               */
+/* =============================== */
+
 .logo img {
     width: 120px;
     cursor: pointer;
@@ -25,15 +33,18 @@ header {
     transform: scale(1.05);
 }
 
-/* ==== CENTRO: PESQUISA E LINK "SOBRE" ==== */
+/* =============================== */
+/*     CENTRO: BUSCA & LINKS       */
+/* =============================== */
+
 .center-content {
     display: flex;
     align-items: center;
     gap: 15px;
-    position: relative;
+    position: relative; /* Necessário para posicionar os resultados */
 }
 
-/* Caixa de pesquisa */
+/* Campo de busca fechado (estado inicial) */
 .search-box {
     display: flex;
     align-items: center;
@@ -42,11 +53,11 @@ header {
     overflow: hidden;
     background-color: var(--cor-caixa);
     padding-left: 2px;
-    width: 60px;
-    transition: width 0.4s ease;
+    width: 60px;                 /* Tamanho inicial pequeno */
+    transition: width 0.4s ease; /* Animação ao abrir */
 }
 
-/* Expansão da pesquisa ao focar */
+/* Quando está ativo (focado) — expande */
 .search-box.active {
     width: 400px;
 }
@@ -64,7 +75,7 @@ header {
     color: #000;
 }
 
-/* Input da pesquisa */
+/* Input da pesquisa: invisível quando fechado */
 .search-box input {
     border: none;
     outline: none;
@@ -73,11 +84,11 @@ header {
     font-size: 0.95rem;
     background-color: var(--cor-caixa);
     color: var(--cor-principal);
-    opacity: 0;
+    opacity: 0;                   /* Some quando inativo */
     transition: opacity 0.3s ease;
 }
 
-/* Torna o input visível quando ativo */
+/* Torna o input visível apenas quando expandido */
 .search-box.active input {
     opacity: 1;
 }
@@ -94,13 +105,17 @@ header {
     color: #000;
 }
 
-/* ==== ÍCONES À DIREITA ==== */
+/* =============================== */
+/*          ÍCONES À DIREITA       */
+/* =============================== */
+
 .icons {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
+/* Botões: tema, carrinho, perfil */
 .icons button {
     background: none;
     border: none;
@@ -113,6 +128,7 @@ header {
     color: #000;
 }
 
+/* Imagem do avatar do usuário */
 .user-avatar {
     width: 32px;
     height: 32px;
@@ -121,22 +137,25 @@ header {
     border: 0.5px solid var(--cor-principal);
 }
 
-/* ==== RESULTADOS DA PESQUISA ==== */
+/* =============================== */
+/*     RESULTADOS DA PESQUISA      */
+/* =============================== */
+
 .search-results {
     position: absolute;
-    top: 45px;
+    top: 45px;               /* Logo abaixo do search-box */
     left: 0;
     width: 100%;
     background-color: var(--cor-caixa);
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    display: none;
+    display: none;           /* Começa oculto */
     flex-direction: column;
     z-index: 20;
     padding: 5px 0;
 }
 
-/* Card individual da pesquisa */
+/* Cada card de resultado */
 .search-results .result-card {
     padding: 8px 12px;
     cursor: pointer;
@@ -146,18 +165,18 @@ header {
     gap: 10px;
 }
 
+/* Hover no card */
 .search-results .result-card:hover {
     background-color: rgba(0,0,0,0.05);
 }
 
-/* Card "Ver todos os resultados" */
+/* Estilo do botão “Ver todos” (se usar futuramente) */
 .search-results .ver-todos {
-    
     border-bottom: 1px solid rgba(0,0,0,0.1);
-    color: #fff297; /* amarelo */
+    color: #fff297;
 }
 
-/* Imagem dentro do card */
+/* Imagem do produto no resultado */
 .search-results .result-card img.card-img {
     width: 50px;
     height: 50px;
@@ -168,21 +187,24 @@ header {
 /* Nome do produto */
 .search-results .result-card strong {
     font-weight: bold;
-    color: #FFFFFF; 
+    color: #FFFFFF;
 }
 
-/* Descrição do produto */
+/* Descrição */
 .search-results .result-card span:nth-of-type(1) {
-    color: #FFFFFF; 
+    color: #FFFFFF;
 }
 
-/* Preço do produto */
+/* Preço */
 .search-results .result-card span:nth-of-type(2) {
     font-weight: bold;
-    color: #fff297; 
+    color: #fff297;
 }
 
-/* Badge do carrinho */
+/* =============================== */
+/*       BADGE DO CARRINHO         */
+/* =============================== */
+
 .cart-badge {
     position: absolute;
     top: -5px;
@@ -193,10 +215,10 @@ header {
     font-weight: bold;
     padding: 2px 6px;
     border-radius: 50%;
-    display: none; /* Começa invisível */
+    display: none; /* Só aparece se houver itens */
 }
 
-/* Deixar o btn-cart relativo para posicionar a badge */
+/* Necessário para a badge ficar posicionada corretamente */
 .btn-cart {
     position: relative;
 }

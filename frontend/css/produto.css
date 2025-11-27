@@ -1,56 +1,56 @@
 /* ===== WRAPPER GERAL ===== */
 .produto-wrapper {
-    max-width: 1100px;
-    margin: 20px auto 20px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
+    max-width: 1100px; /* largura máxima do container */
+    margin: 20px auto 20px auto; /* centraliza e adiciona espaço em cima e embaixo */
+    display: flex; /* coloca imagem + infos lado a lado */
+    align-items: center; /* alinha verticalmente ao centro */
+    justify-content: center; /* centraliza horizontalmente */
+    gap: 40px; /* espaço entre imagem e infos */
 }
 
 /* ===== CARD DO PRODUTO ===== */
 .produto-card {
-    background: var(--cor-caixa);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    display: flex;
-    gap: 40px;
-    flex-wrap: wrap;
+    background: var(--cor-caixa); /* cor do fundo definida no tema */
+    padding: 30px; /* espaçamento interno */
+    border-radius: 12px; /* bordas arredondadas */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* sombra para destaque */
+    display: flex; /* define layout flex */
+    gap: 40px; /* distância entre elementos */
+    flex-wrap: wrap; /* permite quebrar linha no mobile */
 }
 
 /* ===== IMAGEM ===== */
 .produto-imagem img {
-    width: 300px;
-    height: 300px;
-    border-radius: 12px;
-    object-fit: cover;
-    border: 3px solid var(--cor-principal);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    width: 300px; /* largura fixa */
+    height: 300px; /* altura fixa */
+    border-radius: 12px; /* bordas arredondadas */
+    object-fit: cover; /* garante que a imagem preencha sem distorcer */
+    border: 3px solid var(--cor-principal); /* borda na cor principal */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* sombra leve */
 }
 
 /* ===== INFORMAÇÕES ===== */
 .produto-info {
-    max-width: 500px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    color: #ffffff;
+    max-width: 500px; /* limite de largura */
+    display: flex; /* layout flexível */
+    flex-direction: column; /* empilha itens verticalmente */
+    gap: 15px; /* espaço entre informações */
+    color: #ffffff; /* cor do texto */
 }
 
 .produto-info h2 {
-    font-weight: bold;
+    font-weight: bold; /* título em negrito */
 }
 
 /* ===== DADOS INDIVIDUAIS ===== */
 .produto-dado {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 12px;
+    display: flex; /* organiza texto e select */
+    flex-direction: column; /* coloca label e valor um em cima do outro */
+    margin-bottom: 12px; /* espaço inferior */
 }
 
 .produto-dado .label {
-    font-weight: 600;
+    font-weight: 600; /* label mais forte */
     font-size: 15px;
 }
 
@@ -60,57 +60,57 @@
 }
 
 .produto-dado select {
-    padding: 8px;
-    border-radius: 6px;
-    border: none;
-    background: #333;
-    color: #fff;
+    padding: 8px; /* deixa mais confortável ao toque */
+    border-radius: 6px; /* bordas arredondadas */
+    border: none; /* remove borda padrão */
+    background: #333; /* fundo escuro */
+    color: #fff; /* letra branca */
     font-size: 15px;
 }
 
 /* ===== PREÇO ===== */
 #produto-preco {
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff297;
+    font-size: 24px; /* fonte grande */
+    font-weight: bold; /* destaque */
+    color: #fff297; /* amarelo claro */
 }
 
 /* ===== BOTÕES ===== */
 .produto-botoes {
-    margin-top: 20px;
+    margin-top: 20px; /* separa do conteúdo acima */
 }
 
 .btn {
-    padding: 12px;
-    border-radius: 6px;
+    padding: 12px; /* área clicável maior */
+    border-radius: 6px; /* borda arredondada */
     text-align: center;
-    color: var(--cor-fundo);
-    background: var(--cor-principal);
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
-    border: none;
+    color: var(--cor-fundo); /* cor do texto */
+    background: var(--cor-principal); /* cor do botão */
+    font-weight: 600; /* texto mais forte */
+    cursor: pointer; /* cursor de clique */
+    transition: 0.3s; /* animação suave */
+    border: none; /* sem borda */
 }
 
 .btn:hover {
-    background: #ffd700;
-    color: #000;
+    background: #ffd700; /* muda o fundo ao passar mouse */
+    color: #000; /* texto fica preto */
 }
 
 /* ===== RESPONSIVO ===== */
 @media (max-width: 900px) {
     .produto-wrapper {
-        flex-direction: column;
-        gap: 25px;
+        flex-direction: column; /* empilha imagem e infos */
+        gap: 25px; /* reduz espaçamento */
     }
 
     .produto-imagem img {
-        width: 220px;
+        width: 220px; /* imagem menor no mobile */
         height: 220px;
     }
 
     .produto-info {
-        width: 90%;
-        max-width: 420px;
+        width: 90%; /* ocupa quase toda tela */
+        max-width: 420px; /* limite para não esticar demais */
     }
 }

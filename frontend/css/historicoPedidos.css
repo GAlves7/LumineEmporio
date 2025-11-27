@@ -1,53 +1,69 @@
-/* ===== CONTAINER PRINCIPAL ===== */
+/* ============================================================
+   CONTAINER PRINCIPAL DO HISTÓRICO
+   Contém o título e os cards de pedidos
+   ============================================================ */
 .historico-container {
-    width: 100%;
-    padding: 20px;
+    width: 100%;      /* Ocupa toda a largura da página */
+    padding: 20px;    /* Espaçamento interno */
 }
 
-/* Título da página */
+/* ============================================================
+   TÍTULO DA PÁGINA
+   ============================================================ */
 .historico-container h2 {
-    color: #ffffff;
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin-bottom: 25px;
-    text-align: left;
-    margin-top: 10px;
+    color: #ffffff;        /* Cor do texto */
+    font-size: 1.6rem;     /* Tamanho da fonte */
+    font-weight: 600;      /* Peso da fonte (semibold) */
+    margin-bottom: 25px;   /* Espaço abaixo do título */
+    text-align: left;      /* Alinhamento à esquerda */
+    margin-top: 10px;      /* Espaço acima */
 }
 
-/* Container dos cards */
+/* ============================================================
+   WRAPPER DOS CARDS
+   Define que os cards ficam lado a lado de maneira flexível
+   ============================================================ */
 .historico-cards {
     display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    justify-content: center;
+    flex-wrap: wrap;       /* Permite quebrar linha */
+    gap: 40px;             /* Espaçamento entre os cards */
+    justify-content: center; /* Centraliza todos os cards no container */
 }
 
-/* ===== CARD DE HISTÓRICO (igual ao catálogo) ===== */
+/* ============================================================
+   CARD INDIVIDUAL DO HISTÓRICO
+   (Baseado no card do catálogo)
+   ============================================================ */
 .card-historico {
-    background-color: var(--cor-caixa);
-    width: 13%;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(29, 29, 29, 0.2);
+    background-color: var(--cor-caixa); /* Cor padrão das caixas do site */
+    width: 13%;                         /* Largura fixa para telas grandes */
+    padding: 15px;                      /* Espaçamento interno */
+    border-radius: 12px;                /* Cantos arredondados */
+    box-shadow: 0 0 10px rgba(29, 29, 29, 0.2); /* Sombra suave */
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform .2s;
+    transition: transform .2s;           /* Animação suave ao passar o mouse */
 }
 
+/* Efeito hover: eleva o card suavemente */
 .card-historico:hover {
     transform: translateY(-5px);
 }
 
+/* ============================================================
+   IMAGEM DO PRODUTO NO CARD
+   ============================================================ */
 .card-historico img {
     width: 85%;
     height: 140px;
-    object-fit: contain;
+    object-fit: contain;   /* Mostra a imagem inteira sem distorcer */
     background-color: #111;
     border-radius: 10px;
     margin-bottom: 10px;
 }
 
+/* Nome do produto */
 .card-historico h3 {
     margin: 10px 0 5px;
     color: #fff;
@@ -55,34 +71,44 @@
     text-align: center;
 }
 
+/* Preço do produto */
 .card-historico p {
-    color: #fff297;
+    color: #fff297;       /* Amarelo claro */
     font-weight: bold;
     margin-bottom: 12px;
     font-size: 1rem;
 }
 
-/* CORREÇÃO UNIVERSAL DO OVERFLOW HORIZONTAL */
+/* ============================================================
+   CORREÇÃO UNIVERSAL PARA EVITAR SCROLL HORIZONTAL INDESEJADO
+   ============================================================ */
 html, body {
     max-width: 100%;
     overflow-x: hidden;
 }
 
-/* RESPONSIVO */
+/* ============================================================
+   RESPONSIVIDADE
+   Adapta o tamanho dos cards dependendo do tamanho da tela
+   ============================================================ */
+
+/* Tablets e notebooks menores */
 @media (max-width: 1024px) {
     .card-historico {
         width: calc(30% - 20px);
     }
 }
 
+/* Tablets verticais */
 @media (max-width: 768px) {
     .card-historico {
         width: calc(45% - 20px);
     }
 }
 
+/* Celulares */
 @media (max-width: 480px) {
     .card-historico {
-        width: 100%;
+        width: 100%;   /* 1 card por linha */
     }
 }

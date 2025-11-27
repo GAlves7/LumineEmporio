@@ -2,16 +2,17 @@
 <html>
 <head>
     <meta charset="UTF-8">
-
+    <!-- Configura a página para se ajustar ao tamanho da tela -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico"> <!-- Ícone do site -->
+    <!-- Ícone exibido na aba do navegador -->
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <title>Perfil - Lumine Empório</title>
 
-    <!-- Font Awesome -->
+    <!-- Biblioteca de ícones Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- CSS -->
+    <!-- Arquivos de estilo do projeto -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
@@ -20,56 +21,73 @@
 </head>
 <body>
 
-    <!-- HEADER: reutilizado do index, contém logo, busca e ícones -->
+    <!-- Área onde o HEADER será carregado dinamicamente -->
     <div id="headerArea"></div>
 
-    <!-- MODAL DE LOGIN: aparece ao clicar no ícone de usuário -->
+    <!-- Área onde será carregado o modal de login -->
     <div id="modalLoginArea"></div>
 
-    <!-- ======== CONTAINER PRINCIPAL ======== -->
+    <!-- ======== CONTAINER PRINCIPAL DO PERFIL ======== -->
     <div class="perfil-wrapper">
 
-        <!-- DADOS DO USUÁRIO -->
+        <!-- BLOCO DE INFORMAÇÕES DO USUÁRIO -->
         <div class="perfil-info">
             <h2>Informações do Perfil</h2>
 
+            <!-- Linha de informação: Nome do usuário -->
             <div class="perfil-dado">
                 <span class="label">Nome completo:</span>
                 <span class="valor">Nome Completo</span>
             </div>
 
+            <!-- Linha de informação: Email do usuário -->
             <div class="perfil-dado">
                 <span class="label">Email:</span>
                 <span class="valor">emailexemplo@gmail.com</span>
             </div>
 
+            <!-- Linha de informação: Telefone -->
             <div class="perfil-dado">
                 <span class="label">Telefone:</span>
                 <span class="valor" id="vl">(00) 00000-0000</span>
             </div>
 
-            <!-- Botões -->
+            <!-- Botões de ações do perfil -->
             <div class="perfil-botoes">
+                <!-- Redireciona para a edição da conta -->
                 <a href="editarConta.html" class="btn editar">Editar Conta</a>
+
+                <!-- Página listando pedidos anteriores -->
                 <a href="historicoPedidos.html" class="btn historico">Histórico de Pedidos</a>
+
+                <!-- "Sair" apenas redireciona para index (logout real é provável no backend) -->
                 <a href="index.html" class="btn sair">Sair</a>
             </div>
         </div>
 
     </div>
 
-    <!-- FOOTER: rodapé do site -->
+    <!-- Área onde o FOOTER será incluído dinamicamente -->
     <div id="footerArea"></div>
 
-    <!-- Scripts JS -->
+    <!-- Script para importar componentes HTML (header, footer, login) -->
     <script type="module">
         import { loadComponent } from "./js/include.js";
+
+        // Carrega HEADER + JS do header
         loadComponent("headerArea", "header.html", "js/header.js");
+
+        // Carrega FOOTER
         loadComponent("footerArea", "footer.html");
+
+        // Carrega o modal de login + JS do modal
         loadComponent("modalLoginArea", "modalLogin.html", "js/login.js");
     </script>
 
+    <!-- Axios para requisições HTTP -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Script da página de perfil (carrega dados reais do usuário) -->
     <script type="module" src="js/perfil.js"></script>
 </body>
 </html>
