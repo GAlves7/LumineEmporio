@@ -15,7 +15,7 @@ final** ou **desenvolvedor**.
 A versão oficial do site já está publicada e funcional.\
 Acesse:
 
-➜ **https://lumineemporio.store**
+➜ **https://lumine-emporio.vercel.app**
 
 Nenhuma configuração é necessária.
 
