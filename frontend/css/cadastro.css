@@ -1,39 +1,58 @@
-/* ==== LAYOUT PRINCIPAL ==== */
+/* ============================
+   LAYOUT PRINCIPAL DA PÁGINA
+   ============================ */
 .cadastro-wrapper {
+    /* Coloca imagem e formulário lado a lado */
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 100px;
+
+    /* Centraliza tudo na página */
     margin: 60px auto;
+
+    /* Limita a largura total */
     max-width: 1100px;
+
+    /* Permite quebrar linha no celular */
     flex-wrap: wrap;
+
+    /* Imagem fica à direita, formulário à esquerda */
     flex-direction: row-reverse;
 }
 
+/* Imagem grande da lateral */
 .cadastro-imagem img {
     width: 540px;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* sombra suave */
 }
 
-/* ==== FORM ==== */
+
+/* =======================
+   CAIXA DO FORMULÁRIO
+   ======================= */
 .cadastro-container {
     max-width: 400px;
-    background-color: var(--cor-caixa);
+    background-color: var(--cor-caixa); /* cinza escuro */
     padding: 30px;
     border-radius: 10px;
-    color: var(--cor-principal);
+    color: var(--cor-principal); /* amarelo */
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
+/* Título “Cadastro” */
 .cadastro-container h2 {
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* ==== INPUTS PADRÃO ==== */
+
+/* =======================
+   INPUTS PADRÃO
+   ======================= */
 .cadastro-container input {
-    width: 95%;
+    width: 95%;    /* deixa pequenas margens laterais */
     padding: 10px;
     margin: 10px 0;
     border-radius: 5px;
@@ -41,34 +60,43 @@
     outline: none;
 }
 
-/* ==== BOTÃO ==== */
+
+/* =======================
+   BOTÃO PRINCIPAL
+   ======================= */
 .cadastro-container button {
     width: 100%;
     padding: 10px;
     margin-top: 15px;
     border-radius: 5px;
     border: none;
-    background-color: var(--cor-principal);
-    color: var(--cor-fundo);
+    background-color: var(--cor-principal); /* amarelo padrão */
+    color: var(--cor-fundo);               /* texto escuro */
     font-weight: 600;
     cursor: pointer;
 }
 
+/* Efeito hover do botão */
 .cadastro-container button:hover {
-    background-color: #ffd700;
+    background-color: #ffd700; /* amarelo mais vivo */
 }
 
-/* ==== EMAIL COM @gmail.com FIXO ==== */
+
+/* ===============================================
+   CAMPO DE EMAIL (com @gmail.com fixado à direita)
+   =============================================== */
 .email-group {
     position: relative;
     width: 95%;
 }
 
+/* Input normal */
 .email-group input {
     width: 100%;
-    padding-right: 10px;
+    padding-right: 10px; /* separa do @gmail.com */
 }
 
+/* Texto "@gmail.com" fixo dentro da linha */
 .email-group span {
     position: absolute;
     right: 8px;
@@ -81,18 +109,22 @@
     color: #333;
 }
 
-/* ==== CÓDIGO + BOTÃO LADO A LADO ==== */
+
+/* ======================================
+   CÓDIGO DE VERIFICAÇÃO + BOTÃO AO LADO
+   ====================================== */
 .codigo-group {
-    width: 102.5%;
-    
+    width: 102.5%; /* ajuste fino para alinhar com outros inputs */
     gap: 10px;
 }
 
+/* Campo do código */
 .codigo-group input {
-    width: 51.5%;
-    height: 18px;
+    width: 51.5%;     /* metade do espaço */
+    height: 18px;     /* altura ajustada */
 }
 
+/* Botão "Enviar código" */
 .codigo-group button {
     width: 40%;
     height: 38.5px;
@@ -103,17 +135,22 @@
     cursor: pointer;
 }
 
-/* ==== SENHA ==== */
+
+/* ===========================
+   CAMPOS DE SENHA (com ícone)
+   =========================== */
 .password-container {
     position: relative;
     width: 100%;
 }
 
+/* Input de senha com espaço para o ícone */
 .password-container input {
     width: 100%;
-    padding-right: 35px;
+    padding-right: 35px; /* espaço para o olho */
 }
 
+/* Ícone do "mostrar senha" */
 .password-container i {
     position: absolute;
     right: 10px;
@@ -122,13 +159,19 @@
     cursor: pointer;
 }
 
-/* ==== RESPONSIVO ==== */
+
+/* ===========================
+   RESPONSIVIDADE (TELAS < 900px)
+   =========================== */
 @media (max-width: 900px) {
+
+    /* Coloca imagem e formulário um embaixo do outro */
     .cadastro-wrapper {
         flex-direction: column;
         gap: 40px;
     }
 
+    /* Reduz a imagem */
     .cadastro-imagem img {
         width: 80%;
         max-width: 350px;

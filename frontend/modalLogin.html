@@ -1,21 +1,45 @@
-<!-- MODAL DE LOGIN -->
+<!-- ============================================================================
+     MODAL DE LOGIN
+     Este modal é carregado dinamicamente via include.js em outras páginas
+============================================================================ -->
 <div class="login-modal" id="loginModal">
+
+    <!-- Conteúdo interno do modal -->
     <div class="login-content">
+
+        <!-- Título do modal -->
         <h3>Login</h3>
+
+        <!-- Campo de email -->
         <input type="email" placeholder="Email" id="loginEmail">
+
+        <!-- Campo de senha com botão de visualizar -->
         <div class="password-container">
             <input type="password" placeholder="Senha" id="loginPassword">
+
+            <!-- Ícone que alterna exibição da senha -->
             <i class="fa-solid fa-eye" id="togglePassword"></i>
         </div>
 
-        <!-- Checkbox Manter logado -->
+        <!-- Opção "manter logado" -->
         <div class="keep-logged">
             <input type="checkbox" id="keepLogged">
             <label for="keepLogged">Manter-me logado</label>
         </div>
 
-        <p class="forgot-password"><a href="recuperarSenha.html">Esqueceu a senha?</a></p>
+        <!-- Link para recuperar senha -->
+        <p class="forgot-password">
+            <a href="recuperarSenha.html">Esqueceu a senha?</a>
+        </p>
+
+        <!-- Botão de login -->
         <button id="btnLogin">Entrar</button>
-        <p>Não tem conta? <a href="cadastro.html">Registrar</a></p>
+
+        <!-- Link para ir ao cadastro -->
+        <p>
+            Não tem conta?
+            <a href="cadastro.html">Registrar</a>
+        </p>
+
     </div>
 </div>

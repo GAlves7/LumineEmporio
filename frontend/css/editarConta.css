@@ -1,85 +1,97 @@
-/* ==== CONTAINER PRINCIPAL ==== */
+/* ============================================================
+   CONTAINER PRINCIPAL — caixa central onde fica o formulário
+   ============================================================ */
 .editar-container {
-    max-width: 550px;
-    margin: 40px auto 20px auto;
-    background: var(--cor-caixa);
-    padding: 30px;
-    border-radius: 12px;
-    color: var(--cor-principal);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    max-width: 550px;                     /* Largura máxima do formulário */
+    margin: 40px auto 20px auto;          /* Centraliza e adiciona espaçamento */
+    background: var(--cor-caixa);         /* Cor de fundo padrão do site */
+    padding: 30px;                        /* Respiro interno */
+    border-radius: 12px;                  /* Arredondamento das bordas */
+    color: var(--cor-principal);          /* Cor do texto */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* Sombra para destaque */
 }
 
-/* ==== TÍTULO ==== */
+/* ============================================================
+   TÍTULO “Editar Conta”
+   ============================================================ */
 .editar-titulo {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 25px;
-    font-weight: 600;
+    text-align: center;     /* Centraliza o título */
+    font-size: 2rem;        /* Tamanho grande */
+    margin-bottom: 25px;    /* Espaço abaixo */
+    font-weight: 600;       /* Semi-negrito */
 }
 
-/* ==== FORM ==== */
+/* ============================================================
+   FORMULÁRIO — organiza itens verticalmente
+   ============================================================ */
 .editar-form .form-group {
-    margin-bottom: 18px;
+    margin-bottom: 18px;       /* Espaço entre campos */
     display: flex;
-    flex-direction: column;
-    position: relative; /* necessário para o botão do olho */
+    flex-direction: column;    /* Inputs abaixo dos labels */
+    position: relative;        /* Necessário para o botão do olho */
 }
 
 .editar-form label {
-    font-weight: 600;
+    font-weight: 600;          /* Destaque do texto */
     font-size: 15px;
 }
 
 .editar-form input {
-    padding: 10px;
-    border-radius: 6px;
-    border: none;
-    outline: none;
-    background: #ffffff;
-    margin-top: 5px;
-    width: 96%;
+    padding: 10px;             /* Respiro interno */
+    border-radius: 6px;        /* Bordas arredondadas */
+    border: none;              /* Sem borda visível */
+    outline: none;             /* Remove contorno azul */
+    background: #ffffff;       /* Fundo branco */
+    margin-top: 5px;           /* Espaço entre label e input */
+    width: 96%;                /* Largura ajustada ao layout */
 }
 
-/* ==== BOTÃO OLHO PARA SENHA ==== */
+/* ============================================================
+   BOTÃO DO OLHO — ícone que mostra/esconde a senha
+   ============================================================ */
 .editar-form .form-group button {
-    position: absolute;
-    right: 10px;
-    top: 50%;
+    position: absolute;            /* Posiciona dentro do input */
+    right: 10px;                   /* Encostado no lado direito */
+    top: 50%;                      /* Centraliza verticalmente */
     transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    color: #333;
-    font-size: 1rem;
+    background: transparent;       /* Sem fundo */
+    border: none;                  /* Sem borda */
+    cursor: pointer;               /* Muda o mouse */
+    color: #333;                   /* Cor normal do ícone */
+    font-size: 1rem;               /* Tamanho do ícone */
     padding: 0;
 }
 
 .editar-form .form-group button:hover {
-    color: var(--cor-principal);
+    color: var(--cor-principal);   /* Muda a cor ao passar o mouse */
 }
 
-/* ==== BOTÃO SALVAR ==== */
+/* ============================================================
+   BOTÃO "SALVAR ALTERAÇÕES"
+   ============================================================ */
 .salvar-btn {
-    width: 100%;
+    width: 100%;                      /* Ocupa toda a largura */
     padding: 12px;
     margin-top: 10px;
-    background: var(--cor-principal);
-    color: var(--cor-fundo);
+    background: var(--cor-principal); /* Cor padrão do tema */
+    color: var(--cor-fundo);          /* Cor do texto */
     font-weight: 600;
     border-radius: 6px;
     cursor: pointer;
-    transition: .3s;
+    transition: .3s;                  /* Transição suave */
     border: none;
 }
 
 .salvar-btn:hover {
-    background: #ffd700;
-    color: #000;
+    background: #ffd700;              /* Amarelo destaque */
+    color: #000;                      /* Texto escuro */
 }
 
-/* ==== RESPONSIVO ==== */
+/* ============================================================
+   RESPONSIVIDADE — telas menores (até 600px)
+   ============================================================ */
 @media (max-width: 600px) {
     .editar-container {
-        width: 90%;
+        width: 90%;                  /* Ocupa quase toda a tela */
     }
 }

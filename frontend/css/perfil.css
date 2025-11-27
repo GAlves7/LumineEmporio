@@ -1,22 +1,24 @@
 /* ==== WRAPPER GERAL ==== */
+/* Container principal da página de perfil */
 .perfil-wrapper {
-    max-width: 1100px;
-    margin: 40px auto 20px auto; /* distancia do header + centralização */
+    max-width: 1100px; /* Limita a largura máxima do conteúdo */
+    margin: 40px auto 20px auto; /* Distância do topo + centralização horizontal */
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 60px;
-    flex-wrap: wrap;
+    gap: 60px; /* Espaçamento entre os elementos internos */
+    flex-wrap: wrap; /* Permite quebra de linha no responsivo */
 }
 
 /* ==== CARD COM INFORMAÇÕES ==== */
+/* Card onde ficam os dados do usuário */
 .perfil-info {
-    background: var(--cor-caixa);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    width: 420px;
-    color: var(--cor-principal);
+    background: var(--cor-caixa); /* Cor padrão da caixa (claro/escuro conforme tema) */
+    padding: 30px; /* Espaçamento interno */
+    border-radius: 12px; /* Bordas arredondadas */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3); /* Sombra suave */
+    width: 420px; /* Largura fixa padrão */
+    color: var(--cor-principal); /* Cor do texto */
 }
 
 .perfil-info h2 {
@@ -26,67 +28,78 @@
 }
 
 /* ==== DADOS INDIVIDUAIS ==== */
+/* Cada linha de informação (nome, email, telefone) */
 .perfil-dado {
     margin-bottom: 15px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Coloca label acima do valor */
 }
 
+/* Nome da informação (ex: "Email:") */
 .perfil-dado .label {
     font-weight: 600;
     font-size: 15px;
     color: var(--cor-principal);
 }
 
+/* Valor da informação (ex: "usuario@gmail.com") */
 .perfil-dado .valor {
     font-size: 16px;
     margin-top: 2px;
-    color: #ffffff;
+    color: #ffffff; /* Valor fica branco para contraste */
 }
 
 /* ==== BOTÕES ==== */
+/* Container dos botões de ação */
 .perfil-botoes {
     margin-top: 25px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Um botão abaixo do outro */
     gap: 12px;
 }
 
+/* Estilização base dos botões */
 .btn {
     padding: 12px;
     border-radius: 6px;
     text-align: center;
-    color: var(--cor-fundo);
+    color: var(--cor-fundo); /* Cor invertida para contraste */
     background: var(--cor-principal);
     font-weight: 600;
-    transition: 0.3s;
+    transition: 0.3s; /* Suaviza hover */
 }
 
+/* Efeito ao passar o mouse */
 .btn:hover {
-    background: #ffd700;
+    background: #ffd700; /* Amarelo padrão da marca */
     color: #000;
 }
 
+/* Botão "Sair" com cor especial */
 .btn.sair {
-    background: #c0392b;
+    background: #c0392b; /* Vermelho escuro */
 }
 
+/* Hover do botão "Sair" */
 .btn.sair:hover {
-    background: #e74c3c;
+    background: #e74c3c; /* Vermelho claro */
 }
 
 /* ==== RESPONSIVO ==== */
+/* Ajustes para telas menores (mobile e tablets) */
 @media (max-width: 900px) {
+
     .perfil-wrapper {
         gap: 40px;
-        margin-top: 120px;
+        margin-top: 120px; /* Ajuste por causa do header fixo */
     }
 
     .perfil-info {
-        width: 90%;
-        max-width: 420px;
+        width: 90%; /* Ocupa quase toda a largura disponível */
+        max-width: 420px; /* Mantém limite */
     }
 
+    /* Caso tenha foto de perfil, ela diminui */
     .perfil-foto img {
         width: 220px;
         height: 220px;

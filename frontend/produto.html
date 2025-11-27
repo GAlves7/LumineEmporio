@@ -2,18 +2,20 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <!-- Permite responsividade em dispositivos móveis -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Ícone do site -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <title>Produto - Lumine Empório</title>
 
-    <!-- Font Awesome -->
+    <!-- Ícones do Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- Normalize -->
+    <!-- Reset CSS (normaliza estilos entre navegadores) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <!-- CSS -->
+    <!-- Estilos gerais e específicos -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
@@ -23,44 +25,55 @@
 </head>
 <body>
 
-    <!-- HEADER -->
+    <!-- HEADER carregado dinamicamente pelo include.js -->
     <div id="headerArea"></div>
 
-    <!-- MODAL LOGIN -->
+    <!-- MODAL DE LOGIN carregado dinamicamente -->
     <div id="modalLoginArea"></div>
 
-    <!-- PRODUTO CARD -->
+    <!-- ======== ÁREA PRINCIPAL DO PRODUTO ======== -->
     <section class="produto-wrapper">
         <div class="produto-card">
 
+            <!-- IMAGEM DO PRODUTO -->
             <div class="produto-imagem">
                 <img id="produto-img" src="" alt="Imagem do Produto">
             </div>
 
+            <!-- INFORMAÇÕES DO PRODUTO -->
             <div class="produto-info">
+
+                <!-- Nome do produto -->
                 <h2 id="produto-nome"></h2>
+
+                <!-- Descrição -->
                 <p id="produto-descricao"></p>
 
+                <!-- Preço -->
                 <div class="produto-dado">
                     <span class="label">Preço:</span>
                     <span class="valor" id="produto-preco"></span>
                 </div>
 
+                <!-- Tamanho (select dinamicamente preenchido) -->
                 <div class="produto-dado">
                     <span class="label">Tamanho:</span>
                     <select id="produto-tamanho"></select>
                 </div>
 
+                <!-- Cor (select dinâmico) -->
                 <div class="produto-dado">
                     <span class="label">Cor:</span>
                     <select id="produto-cor"></select>
                 </div>
 
+                <!-- Estoque atualizado conforme seleção -->
                 <div class="produto-dado">
                     <span class="label">Estoque:</span>
                     <span class="valor" id="produto-estoque"></span>
                 </div>
 
+                <!-- Botão principal: adiciona ao carrinho -->
                 <div class="produto-botoes">
                     <button class="btn" id="btn-comprar">Adicionar ao carrinho</button>
                 </div>
@@ -69,10 +82,10 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- FOOTER carregado dinamicamente -->
     <div id="footerArea"></div>
 
-    <!-- SCRIPTS -->
+    <!-- Carrega HEADER, FOOTER e MODAL dinamicamente -->
     <script type="module">
         import { loadComponent } from "./js/include.js";
         loadComponent("headerArea", "header.html", "js/header.js");
@@ -80,7 +93,10 @@
         loadComponent("modalLoginArea", "modalLogin.html", "js/login.js");
     </script>
 
+    <!-- Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Script principal da página do produto -->
     <script type="module" src="js/produto.js"></script>
 
 </body>

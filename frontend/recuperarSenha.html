@@ -20,38 +20,43 @@
 
 </head>
 <body>
-    <!-- HEADER: reutilizado do index, contém logo, busca e ícones -->
+    <!-- HEADER: reutilizado do index, carregado dinamicamente -->
     <div id="headerArea"></div>
 
     <!-- CONTEÚDO PRINCIPAL DA PÁGINA DE RECUPERAÇÃO -->
     <section class="recuperar-container">
         <div class="recuperar-box">
-            <h2>Recuperar Senha</h2>
+            <h2>Recuperar Senha</h2> <!-- Título da página -->
+
+            <!-- Texto explicativo para o usuário -->
             <p>Para recuperar sua senha, enviaremos um link de redefinição para o seu e-mail. Informe abaixo o e-mail cadastrado em sua conta:</p>
 
             <!-- Campo para inserir o e-mail cadastrado -->
             <input type="email" placeholder="Digite seu e-mail" id="emailRecuperar">
 
-            <!-- Agora NÃO redireciona — JS controla tudo -->
+            <!-- Botão que dispara a funcionalidade via JS -->
             <button class="btn-enviar">Enviar link de recuperação</button>
         </div>
     </section>
 
-    <!-- MODAL DE LOGIN: reutilizado do index -->
+    <!-- MODAL DE LOGIN: também carregado por include.js -->
     <div id="modalLoginArea"></div>
 
     <!-- FOOTER: rodapé do site -->
     <div id="footerArea"></div>
 
-    <!-- Script principal: funcionalidades globais -->
+    <!-- Script principal: carrega header, footer e modal -->
     <script type="module">
         import { loadComponent } from "./js/include.js";
-        loadComponent("headerArea", "header.html", "js/header.js");
-        loadComponent("footerArea", "footer.html");
-        loadComponent("modalLoginArea", "modalLogin.html", "js/login.js");
+        loadComponent("headerArea", "header.html", "js/header.js");   // carrega header com script
+        loadComponent("footerArea", "footer.html");                  // carrega footer
+        loadComponent("modalLoginArea", "modalLogin.html", "js/login.js"); // carrega modal login
     </script>
 
+    <!-- Axios (CDN) -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Script específico da página -->
     <script type="module" src="js/recuperarSenha.js"></script>
 
 </body>

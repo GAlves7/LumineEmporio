@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <!-- Define padrão UTF-8 (acentos, caracteres especiais) -->
     <meta charset="UTF-8">
+
+    <!-- Deixa layout responsivo para mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Ícone na aba do navegador -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <title>Históricos de pedidos - Lumine Empório</title>
 
-    <!-- Fonts / Icons -->
+    <!-- Biblioteca de ícones Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- Normalize -->
+    <!-- Reset de estilos padrão dos navegadores -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 
-    <!-- CSS -->
+    <!-- Estilos globais e específicos da página -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
@@ -22,19 +26,41 @@
 </head>
 <body>
 
+    <!-- Área onde o header será carregado dinamicamente -->
     <div id="headerArea"></div>
+
+    <!-- Modal de login carregado via include.js -->
     <div id="modalLoginArea"></div>
 
+    <!-- Área onde o footer será incluído -->
     <div id="footerArea"></div>
 
+    <!-- Carregamento dos componentes reutilizáveis (Header, Footer, Login Modal) -->
     <script type="module">
         import { loadComponent } from "./js/include.js";
+
+        /* 
+         * Carrega HEADER dentro da div "headerArea"
+         * Após inserir o HTML, executa o JS correspondente (header.js)
+         */
         loadComponent("headerArea", "header.html", "js/header.js");
+
+        /*
+         * Carrega FOOTER dentro da div "footerArea"
+         * Não possui script atrelado
+         */
         loadComponent("footerArea", "footer.html");
+
+        /*
+         * Carrega MODAL DE LOGIN e executa login.js para funcionalidade
+         */
         loadComponent("modalLoginArea", "modalLogin.html", "js/login.js");
     </script>
 
+    <!-- Axios (HTTP client usado em todo o projeto) -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Script específico da página de histórico de pedidos -->
     <script type="module" src="js/historicoPedidos.js"></script>
 </body>
 </html>

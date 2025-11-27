@@ -1,90 +1,106 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8"> <!-- Define a codificação de caracteres -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade -->
+    <meta charset="UTF-8"> <!-- Define UTF-8, garantindo acentuação correta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Torna a página responsiva -->
 
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico"> <!-- Ícone do site -->
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico"> <!-- Ícone da aba -->
     <title>Nova Senha - Lumine Empório</title>
 
-    <!-- Google Fonts e Font Awesome -->
+    <!-- Importação de fontes e ícones usados no layout -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/header.css">
+    <!-- Estilos gerais do site e desta página -->
+    <link rel="stylesheet" href="css/style.css"> 
+    <link rel="stylesheet" href="css/header.css"> 
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="css/recuperarSenha.css">
+    <link rel="stylesheet" href="css/recuperarSenha.css"> <!-- Estilo exclusivo das páginas de recuperação -->
 </head>
 <body>
 
-    <!-- HEADER -->
+    <!-- HEADER carregado dinamicamente via include.js -->
     <div id="headerArea"></div>
 
-    <!-- CONTEÚDO PRINCIPAL -->
+    <!-- =============================================
+         ÁREA PRINCIPAL — FORMULÁRIO DE NOVA SENHA
+    ============================================== -->
     <section class="recuperar-container">
         <div class="recuperar-box">
             <h2>Definir Nova Senha</h2>
             <p>Digite a nova senha e confirme para concluir a recuperação:</p>
 
-            <!-- Campo nova senha -->
+            <!-- Campo N O V A  S E N H A com ícone de visualizar -->
             <div class="password-container">
                 <input type="password" placeholder="Nova senha" id="novaSenha">
                 <i class="fa-solid fa-eye" id="toggleNovaSenha"></i>
             </div>
 
-            <!-- Campo confirmar senha -->
+            <!-- Campo de confirmação da nova senha -->
             <div class="password-container">
                 <input type="password" placeholder="Repita a nova senha" id="confirmarNovaSenha">
                 <i class="fa-solid fa-eye" id="toggleConfirmarSenha"></i>
             </div>
 
-            <!-- Botão -->
+            <!-- Botão que dispara a redefinição via recuperarSenha.js -->
             <button class="btn-enviar" id="btnSalvarSenha">Salvar nova senha</button>
         </div>
     </section>
 
-    <!-- MODAL LOGIN -->
+    <!-- Modal de Login carregado via include.js -->
     <div id="modalLoginArea"></div>
 
-    <!-- FOOTER -->
+    <!-- Rodapé carregado dinamicamente -->
     <div id="footerArea"></div>
 
-    <!-- Includes Globais -->
+    <!-- =============================================
+         Includes globais (header, footer e modal)
+         Carregados via include.js para evitar duplicação
+    ============================================== -->
     <script type="module">
         import { loadComponent } from "./js/include.js";
+
         loadComponent("headerArea", "header.html", "js/header.js");
         loadComponent("footerArea", "footer.html");
         loadComponent("modalLoginArea", "modalLogin.html", "js/login.js");
     </script>
 
-    <!-- Mostrar/Ocultar Senha -->
+    <!-- =============================================
+         Script para mostrar/ocultar a senha
+         (Não precisa de módulo)
+    ============================================== -->
     <script>
+        /* --- Mostrar/Ocultar campo NOVA SENHA --- */
         const toggleNovaSenha = document.getElementById('toggleNovaSenha');
         const novaSenha = document.getElementById('novaSenha');
 
         toggleNovaSenha.addEventListener('click', () => {
             const type = novaSenha.type === 'password' ? 'text' : 'password';
-            novaSenha.type = type;
+            novaSenha.type = type; // alterna entre texto e senha
+
             toggleNovaSenha.classList.toggle('fa-eye-slash');
         });
 
+        /* --- Mostrar/Ocultar campo CONFIRMAR SENHA --- */
         const toggleConfirmarSenha = document.getElementById('toggleConfirmarSenha');
         const confirmarNovaSenha = document.getElementById('confirmarNovaSenha');
 
         toggleConfirmarSenha.addEventListener('click', () => {
             const type = confirmarNovaSenha.type === 'password' ? 'text' : 'password';
             confirmarNovaSenha.type = type;
+
             toggleConfirmarSenha.classList.toggle('fa-eye-slash');
         });
     </script>
 
-    <!-- Axios -->
+    <!-- Axios necessário antes do script do sistema -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-    <!-- Script de recuperação (mesmo arquivo do passo 1) -->
+    <!-- Script de lógica (envio do token + redefinição da senha)
+         É o MESMO usado na primeira página, mas possui tratamentos diferentes
+         pois detecta automaticamente qual página está aberta.
+    -->
     <script type="module" src="js/recuperarSenha.js"></script>
 
 </body>
