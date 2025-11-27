@@ -46,7 +46,7 @@ public class CodigoVerificacaoService{
 		codigoEntity.setEmail(email);
 		codigoVerificacaoRepository.save(codigoEntity);
 		
-		mailService.enviarEmailTexto(email, "Email de verificação.", "Codigo de Verificação: "+codigo);
+		mailService.enviarEmailTexto(email, "Email de verificação.", "<strong>Codigo de Verificação:</strong> "+codigo);
 		
 		System.out.print("Codigo de Verificação: "+codigo);
 	}

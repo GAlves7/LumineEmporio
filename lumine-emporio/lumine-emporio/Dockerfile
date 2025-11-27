@@ -5,8 +5,5 @@ WORKDIR /app
 
 COPY target/*.jar /app/app.jar
 
-# Copia as imagens iniciais (opcional)
-COPY src/main/resources/static/imagens /app/imagens
-
 EXPOSE 8080
 CMD ["java", "-jar", "/app/app.jar"]
