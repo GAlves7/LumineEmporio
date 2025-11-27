@@ -57,7 +57,7 @@ public class LinkVerificacaoService {
 	    novo.setToken(passwordEncoder.encode(token));
 	    try {
 	        linkVerificacaoRepository.save(novo);
-	        String linkFinal = "http://lumineemporio.store/recuperarSenha2.html?token=" + token +
+	        String linkFinal = "https://lumine-emporio.vercel.app/recuperarSenha2.html?token=" + token +
 	                "&tokenId=" + novo.getTokenId();
 	        System.out.println("Link: "+linkFinal);
 		    mailService.enviarEmailTexto(usuario.getEmail(), "Verificação", "<strong>Link:</strong> "+linkFinal);
