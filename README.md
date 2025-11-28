@@ -10,6 +10,27 @@ final** ou **desenvolvedor**.
 
 ------------------------------------------------------------------------
 
+## ✧ 2.  Stacks for devs (Tecnologias usadas)
+
+### 💻 Frontend
+
+- HTML5\
+- CS3\
+- JAVASCRIPT (PURO)
+
+### 🔧 Backend
+
+- JAVA\
+- SPRING BOOT\
+- SPRING SECURITY\
+- MAVEN
+
+### 📚 Database
+
+- MYSQL
+
+------------------------------------------------------------------------
+
 ## ✧ 1. Testar o Projeto na Nuvem (Modo Usuário)
 
 A versão oficial do site já está publicada e funcional.\
@@ -18,21 +39,3 @@ Acesse:
 ➜ **https://lumineemporio.store**
 
 Nenhuma configuração é necessária.
-
-------------------------------------------------------------------------
-
-## ✧ 2.  Stacks for devs (Tecnologias usadas)
-
-### 💻 Frontend
-
-- HTML5
-- CS3
-- JAVASCRIPT (PURO)
-
-### 🔧 Backend
-
-- JAVA
-
-### 📚 Database
-
-- MYSQL
