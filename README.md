@@ -140,6 +140,20 @@ Após enviar todas, o banco estará populado.
 
 ------------------------------------------------------------------------
 
+## ✧ 2.8 Trocar Base URL no api.js
+
+Abra o arquivo **api.js** no frontend:
+
+### 🔹 Mude:
+
+    "baseURL: "https://lumineemporioonline-production.up.railway.app","
+
+## 🔹 Para:
+
+    "baseURL: "https://localhost:8080","
+
+------------------------------------------------------------------------
+
 # 🎉 Projeto Funcionando!
 
 Agora o projeto estará totalmente ativo na sua máquina: 
