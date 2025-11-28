@@ -10,7 +10,7 @@ final** ou **desenvolvedor**.
 
 ------------------------------------------------------------------------
 
-## ✧ 2.  Stacks for devs (Tecnologias usadas)
+## ✧ 1.  Stacks for devs (Tecnologias usadas)
 
 ### 💻 Frontend
 
@@ -31,7 +31,7 @@ final** ou **desenvolvedor**.
 
 ------------------------------------------------------------------------
 
-## ✧ 1. Testar o Projeto na Nuvem (Modo Usuário)
+## ✧ 2. Testar o Projeto na Nuvem (Modo Usuário)
 
 A versão oficial do site já está publicada e funcional.\
 Acesse:
